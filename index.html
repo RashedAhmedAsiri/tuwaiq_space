@@ -225,6 +225,18 @@ canvas.chart{width:100%;display:block}
   .ant input{width:90px}
   .bottom .score{width:220px}
 }
+
+/* presentation viewer */
+.top{z-index:7!important}
+.deck{position:absolute;inset:0;z-index:6;background:rgba(11,16,32,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(max(12px,env(safe-area-inset-top,0px)) + 64px) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.deck-stage{flex:1;min-height:0;width:100%;position:relative;touch-action:pan-y}
+.deck-stage img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.5);user-select:none;-webkit-user-drag:none}
+.deck-bar{display:flex;align-items:center;gap:8px;padding:8px;flex-wrap:wrap;justify-content:center}
+.deck-bar .num{min-width:4.5em;text-align:center;font-weight:700}
+.deck-bar .chev{display:inline-block;font-size:22px;line-height:1}
+[dir="rtl"] .deck-bar .chev{transform:scaleX(-1)}
+a.btn{text-decoration:none}
+body.deck-open .bottom,body.deck-open .tools,body.deck-open .worlds-bar,body.deck-open .markers{visibility:hidden}
 </style>
 </head>
 <body>
@@ -246,6 +258,7 @@ canvas.chart{width:100%;display:block}
     <nav class="modes glass" role="tablist" id="modes">
       <button class="mode" role="tab" type="button" data-mode="story" aria-selected="true" data-i18n="mStory">قصة Ingenuity</button>
       <button class="mode" role="tab" type="button" data-mode="explore" aria-selected="false" data-i18n="mExplore">الخريطة</button>
+      <button class="mode" role="tab" type="button" data-mode="deck" aria-selected="false" data-i18n="mDeck">العرض التقديمي</button>
     </nav>
     <button class="lang glass" id="langBtn" type="button">English</button>
   </header>
@@ -345,10 +358,10 @@ canvas.chart{width:100%;display:block}
       <div data-pane="how" class="sec src">
         <h3 data-i18n="srcH">البيانات</h3>
         <span data-i18n="s1"><b>حرّة رهط:</b> نموذج Copernicus GLO-30 (30 م) وصورة Sentinel-2 من 8 نوفمبر 2025.</span>
-        <span data-i18n="s2"><b>Nobile Rim 1:</b> نقاط ليزر LOLA الخام من LRO، شبكناها بدقة 25 م، وإضاءة بشمس منخفضة 4°.</span>
+        <span data-i18n="s2"><b>حافة شاكلتون:</b> نقاط ليزر LOLA الخام من LRO، شبكناها بدقة 20 م، وإضاءة بشمس منخفضة 7° كما في القطب.</span>
         <span data-i18n="s3"><b>فوهة جيزيرو:</b> نموذج HiRISE بدقة 1 م وصورته، فوق حافة الدلتا الغربية.</span>
         <span><a href="https://www.jpl.nasa.gov/news/nasas-ingenuity-mars-helicopter-phones-home/" target="_blank" rel="noopener" data-i18n="s4">قصة Ingenuity: بيان JPL، 30 يونيو 2023</a></span>
-        <span style="color:var(--muted)" data-i18n="limits">نقيس خط الرؤية الهندسي فقط، دون منطقة فرينل أو الحيود أو قوة الإرسال. موقع Nobile Rim 1 مأخوذ من عرضنا ولم نتحقق منه بعد.</span>
+        <span style="color:var(--muted)" data-i18n="limits">نقيس خط الرؤية الهندسي فقط، دون منطقة فرينل أو الحيود أو قوة الإرسال. </span>
       </div>
     </div>
   </aside>
@@ -378,15 +391,14 @@ canvas.chart{width:100%;display:block}
     </div>
   </div>
 
-  <div class="intro" id="intro">
-    <div class="card glass">
-      <img class="intro-logo" src="logo_full.png" alt="Tuwaiq SPACE">
-      <h1 data-i18n="inH">تلّ واحد أسكت مروحية على المريخ <span>63 يومًا</span>.</h1>
-      <p data-i18n="inP">نحن فريق Tuwaiq SPACE. بنينا Rahat Relay لنعرف أين تختفي إشارة المركبة خلف التضاريس، وأين تعيدها محطة ترحيل واحدة. خلفك الآن تضاريس حقيقية من فوهة جيزيرو.</p>
-      <div class="row">
-        <button class="btn sand" type="button" id="inStory" data-i18n="inStory">▶ شاهد ما حدث</button>
-        <button class="btn" type="button" id="inExplore" data-i18n="inExplore">جرّب الخريطة بنفسك</button>
-      </div>
+  <div class="deck" id="deck" hidden>
+    <div class="deck-stage" id="deckStage"><img id="deckImg" alt=""></div>
+    <div class="deck-bar glass">
+      <button class="btn" type="button" id="deckPrev" aria-label="Previous slide"><span class="chev">‹</span></button>
+      <span class="num" id="deckN">1 / 11</span>
+      <button class="btn" type="button" id="deckNext" aria-label="Next slide"><span class="chev">›</span></button>
+      <a class="btn" id="deckPdf" href="deck/Rahat_Relay.pdf" download data-i18n="deckPdf">تحميل PDF</a>
+      <button class="btn" type="button" id="deckClose" data-i18n="deckClose">العودة إلى الخريطة</button>
     </div>
   </div>
 </div>
@@ -404,7 +416,7 @@ const FONT='"IBM Plex Sans Arabic",system-ui,sans-serif';
 const $=id=>document.getElementById(id);
 
 const EN = {
-  loading:'Loading elevation data…', mStory:'Ingenuity’s story', mExplore:'Map', mWorlds:'Three worlds', mHow:'How it works',
+  loading:'Loading elevation data…', mStory:'Ingenuity’s story', mExplore:'Map', mDeck:'Presentation', deckPdf:'Download PDF', deckClose:'Back to the map', mWorlds:'Three worlds', mHow:'How it works',
   tRahat:'Harrat Rahat', tMoon:'Moon', tMars:'Mars', cov:'Signal shadow', ex3:'Exaggerate height ×3',
   stK:'Jezero crater, Mars · real HiRISE terrain', stH:'One hill silenced Ingenuity for 63 days',
   stP:'Move time at the bottom, or drag the rover toward the crest. Then click the terrain to drop a relay, and see how many days it would have saved.',
@@ -427,10 +439,10 @@ const EN = {
   m4:'Try more than 1,300 relay spots and pick the one that sees the base and wins back the most route.',
   cvH:'Try the planet’s curve', dist:'Distance between antennas', srcH:'The data',
   s1:'<b>Harrat Rahat:</b> Copernicus GLO-30 elevation (30 m) and a Sentinel-2 image from 8 Nov 2025.',
-  s2:'<b>Nobile Rim 1:</b> raw LOLA laser shots from LRO, gridded by us at 25 m, lit with a 4° sun.',
+  s2:'<b>Shackleton rim:</b> raw LOLA laser shots from LRO, gridded by us at 20 m, lit by a low 7° sun as at the pole.',
   s3:'<b>Jezero crater:</b> HiRISE 1 m elevation model and image over the western delta front.',
   s4:'Ingenuity story: JPL news release, 30 June 2023',
-  limits:'Geometric line of sight only, without Fresnel zone, diffraction or transmit power. The Nobile Rim 1 position comes from our deck and is not yet verified.',
+  limits:'Geometric line of sight only, without Fresnel zone, diffraction or transmit power.',
   kClear:'sees the base', kBad:'blocked', kRel:'saved by relay', tPlay:'▶ Play', tPause:'❚❚ Pause',
   inH:'One hill silenced a helicopter on Mars for <span>63 days</span>.',
   inP:'We are Tuwaiq SPACE. We built Rahat Relay to find where a rover’s signal disappears behind terrain, and where one relay brings it back. Behind this card is real terrain from Jezero crater.',
@@ -449,9 +461,9 @@ const SITES = {
   rahat:{ name:{ar:'حرّة رهط',en:'Harrat Rahat'}, world:{ar:'الأرض، قرب المدينة',en:'Earth, near Madinah'}, R:6371000, L:5000, N:512,
     h:'data/rahat_h.txt', q:[823.0,0.003448538948653391], tex:'data/rahat_tex.jpg', proj:{lat:24.3575, lon:39.8195, ox:0, oy:0},
     base:[-964,277], ctrl:[[-964,277],[468,-24],[1929,75]], sun:[0.35,0.71,0.61], shade:0.35, color:'#F5F7FC' },
-  moon:{ name:{ar:'Nobile Rim 1',en:'Nobile Rim 1'}, world:{ar:'القمر، القطب الجنوبي',en:'Moon, south pole'}, R:1737400, L:5000, N:512,
-    h:'data/moon_h.txt', q:[529.0,0.031280994888227664], tex:'data/moon_tex.jpg', proj:{lat:-85.74, lon:42.45, ox:-1070, oy:-900},
-    base:[-1070,-900], ctrl:[[-1070,-900],[42,32],[1113,932]], sun:[-0.2,0.3,-0.9], shade:0.0, color:'#8966E8' },
+  moon:{ name:{ar:'حافة شاكلتون',en:'Shackleton rim'}, world:{ar:'القمر، القطب الجنوبي',en:'Moon, south pole'}, R:1737400, L:8000, N:512,
+    h:'data/moon_h.txt', q:[-1997.0,0.05438768154527994], tex:'data/moon_tex.jpg', proj:{lat:-89.9657911192468, lon:106.81034394422213, ox:0, oy:0},
+    base:[-1500,-410], ctrl:[[-1500,-410],[-250,-1540],[1000,-1550]], sun:[-0.7,0.3,0.65], shade:0.55, color:'#8966E8', cam:[0.8,0.42,0.3] },
   mars:{ name:{ar:'فوهة جيزيرو',en:'Jezero crater'}, world:{ar:'المريخ، حافة الدلتا',en:'Mars, delta front'}, R:3396190, L:4000, N:512,
     h:'data/mars_h.txt', q:[-2569.0,0.002532997634851606], tex:'data/mars_tex.jpg', proj:{lat:18.5009, lon:77.4285, ox:0, oy:0},
     base:[1300,-300], ctrl:[[1300,-300],[700,-150],[200,200],[-300,700],[-900,900],[-1400,1100]], sun:[-0.62,0.72,0.3], shade:0.3, color:'#B5C1D4' }
@@ -684,7 +696,7 @@ function enterExplore(){ mk.heli.hidden=true; mk.base.hidden=false; pathLine.vis
   st.idx=start; $('roverR').value=st.idx; uniforms.covOn.value=st.cov?1:0; updateExplore(true); updateScore();
   const [bx,by]=tr.cfg.base, pts=[{x:bx,y:by},...tr.route]; let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9; for(const q of pts){ x0=Math.min(x0,q.x); x1=Math.max(x1,q.x); y0=Math.min(y0,q.y); y1=Math.max(y1,q.y); }
   const cx=(x0+x1)/2, cy=(y0+y1)/2, R=Math.max(...pts.map(q=>Math.hypot(q.x-cx,q.y-cy))), tg=W(cx,cy), sp=Math.max(1600,R*2.9)*(host.clientWidth<760?2:1);
-  flyTo(tg,new THREE.Vector3(tg.x-sp*0.45,tg.y+sp*0.5,tg.z+sp*0.62));
+  const cm=tr.cfg.cam||[-0.45,0.5,0.62]; flyTo(tg,new THREE.Vector3(tg.x+sp*cm[0],tg.y+sp*cm[1],tg.z+sp*cm[2]));
   logEl.innerHTML=''; log(L2(`${tr.cfg.name.ar}: مسار ${km(tr.route.length_m)}، ${pct(st.an.blocked)} منه لا يرى القاعدة`,`${tr.cfg.name.en}: ${km(tr.route.length_m)} route, ${pct(st.an.blocked)} of it can’t see the base`)); getBest(); }
 function drawRoute(){ const a=st.an, cols=[]; for(let i=0;i<NROUTE;i++) cols.push(...(a.direct[i]?[0.96,0.97,0.99]:a.via[i]?[0.79,0.72,0.96]:[0.54,0.40,0.91])); setLine(routeLine,tr.route.map(p=>W(p.x,p.y,4)),cols); }
 function updateExplore(full){ if(mode==='story'||!tr) return;
@@ -777,9 +789,21 @@ async function setMode(m){ mode=m;
   if(m==='story'){ st.playing=false; await loadSite('mars'); mode==='story'&&enterStory(); }
   else { const fresh=key!==exploreKey||!st.an||S.ready&&mk.base.hidden; await loadSite(exploreKey); if(fresh) enterExplore(); else updateExplore(false); }
   if(m==='worlds') renderWorlds(); if(m==='how') drawBulges(); setTimeout(resize,30); }
-document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{ $('intro').hidden=true; setMode(b.dataset.mode); }));
-$('inStory').addEventListener('click',()=>{ $('intro').hidden=true; setT(0); playStory(); });
-$('inExplore').addEventListener('click',()=>{ $('intro').hidden=true; setMode('explore'); });
+document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.mode==='deck') openDeck(); else { closeDeck(); setMode(b.dataset.mode); } }));
+
+/* ================= presentation ================= */
+const DECK=Array.from({length:11},(_,i)=>`deck/s-${String(i+1).padStart(2,'0')}.jpg`); let deckI=0;
+function showSlide(i){ deckI=Math.max(0,Math.min(DECK.length-1,i)); $('deckImg').src=DECK[deckI]; $('deckImg').alt=`Slide ${deckI+1}`; $('deckN').textContent=`${deckI+1} / ${DECK.length}`;
+  $('deckPrev').disabled=deckI===0; $('deckNext').disabled=deckI===DECK.length-1; if(deckI+1<DECK.length) new Image().src=DECK[deckI+1]; }
+function openDeck(){ stopStory(); st.playing=false; $('deck').hidden=false; document.body.classList.add('deck-open'); showSlide(deckI);
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode==='deck')); }
+function closeDeck(){ if($('deck').hidden) return; $('deck').hidden=true; document.body.classList.remove('deck-open');
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode===mode)); }
+$('deckPrev').addEventListener('click',()=>showSlide(deckI-1)); $('deckNext').addEventListener('click',()=>showSlide(deckI+1)); $('deckClose').addEventListener('click',closeDeck);
+$('deckImg').addEventListener('click',e=>{ const r=e.currentTarget.getBoundingClientRect(), left=e.clientX<r.left+r.width/2, rtl=document.documentElement.dir==='rtl'; showSlide(deckI+((left!==rtl)?-1:1)); });
+addEventListener('keydown',e=>{ if($('deck').hidden) return; const rtl=document.documentElement.dir==='rtl';
+  if(e.key==='Escape') closeDeck(); else if(e.key==='ArrowRight') showSlide(deckI+(rtl?-1:1)); else if(e.key==='ArrowLeft') showSlide(deckI+(rtl?1:-1)); else if(e.key===' '||e.key==='PageDown') { e.preventDefault(); showSlide(deckI+1); } else if(e.key==='PageUp') showSlide(deckI-1); });
+let swX=null; $('deckStage').addEventListener('pointerdown',e=>{ swX=e.clientX; }); $('deckStage').addEventListener('pointerup',e=>{ if(swX==null) return; const d=e.clientX-swX; swX=null; if(Math.abs(d)>50){ const rtl=document.documentElement.dir==='rtl'; showSlide(deckI+((d<0)!==rtl?1:-1)); } });
 
 /* ================= worlds pane ================= */
 const worldRes={}; let sensH=3; const SC={rahat:'#F5F7FC',moon:'#8966E8',mars:'#8A9AB3'};
@@ -824,7 +848,7 @@ renderer.setAnimationLoop(t=>{ if(!tr) return;
 hooks.push(()=>{ setTimeout(resize,30); playBtn.textContent=st.playing?T('pause'):T('drive'); setPlacing(st.placing); $('bestBtn').textContent=T('best'); $('tPlay').textContent=S.playing?T('tPause'):T('tPlay');
   if(mode==='story') updateStory(); else if(st.an){ updateExplore(false); updateScore(); } if(mode==='worlds') renderWorlds(); if(mode==='how') drawBulges(); });
 applyLang();
-setMode('story').then(()=>computeWorlds()).catch(e=>{ $('loading').textContent='Data failed to load: '+e.message; console.error(e); });
+setMode('story').then(()=>{ setTimeout(()=>{ if(mode==='story'&&$('deck').hidden&&!S.playing){ setT(0); playStory(); } },900); computeWorlds(); }).catch(e=>{ $('loading').textContent='Data failed to load: '+e.message; console.error(e); });
 </script>
 
 </body>
