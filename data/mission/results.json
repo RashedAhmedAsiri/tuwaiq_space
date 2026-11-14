@@ -1,0 +1,772 @@
+{
+  "protocol": "1.0",
+  "routes": {
+    "primary": {
+      "length": 7847.250524205032,
+      "samples": 262
+    },
+    "check": {
+      "length": 7847.250524205032,
+      "samples": 262
+    }
+  },
+  "measurements": {
+    "primary": {
+      "labah": {
+        "native": {
+          "blocked": 0.35877862595419846,
+          "longest": 1497.566893932258,
+          "unknown": 0,
+          "coverage": 0.6412213740458015,
+          "clearance": -45.865582345832195,
+          "worst": 99,
+          "blockedLength": 2815.425760592645,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.30916030534351147,
+          "longest": 1407.7128802963225,
+          "unknown": 0,
+          "coverage": 0.6908396946564885,
+          "clearance": -38.304039944103806,
+          "worst": 99,
+          "blockedLength": 2426.058368170258,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.916030534351145,
+          "longest": 6918.759049967031,
+          "unknown": 0,
+          "coverage": 0.08396946564885496,
+          "clearance": -131.8807611908095,
+          "worst": 129,
+          "blockedLength": 7188.321090874838,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9122137404580153,
+          "longest": 6888.807712088386,
+          "unknown": 0,
+          "coverage": 0.08778625954198473,
+          "clearance": -127.36764643405309,
+          "worst": 129,
+          "blockedLength": 7158.369752996193,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.7786259541984732,
+          "longest": 4492.700681796774,
+          "unknown": 0,
+          "coverage": 0.22137404580152673,
+          "clearance": -78.73926179554564,
+          "worst": 197,
+          "blockedLength": 6110.072927243613,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.7251908396946565,
+          "longest": 4462.749343918129,
+          "unknown": 0,
+          "coverage": 0.2748091603053435,
+          "clearance": -75.75674938697459,
+          "worst": 204,
+          "blockedLength": 5690.75419694258,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.9694656488549618,
+          "longest": 7607.639821175871,
+          "unknown": 0,
+          "coverage": 0.030534351145038167,
+          "clearance": -105.93626536650117,
+          "worst": 97,
+          "blockedLength": 7607.639821175871,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9618320610687023,
+          "longest": 7547.73714541858,
+          "unknown": 0,
+          "coverage": 0.03816793893129771,
+          "clearance": -104.2514830268592,
+          "worst": 97,
+          "blockedLength": 7547.73714541858,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690451,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -42.94689676605867,
+          "worst": 157,
+          "blockedLength": 7727.445172690451,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690451,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -38.9558520288133,
+          "worst": 157,
+          "blockedLength": 7727.445172690451,
+          "unknownLength": 0
+        }
+      }
+    },
+    "check": {
+      "labah": {
+        "native": {
+          "blocked": 0.3816793893129771,
+          "longest": 1527.5182318109032,
+          "unknown": 0,
+          "coverage": 0.6183206106870229,
+          "clearance": -32.27904435610333,
+          "worst": 98,
+          "blockedLength": 2995.133787864516,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.3320610687022901,
+          "longest": 1527.5182318109032,
+          "unknown": 0,
+          "coverage": 0.6679389312977099,
+          "clearance": -31.68846154347193,
+          "worst": 98,
+          "blockedLength": 2605.7663954421287,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.7977099236641222,
+          "longest": 5690.75419694258,
+          "unknown": 0,
+          "coverage": 0.20229007633587787,
+          "clearance": -116.46542648242348,
+          "worst": 127,
+          "blockedLength": 6259.829616636838,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.7862595419847328,
+          "longest": 5660.802859063935,
+          "unknown": 0,
+          "coverage": 0.21374045801526717,
+          "clearance": -112.45737807241812,
+          "worst": 126,
+          "blockedLength": 6169.975603000903,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.5458015267175572,
+          "longest": 4073.3819514957418,
+          "unknown": 0,
+          "coverage": 0.4541984732824427,
+          "clearance": -77.24408465585475,
+          "worst": 182,
+          "blockedLength": 4283.041316646258,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.5114503816793893,
+          "longest": 3833.7712484665803,
+          "unknown": 0,
+          "coverage": 0.48854961832061067,
+          "clearance": -75.10458289119356,
+          "worst": 182,
+          "blockedLength": 4013.479275738451,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.5267175572519084,
+          "longest": 3444.403856044193,
+          "unknown": 0,
+          "coverage": 0.4732824427480916,
+          "clearance": -100.8097051197783,
+          "worst": 74,
+          "blockedLength": 4133.284627253032,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.5114503816793893,
+          "longest": 3444.403856044193,
+          "unknown": 0,
+          "coverage": 0.48854961832061067,
+          "clearance": -99.59074076524121,
+          "worst": 73,
+          "blockedLength": 4013.479275738451,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.8854961832061069,
+          "longest": 6918.759049967031,
+          "unknown": 0,
+          "coverage": 0.11450381679389313,
+          "clearance": -30.935236195776724,
+          "worst": 156,
+          "blockedLength": 6948.710387845676,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8816793893129771,
+          "longest": 6918.759049967031,
+          "unknown": 0,
+          "coverage": 0.1183206106870229,
+          "clearance": -28.230294262671578,
+          "worst": 157,
+          "blockedLength": 6918.759049967031,
+          "unknownLength": 0
+        }
+      }
+    }
+  },
+  "cases": {
+    "nobile": {
+      "primary": {
+        "native": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0.19083969465648853,
+                "longest": 3114.9391393790966,
+                "clearance": 27.19700357095553
+              },
+              "score": 4.153252185838795
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.6106870229007633,
+                "longest": 6110.072927243613,
+                "clearance": 60.07068302066898
+              },
+              "score": 8.146763902991484
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.05343511450381677,
+                "longest": 688.8807712088392,
+                "clearance": 25.94449582430832
+              },
+              "score": 0.9185076949451189
+            }
+          },
+          "best": "anahi",
+          "within": [
+            "anahi"
+          ]
+        },
+        "common": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0.23664122137404586,
+                "longest": 3084.9878015004515,
+                "clearance": 28.494733639884615
+              },
+              "score": 4.113317068667269
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.6526717557251909,
+                "longest": 6140.024265122258,
+                "clearance": 65.9474430827554
+              },
+              "score": 8.18669902016301
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.04961832061068705,
+                "longest": 658.9294333301941,
+                "clearance": 23.11616340719388
+              },
+              "score": 0.8785725777735921
+            }
+          },
+          "best": "anahi",
+          "within": [
+            "anahi"
+          ]
+        }
+      },
+      "check": {
+        "native": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0.01908396946564883,
+                "longest": 628.9780954515486,
+                "clearance": 23.56562046392355
+              },
+              "score": 0.8386374606020648
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.14503816793893126,
+                "longest": 1916.88562423329,
+                "clearance": 68.53066076367497
+              },
+              "score": 2.55584749897772
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.2709923664122138,
+                "longest": 2246.350340898387,
+                "clearance": 15.655721362645181
+              },
+              "score": 2.995133787864516
+            }
+          },
+          "best": "axis",
+          "within": [
+            "axis"
+          ]
+        },
+        "common": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0,
+                "longest": 389.3673924223872,
+                "clearance": 24.48615787404765
+              },
+              "score": 0.6996045106870756
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.1793893129770992,
+                "longest": 1916.88562423329,
+                "clearance": 67.90227922176928
+              },
+              "score": 2.55584749897772
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.2748091603053435,
+                "longest": 2216.399003019742,
+                "clearance": 12.866637307176916
+              },
+              "score": 2.9551986706929894
+            }
+          },
+          "best": "axis",
+          "within": [
+            "axis"
+          ]
+        }
+      }
+    },
+    "jezero": {
+      "primary": {
+        "native": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0.20610687022900764,
+                "longest": 3234.744490893677,
+                "clearance": 35.79236502948697
+              },
+              "score": 4.312992654524902
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.6259541984732824,
+                "longest": 6229.878278758193,
+                "clearance": 2.9186855797735234
+              },
+              "score": 8.30650437167759
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.06870229007633588,
+                "longest": 808.6861227234194,
+                "clearance": 88.93386442475082
+              },
+              "score": 2.5409675549928807
+            }
+          },
+          "best": "anahi",
+          "within": []
+        },
+        "common": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0.2595419847328244,
+                "longest": 3264.695828772322,
+                "clearance": 36.80089735816129
+              },
+              "score": 4.352927771696429
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.6755725190839694,
+                "longest": 6319.732292394128,
+                "clearance": 0.6518120847094906
+              },
+              "score": 8.42630972319217
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.0725190839694656,
+                "longest": 838.6374606020645,
+                "clearance": 88.41179440523979
+              },
+              "score": 2.5260512687211367
+            }
+          },
+          "best": "anahi",
+          "within": []
+        }
+      },
+      "check": {
+        "native": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0.3396946564885497,
+                "longest": 2845.3770984712896,
+                "clearance": 46.308848460078025
+              },
+              "score": 3.793836131295053
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.5038167938931297,
+                "longest": 5391.240818156128,
+                "clearance": 1.3438081603266028
+              },
+              "score": 7.188321090874837
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.08778625954198471,
+                "longest": 1228.0048530244512,
+                "clearance": 85.53019028664676
+              },
+              "score": 2.4437197224756217
+            }
+          },
+          "best": "anahi",
+          "within": []
+        },
+        "common": {
+          "candidates": {
+            "axis": {
+              "delta": {
+                "blocked": 0.3702290076335878,
+                "longest": 3084.987801500451,
+                "clearance": 46.87428862852198
+              },
+              "score": 4.113317068667268
+            },
+            "labah": {
+              "delta": {
+                "blocked": 0.549618320610687,
+                "longest": 5391.240818156128,
+                "clearance": 3.458167280800353
+              },
+              "score": 7.188321090874837
+            },
+            "anahi": {
+              "delta": {
+                "blocked": 0.09541984732824427,
+                "longest": 1257.9561909030963,
+                "clearance": 84.22708380974655
+              },
+              "score": 2.4064881088499015
+            }
+          },
+          "best": "anahi",
+          "within": []
+        }
+      }
+    }
+  },
+  "optimization": {
+    "anahi": {
+      "baseline": {
+        "point": null,
+        "results": [
+          {
+            "id": "native/low",
+            "blocked": 0.9312977099236641,
+            "longest": 6978.661725724322,
+            "unknown": 0,
+            "coverage": 0.06870229007633588,
+            "clearance": -132.9003984977237,
+            "worst": 129,
+            "blockedLength": 7308.126442389419,
+            "unknownLength": 0
+          },
+          {
+            "id": "native/nominal",
+            "blocked": 0.916030534351145,
+            "longest": 6918.759049967031,
+            "unknown": 0,
+            "coverage": 0.08396946564885496,
+            "clearance": -131.8807611908095,
+            "worst": 129,
+            "blockedLength": 7188.321090874838,
+            "unknownLength": 0
+          },
+          {
+            "id": "native/high",
+            "blocked": 0.9045801526717557,
+            "longest": 6858.856374209741,
+            "unknown": 0,
+            "coverage": 0.09541984732824428,
+            "clearance": -130.5343363195334,
+            "worst": 129,
+            "blockedLength": 7098.467077238903,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/low",
+            "blocked": 0.9198473282442748,
+            "longest": 6918.759049967031,
+            "unknown": 0,
+            "coverage": 0.08015267175572519,
+            "clearance": -128.3872837409673,
+            "worst": 129,
+            "blockedLength": 7218.272428753483,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/nominal",
+            "blocked": 0.9122137404580153,
+            "longest": 6888.807712088386,
+            "unknown": 0,
+            "coverage": 0.08778625954198473,
+            "clearance": -127.36764643405309,
+            "worst": 129,
+            "blockedLength": 7158.369752996193,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/high",
+            "blocked": 0.9045801526717557,
+            "longest": 6858.856374209741,
+            "unknown": 0,
+            "coverage": 0.09541984732824428,
+            "clearance": -126.02122156277699,
+            "worst": 129,
+            "blockedLength": 7098.467077238903,
+            "unknownLength": 0
+          }
+        ],
+        "nominal": {
+          "id": "native/nominal",
+          "blocked": 0.916030534351145,
+          "longest": 6918.759049967031,
+          "unknown": 0,
+          "coverage": 0.08396946564885496,
+          "clearance": -131.8807611908095,
+          "worst": 129,
+          "blockedLength": 7188.321090874838,
+          "unknownLength": 0
+        },
+        "worstGap": 6978.661725724322,
+        "bestGap": 6858.856374209741,
+        "worstCoverage": 0.06870229007633588,
+        "bestCoverage": 0.09541984732824428
+      },
+      "coverage": {
+        "point": {
+          "x": 4200,
+          "y": 3000
+        },
+        "results": [
+          {
+            "id": "native/low",
+            "blocked": 0.5,
+            "longest": 2366.1556924129677,
+            "unknown": 0,
+            "coverage": 0.5,
+            "clearance": -108.81832374031774,
+            "worst": 128,
+            "blockedLength": 3923.625262102516,
+            "unknownLength": 0
+          },
+          {
+            "id": "native/nominal",
+            "blocked": 0.4618320610687023,
+            "longest": 2246.350340898387,
+            "unknown": 0,
+            "coverage": 0.5381679389312977,
+            "clearance": -107.68077494151339,
+            "worst": 128,
+            "blockedLength": 3624.1118833160644,
+            "unknownLength": 0
+          },
+          {
+            "id": "native/high",
+            "blocked": 0.40076335877862596,
+            "longest": 2036.6909757478709,
+            "unknown": 0,
+            "coverage": 0.5992366412213741,
+            "clearance": -106.25574240897708,
+            "worst": 128,
+            "blockedLength": 3144.8904772577416,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/low",
+            "blocked": 0.4541984732824427,
+            "longest": 2276.301678777032,
+            "unknown": 0,
+            "coverage": 0.5458015267175572,
+            "clearance": -103.70089609122897,
+            "worst": 128,
+            "blockedLength": 3564.209207558774,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/nominal",
+            "blocked": 0.42366412213740456,
+            "longest": 2186.4476651410964,
+            "unknown": 0,
+            "coverage": 0.5763358778625954,
+            "clearance": -102.58438268757573,
+            "worst": 128,
+            "blockedLength": 3324.5985045296125,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/high",
+            "blocked": 0.3702290076335878,
+            "longest": 2036.6909757478709,
+            "unknown": 0,
+            "coverage": 0.6297709923664122,
+            "clearance": -101.17337375180682,
+            "worst": 128,
+            "blockedLength": 2905.27977422858,
+            "unknownLength": 0
+          }
+        ],
+        "nominal": {
+          "id": "native/nominal",
+          "blocked": 0.4618320610687023,
+          "longest": 2246.350340898387,
+          "unknown": 0,
+          "coverage": 0.5381679389312977,
+          "clearance": -107.68077494151339,
+          "worst": 128,
+          "blockedLength": 3624.1118833160644,
+          "unknownLength": 0
+        },
+        "worstGap": 2366.1556924129677,
+        "bestGap": 2036.6909757478709,
+        "worstCoverage": 0.5,
+        "bestCoverage": 0.6297709923664122
+      },
+      "robust": {
+        "point": {
+          "x": 4200,
+          "y": 3000
+        },
+        "results": [
+          {
+            "id": "native/low",
+            "blocked": 0.5,
+            "longest": 2366.1556924129677,
+            "unknown": 0,
+            "coverage": 0.5,
+            "clearance": -108.81832374031774,
+            "worst": 128,
+            "blockedLength": 3923.625262102516,
+            "unknownLength": 0
+          },
+          {
+            "id": "native/nominal",
+            "blocked": 0.4618320610687023,
+            "longest": 2246.350340898387,
+            "unknown": 0,
+            "coverage": 0.5381679389312977,
+            "clearance": -107.68077494151339,
+            "worst": 128,
+            "blockedLength": 3624.1118833160644,
+            "unknownLength": 0
+          },
+          {
+            "id": "native/high",
+            "blocked": 0.40076335877862596,
+            "longest": 2036.6909757478709,
+            "unknown": 0,
+            "coverage": 0.5992366412213741,
+            "clearance": -106.25574240897708,
+            "worst": 128,
+            "blockedLength": 3144.8904772577416,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/low",
+            "blocked": 0.4541984732824427,
+            "longest": 2276.301678777032,
+            "unknown": 0,
+            "coverage": 0.5458015267175572,
+            "clearance": -103.70089609122897,
+            "worst": 128,
+            "blockedLength": 3564.209207558774,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/nominal",
+            "blocked": 0.42366412213740456,
+            "longest": 2186.4476651410964,
+            "unknown": 0,
+            "coverage": 0.5763358778625954,
+            "clearance": -102.58438268757573,
+            "worst": 128,
+            "blockedLength": 3324.5985045296125,
+            "unknownLength": 0
+          },
+          {
+            "id": "common/high",
+            "blocked": 0.3702290076335878,
+            "longest": 2036.6909757478709,
+            "unknown": 0,
+            "coverage": 0.6297709923664122,
+            "clearance": -101.17337375180682,
+            "worst": 128,
+            "blockedLength": 2905.27977422858,
+            "unknownLength": 0
+          }
+        ],
+        "nominal": {
+          "id": "native/nominal",
+          "blocked": 0.4618320610687023,
+          "longest": 2246.350340898387,
+          "unknown": 0,
+          "coverage": 0.5381679389312977,
+          "clearance": -107.68077494151339,
+          "worst": 128,
+          "blockedLength": 3624.1118833160644,
+          "unknownLength": 0
+        },
+        "worstGap": 2366.1556924129677,
+        "bestGap": 2036.6909757478709,
+        "worstCoverage": 0.5,
+        "bestCoverage": 0.6297709923664122
+      },
+      "tested": 729,
+      "eligible": 80,
+      "robustEligible": 62
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "version": "2.0",
+  "baseProtocol": "data/mission/protocol.json",
+  "anglesDegrees": [-75, -60, -45, -30, -15, 0, 15, 30, 45, 60, 75],
+  "rotationOrigin": "primary route base, clockwise in east/south projected coordinates",
+  "purpose": "Stress-test route transfer at fixed base, polyline shape, length and antenna assumptions. The separately mirrored route remains outside this sweep.",
+  "comparison": {
+    "grid": "60 m common grid, separately checked on available native grids",
+    "heightSets": ["nominal"],
+    "reference": "Same rotation in both paired windows",
+    "sectorDecision": "Count routes passing all thresholds, report per-site counts, outcome at both resolutions and route-level mismatches",
+    "thresholdSensitivityFactors": [0.75, 1, 1.25]
+  },
+  "relay": {
+    "trainingAnglesDegrees": [-60, -30, 0, 30, 60],
+    "validationAnglesDegrees": [-75, -45, -15, 15, 45, 75],
+    "variants": ["native/low", "native/nominal", "native/high", "common/low", "common/nominal", "common/high"],
+    "maxSlopeDegrees": 20,
+    "objective": "Reduce the worst longest blocked span across training angles and all variants. Break ties on average span, then worst coverage, then distance to base.",
+    "selection": "Run separately for each Saudi sector. Lock the station before evaluating validation angles. Compare with no relay and the station optimized for the north-up primary route by coverage."
+  }
+}

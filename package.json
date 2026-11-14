@@ -1,0 +1,10 @@
+{
+  "name": "rahat-relay",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/preview.mjs",
+    "test": "node --test tests/mission.test.mjs && node mission/recalculate.mjs --check && node mission/recalculate-sweep.mjs --check"
+  }
+}

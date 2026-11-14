@@ -1,0 +1,150 @@
+{
+  "protocol": "1.0",
+  "comparisonStep": 60,
+  "routeSpacing": 30,
+  "slopeRadius": 60,
+  "maxSlope": 20,
+  "minDistance": 100,
+  "tolerance": {
+    "blockedFraction": 0.15,
+    "longest": 750,
+    "clearance": 35
+  },
+  "routes": {
+    "primary": [
+      {
+        "x": 3528,
+        "y": 2604
+      },
+      {
+        "x": 5292,
+        "y": 4956
+      },
+      {
+        "x": 2436,
+        "y": 5544
+      },
+      {
+        "x": 1512,
+        "y": 3780
+      }
+    ],
+    "check": [
+      {
+        "x": 3528,
+        "y": 5796
+      },
+      {
+        "x": 5292,
+        "y": 3444
+      },
+      {
+        "x": 2436,
+        "y": 2856
+      },
+      {
+        "x": 1512,
+        "y": 4620
+      }
+    ]
+  },
+  "heights": {
+    "low": {
+      "base": 4,
+      "rover": 1.5,
+      "relay": 6
+    },
+    "nominal": {
+      "base": 6,
+      "rover": 2,
+      "relay": 8
+    },
+    "high": {
+      "base": 8,
+      "rover": 3,
+      "relay": 10
+    }
+  },
+  "sites": {
+    "labah": {
+      "n": 281,
+      "step": 30,
+      "size": 8400,
+      "origin": 827.0,
+      "west": 576860.95785,
+      "north": 2695085.06148,
+      "lat": 24.329,
+      "lon": 39.799,
+      "source": "srtm",
+      "srcStep": 30,
+      "radius": 6371000,
+      "file": "data/mission/labah.bin.gz",
+      "encoding": "gzip",
+      "sha256": "30dbf181e7622b79d49ff8aaf7b6b5471f1b76b58aa7f8907a05384a8ee463ed"
+    },
+    "anahi": {
+      "n": 281,
+      "step": 30,
+      "size": 8400,
+      "origin": 885.0,
+      "west": 575878.85753,
+      "north": 2687377.16238,
+      "lat": 24.25944,
+      "lon": 39.78889,
+      "source": "srtm",
+      "srcStep": 30,
+      "radius": 6371000,
+      "file": "data/mission/anahi.bin.gz",
+      "encoding": "gzip",
+      "sha256": "8d87a92a29f21c84c0953f0e542c8d74f668666174741749ec4ca89ba0cd0b4e"
+    },
+    "axis": {
+      "n": 281,
+      "step": 30,
+      "size": 8400,
+      "origin": 954.0,
+      "west": 586942.61123,
+      "north": 2673554.05729,
+      "lat": 24.134,
+      "lon": 39.897,
+      "source": "srtm",
+      "srcStep": 30,
+      "radius": 6371000,
+      "file": "data/axis.txt",
+      "encoding": "base64+gzip",
+      "sha256": "eed54c74a498924cc42b390c0731020d4a36035341788931effe354d17648cc7"
+    },
+    "nobile": {
+      "n": 1681,
+      "step": 5,
+      "size": 8400,
+      "origin": 3695.0,
+      "west": 79800.0,
+      "north": 114200.0,
+      "lat": -85.4381,
+      "lon": 37.36667,
+      "source": "lola",
+      "srcStep": 5,
+      "radius": 1737400,
+      "file": "data/mission/nobile.bin.gz",
+      "encoding": "gzip",
+      "sha256": "1a4ebd4584b5347ab018bc7fe56e47e9892bfd6f169af5c10b3529ecb1182b57"
+    },
+    "jezero": {
+      "n": 421,
+      "step": 20,
+      "size": 8400,
+      "origin": -2589.0,
+      "west": 4346702.26098,
+      "north": 1100011.33311,
+      "lat": 18.487,
+      "lon": 77.387,
+      "source": "ctx",
+      "srcStep": 20,
+      "radius": 3396190,
+      "file": "data/jezero.txt",
+      "encoding": "base64+gzip",
+      "sha256": "983558ec127de0b59baa910adb6faf67fda524821e8354e8311b9dafc1d35004"
+    }
+  }
+}

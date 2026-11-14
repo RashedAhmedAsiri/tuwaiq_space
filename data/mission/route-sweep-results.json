@@ -1,0 +1,4167 @@
+{
+  "protocol": "2.0",
+  "measurements": {
+    "0": {
+      "labah": {
+        "native": {
+          "blocked": 0.35877862595419846,
+          "longest": 1497.566893932258,
+          "unknown": 0,
+          "coverage": 0.6412213740458015,
+          "clearance": -45.865582345832195,
+          "worst": 99,
+          "blockedLength": 2815.425760592645,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.30916030534351147,
+          "longest": 1407.7128802963225,
+          "unknown": 0,
+          "coverage": 0.6908396946564885,
+          "clearance": -38.304039944103806,
+          "worst": 99,
+          "blockedLength": 2426.058368170258,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.916030534351145,
+          "longest": 6918.759049967031,
+          "unknown": 0,
+          "coverage": 0.08396946564885496,
+          "clearance": -131.8807611908095,
+          "worst": 129,
+          "blockedLength": 7188.321090874838,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9122137404580153,
+          "longest": 6888.807712088386,
+          "unknown": 0,
+          "coverage": 0.08778625954198473,
+          "clearance": -127.36764643405309,
+          "worst": 129,
+          "blockedLength": 7158.369752996193,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.7786259541984732,
+          "longest": 4492.700681796774,
+          "unknown": 0,
+          "coverage": 0.22137404580152673,
+          "clearance": -78.73926179554564,
+          "worst": 197,
+          "blockedLength": 6110.072927243613,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.7251908396946565,
+          "longest": 4462.749343918129,
+          "unknown": 0,
+          "coverage": 0.2748091603053435,
+          "clearance": -75.75674938697459,
+          "worst": 204,
+          "blockedLength": 5690.75419694258,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.9694656488549618,
+          "longest": 7607.639821175871,
+          "unknown": 0,
+          "coverage": 0.030534351145038167,
+          "clearance": -105.93626536650117,
+          "worst": 97,
+          "blockedLength": 7607.639821175871,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9618320610687023,
+          "longest": 7547.73714541858,
+          "unknown": 0,
+          "coverage": 0.03816793893129771,
+          "clearance": -104.2514830268592,
+          "worst": 97,
+          "blockedLength": 7547.73714541858,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690451,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -42.94689676605867,
+          "worst": 157,
+          "blockedLength": 7727.445172690451,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690451,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -38.9558520288133,
+          "worst": 157,
+          "blockedLength": 7727.445172690451,
+          "unknownLength": 0
+        }
+      }
+    },
+    "15": {
+      "labah": {
+        "native": {
+          "blocked": 0.22519083969465647,
+          "longest": 329.4647166650969,
+          "unknown": 0,
+          "coverage": 0.7748091603053435,
+          "clearance": -4.160864545244863,
+          "worst": 97,
+          "blockedLength": 1767.1289348400653,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.1450381679389313,
+          "longest": 299.5133787864517,
+          "unknown": 0,
+          "coverage": 0.8549618320610687,
+          "clearance": -2.8290297249554897,
+          "worst": 99,
+          "blockedLength": 1138.1508393885165,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.9122137404580153,
+          "longest": 5930.364899971744,
+          "unknown": 0,
+          "coverage": 0.08778625954198473,
+          "clearance": -134.31825689269147,
+          "worst": 104,
+          "blockedLength": 7158.369752996196,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8931297709923665,
+          "longest": 5930.364899971744,
+          "unknown": 0,
+          "coverage": 0.10687022900763359,
+          "clearance": -129.99723576145936,
+          "worst": 104,
+          "blockedLength": 7008.61306360297,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.9045801526717557,
+          "longest": 6619.2456711805835,
+          "unknown": 0,
+          "coverage": 0.09541984732824428,
+          "clearance": -82.3106630654404,
+          "worst": 167,
+          "blockedLength": 7098.467077238906,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8816793893129771,
+          "longest": 6499.440319666002,
+          "unknown": 0,
+          "coverage": 0.1183206106870229,
+          "clearance": -78.31456665000792,
+          "worst": 163,
+          "blockedLength": 6918.759049967035,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.8969465648854962,
+          "longest": 7038.564401481615,
+          "unknown": 0,
+          "coverage": 0.10305343511450382,
+          "clearance": -43.907081115778055,
+          "worst": 97,
+          "blockedLength": 7038.564401481615,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8816793893129771,
+          "longest": 6918.759049967035,
+          "unknown": 0,
+          "coverage": 0.1183206106870229,
+          "clearance": -42.85734598562183,
+          "worst": 97,
+          "blockedLength": 6918.759049967035,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.4451726904545,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -39.754189915724965,
+          "worst": 134,
+          "blockedLength": 7727.4451726904545,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.4451726904545,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -36.18122832296922,
+          "worst": 134,
+          "blockedLength": 7727.4451726904545,
+          "unknownLength": 0
+        }
+      }
+    },
+    "30": {
+      "labah": {
+        "native": {
+          "blocked": 0.14122137404580154,
+          "longest": 748.783446966129,
+          "unknown": 0,
+          "coverage": 0.8587786259541985,
+          "clearance": -6.369170111528547,
+          "worst": 65,
+          "blockedLength": 1108.199501509871,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.10687022900763359,
+          "longest": 718.8321090874838,
+          "unknown": 0,
+          "coverage": 0.8931297709923665,
+          "clearance": -5.576140828323105,
+          "worst": 65,
+          "blockedLength": 838.6374606020645,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.950381679389313,
+          "longest": 7457.883131782644,
+          "unknown": 0,
+          "coverage": 0.04961832061068702,
+          "clearance": -40.53624194744725,
+          "worst": 121,
+          "blockedLength": 7457.883131782644,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.950381679389313,
+          "longest": 7457.883131782644,
+          "unknown": 0,
+          "coverage": 0.04961832061068702,
+          "clearance": -37.76764622809628,
+          "worst": 128,
+          "blockedLength": 7457.883131782644,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.8664122137404581,
+          "longest": 6140.024265122258,
+          "unknown": 0,
+          "coverage": 0.13358778625954199,
+          "clearance": -84.04077532559313,
+          "worst": 143,
+          "blockedLength": 6798.953698452451,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8435114503816794,
+          "longest": 6050.170251486322,
+          "unknown": 0,
+          "coverage": 0.15648854961832062,
+          "clearance": -79.21608990556274,
+          "worst": 140,
+          "blockedLength": 6619.24567118058,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.6946564885496184,
+          "longest": 5451.143493913419,
+          "unknown": 0,
+          "coverage": 0.3053435114503817,
+          "clearance": -38.72817111138829,
+          "worst": 132,
+          "blockedLength": 5451.143493913419,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.683206106870229,
+          "longest": 5361.289480277484,
+          "unknown": 0,
+          "coverage": 0.31679389312977096,
+          "clearance": -37.57053356433698,
+          "worst": 135,
+          "blockedLength": 5361.289480277484,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9580152671755725,
+          "longest": 6619.24567118058,
+          "unknown": 0,
+          "coverage": 0.04198473282442748,
+          "clearance": -65.52874605345323,
+          "worst": 61,
+          "blockedLength": 7517.7858075399345,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.950381679389313,
+          "longest": 6619.24567118058,
+          "unknown": 0,
+          "coverage": 0.04961832061068702,
+          "clearance": -62.38408133836447,
+          "worst": 61,
+          "blockedLength": 7457.883131782644,
+          "unknownLength": 0
+        }
+      }
+    },
+    "45": {
+      "labah": {
+        "native": {
+          "blocked": 0.13740458015267176,
+          "longest": 239.61070302916127,
+          "unknown": 0,
+          "coverage": 0.8625954198473282,
+          "clearance": -29.95756254772607,
+          "worst": 259,
+          "blockedLength": 1078.2481636312257,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.07633587786259542,
+          "longest": 179.70802727187095,
+          "unknown": 0,
+          "coverage": 0.9236641221374046,
+          "clearance": -23.963761576382012,
+          "worst": 259,
+          "blockedLength": 599.0267575729032,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.950381679389313,
+          "longest": 6679.148346937871,
+          "unknown": 0,
+          "coverage": 0.04961832061068702,
+          "clearance": -82.22310586856484,
+          "worst": 260,
+          "blockedLength": 7457.883131782644,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9427480916030534,
+          "longest": 6649.197009059225,
+          "unknown": 0,
+          "coverage": 0.05725190839694656,
+          "clearance": -75.43058376091699,
+          "worst": 259,
+          "blockedLength": 7397.980456025354,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.8893129770992366,
+          "longest": 5900.4135620930965,
+          "unknown": 0,
+          "coverage": 0.11068702290076336,
+          "clearance": -97.13962953655732,
+          "worst": 207,
+          "blockedLength": 6978.661725724322,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8893129770992366,
+          "longest": 5900.4135620930965,
+          "unknown": 0,
+          "coverage": 0.11068702290076336,
+          "clearance": -91.39980386136563,
+          "worst": 206,
+          "blockedLength": 6978.661725724322,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.6259541984732825,
+          "longest": 4882.068074219161,
+          "unknown": 0,
+          "coverage": 0.37404580152671757,
+          "clearance": -41.25921929963715,
+          "worst": 71,
+          "blockedLength": 4912.019412097806,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.5992366412213741,
+          "longest": 4702.36004694729,
+          "unknown": 0,
+          "coverage": 0.40076335877862596,
+          "clearance": -39.644024847901164,
+          "worst": 70,
+          "blockedLength": 4702.36004694729,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9274809160305344,
+          "longest": 5600.900183306645,
+          "unknown": 0,
+          "coverage": 0.07251908396946564,
+          "clearance": -29.596684223889497,
+          "worst": 98,
+          "blockedLength": 7278.175104510774,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8931297709923665,
+          "longest": 5481.094831792064,
+          "unknown": 0,
+          "coverage": 0.10687022900763359,
+          "clearance": -27.464826967289355,
+          "worst": 98,
+          "blockedLength": 7008.6130636029675,
+          "unknownLength": 0
+        }
+      }
+    },
+    "60": {
+      "labah": {
+        "native": {
+          "blocked": 0.17557251908396945,
+          "longest": 419.31873030103225,
+          "unknown": 0,
+          "coverage": 0.8244274809160306,
+          "clearance": -25.40629156257853,
+          "worst": 237,
+          "blockedLength": 1377.7615424176772,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.09923664122137404,
+          "longest": 419.31873030103225,
+          "unknown": 0,
+          "coverage": 0.9007633587786259,
+          "clearance": -21.19053009460879,
+          "worst": 238,
+          "blockedLength": 778.7347848447741,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.9541984732824428,
+          "longest": 7487.834469661289,
+          "unknown": 0,
+          "coverage": 0.04580152671755725,
+          "clearance": -82.56576823129319,
+          "worst": 238,
+          "blockedLength": 7487.834469661289,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.950381679389313,
+          "longest": 7457.883131782644,
+          "unknown": 0,
+          "coverage": 0.04961832061068702,
+          "clearance": -76.2557071843662,
+          "worst": 237,
+          "blockedLength": 7457.883131782644,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.916030534351145,
+          "longest": 7158.369752996193,
+          "unknown": 0,
+          "coverage": 0.08396946564885496,
+          "clearance": -99.393808393359,
+          "worst": 176,
+          "blockedLength": 7188.321090874838,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9083969465648855,
+          "longest": 4163.235965131677,
+          "unknown": 0,
+          "coverage": 0.0916030534351145,
+          "clearance": -92.91143648410502,
+          "worst": 175,
+          "blockedLength": 7128.418415117548,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.5763358778625954,
+          "longest": 4193.1873030103225,
+          "unknown": 0,
+          "coverage": 0.42366412213740456,
+          "clearance": -38.663727938592274,
+          "worst": 78,
+          "blockedLength": 4522.652019675419,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.5687022900763359,
+          "longest": 4133.284627253032,
+          "unknown": 0,
+          "coverage": 0.4312977099236641,
+          "clearance": -37.718505961819574,
+          "worst": 79,
+          "blockedLength": 4462.749343918129,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.916030534351145,
+          "longest": 4762.2627227045805,
+          "unknown": 0,
+          "coverage": 0.08396946564885496,
+          "clearance": -27.890353030126334,
+          "worst": 119,
+          "blockedLength": 7188.321090874838,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8893129770992366,
+          "longest": 4732.311384825935,
+          "unknown": 0,
+          "coverage": 0.11068702290076336,
+          "clearance": -25.98845153773027,
+          "worst": 118,
+          "blockedLength": 6978.661725724322,
+          "unknownLength": 0
+        }
+      }
+    },
+    "75": {
+      "labah": {
+        "native": {
+          "blocked": 0.2786259541984733,
+          "longest": 808.6861227234194,
+          "unknown": 0,
+          "coverage": 0.7213740458015268,
+          "clearance": -26.891097712141118,
+          "worst": 212,
+          "blockedLength": 2186.4476651410973,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.20229007633587787,
+          "longest": 1018.3454878739357,
+          "unknown": 0,
+          "coverage": 0.7977099236641222,
+          "clearance": -23.56592306428638,
+          "worst": 212,
+          "blockedLength": 1587.4209075681938,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.9007633587786259,
+          "longest": 6978.661725724323,
+          "unknown": 0,
+          "coverage": 0.09923664122137404,
+          "clearance": -84.69850831533427,
+          "worst": 212,
+          "blockedLength": 7068.515739360259,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8893129770992366,
+          "longest": 6978.661725724323,
+          "unknown": 0,
+          "coverage": 0.11068702290076336,
+          "clearance": -79.73879699665292,
+          "worst": 211,
+          "blockedLength": 6978.661725724323,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.9274809160305344,
+          "longest": 3923.625262102517,
+          "unknown": 0,
+          "coverage": 0.07251908396946564,
+          "clearance": -122.38394714774927,
+          "worst": 248,
+          "blockedLength": 7278.175104510776,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9198473282442748,
+          "longest": 3863.7225863452263,
+          "unknown": 0,
+          "coverage": 0.08015267175572519,
+          "clearance": -113.66062576510785,
+          "worst": 250,
+          "blockedLength": 7218.272428753485,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.648854961832061,
+          "longest": 3504.3065318014847,
+          "unknown": 0,
+          "coverage": 0.3511450381679389,
+          "clearance": -25.979276490245866,
+          "worst": 34,
+          "blockedLength": 5091.727439369678,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.6221374045801527,
+          "longest": 3444.403856044194,
+          "unknown": 0,
+          "coverage": 0.37786259541984735,
+          "clearance": -24.0238060134609,
+          "worst": 34,
+          "blockedLength": 4882.068074219162,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.851145038167939,
+          "longest": 3893.6739242238714,
+          "unknown": 0,
+          "coverage": 0.14885496183206107,
+          "clearance": -29.621498133505973,
+          "worst": 78,
+          "blockedLength": 6679.148346937872,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.7748091603053435,
+          "longest": 3594.16054543742,
+          "unknown": 0,
+          "coverage": 0.22519083969465647,
+          "clearance": -28.108291464690865,
+          "worst": 77,
+          "blockedLength": 6080.121589364969,
+          "unknownLength": 0
+        }
+      }
+    },
+    "-75": {
+      "labah": {
+        "native": {
+          "blocked": 0.8625954198473282,
+          "longest": 6649.197009059229,
+          "unknown": 0,
+          "coverage": 0.13740458015267176,
+          "clearance": -56.476991626413906,
+          "worst": 97,
+          "blockedLength": 6769.002360573809,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8549618320610687,
+          "longest": 6649.197009059229,
+          "unknown": 0,
+          "coverage": 0.1450381679389313,
+          "clearance": -53.088768379269254,
+          "worst": 97,
+          "blockedLength": 6709.099684816519,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.9274809160305344,
+          "longest": 7278.175104510777,
+          "unknown": 0,
+          "coverage": 0.07251908396946564,
+          "clearance": -127.13562262551875,
+          "worst": 257,
+          "blockedLength": 7278.175104510777,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9274809160305344,
+          "longest": 7278.175104510777,
+          "unknown": 0,
+          "coverage": 0.07251908396946564,
+          "clearance": -123.08266854408168,
+          "worst": 257,
+          "blockedLength": 7278.175104510777,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.8396946564885496,
+          "longest": 5870.462224214454,
+          "unknown": 0,
+          "coverage": 0.16030534351145037,
+          "clearance": -92.29988074289804,
+          "worst": 178,
+          "blockedLength": 6589.294333301938,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8206106870229007,
+          "longest": 5810.559548457163,
+          "unknown": 0,
+          "coverage": 0.17938931297709923,
+          "clearance": -87.92878907823388,
+          "worst": 178,
+          "blockedLength": 6439.537643908712,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.7404580152671756,
+          "longest": 5810.559548457163,
+          "unknown": 0,
+          "coverage": 0.2595419847328244,
+          "clearance": -172.50160594619052,
+          "worst": 196,
+          "blockedLength": 5810.559548457163,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.7404580152671756,
+          "longest": 5810.559548457163,
+          "unknown": 0,
+          "coverage": 0.2595419847328244,
+          "clearance": -171.22329724105748,
+          "worst": 196,
+          "blockedLength": 5810.559548457163,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9770992366412213,
+          "longest": 7667.542496933164,
+          "unknown": 0,
+          "coverage": 0.022900763358778626,
+          "clearance": -56.57181237491386,
+          "worst": 114,
+          "blockedLength": 7667.542496933164,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9694656488549618,
+          "longest": 7427.931793904003,
+          "unknown": 0,
+          "coverage": 0.030534351145038167,
+          "clearance": -54.47293852633402,
+          "worst": 113,
+          "blockedLength": 7607.639821175874,
+          "unknownLength": 0
+        }
+      }
+    },
+    "-60": {
+      "labah": {
+        "native": {
+          "blocked": 0.8358778625954199,
+          "longest": 6110.072927243613,
+          "unknown": 0,
+          "coverage": 0.16412213740458015,
+          "clearance": -50.78668064484714,
+          "worst": 203,
+          "blockedLength": 6559.34299542329,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8206106870229007,
+          "longest": 6110.072927243613,
+          "unknown": 0,
+          "coverage": 0.17938931297709923,
+          "clearance": -44.635376123793776,
+          "worst": 204,
+          "blockedLength": 6439.5376439087095,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.9236641221374046,
+          "longest": 7248.223766632129,
+          "unknown": 0,
+          "coverage": 0.07633587786259542,
+          "clearance": -129.62779150386052,
+          "worst": 236,
+          "blockedLength": 7248.223766632129,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9236641221374046,
+          "longest": 7248.223766632129,
+          "unknown": 0,
+          "coverage": 0.07633587786259542,
+          "clearance": -125.22016535259252,
+          "worst": 236,
+          "blockedLength": 7248.223766632129,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.8473282442748091,
+          "longest": 5091.727439369677,
+          "unknown": 0,
+          "coverage": 0.15267175572519084,
+          "clearance": -59.57035677438353,
+          "worst": 157,
+          "blockedLength": 6649.197009059225,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8244274809160306,
+          "longest": 5061.776101491032,
+          "unknown": 0,
+          "coverage": 0.17557251908396945,
+          "clearance": -56.28565638800387,
+          "worst": 156,
+          "blockedLength": 6469.4889817873545,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.9351145038167938,
+          "longest": 7338.077780268064,
+          "unknown": 0,
+          "coverage": 0.0648854961832061,
+          "clearance": -150.00769589149968,
+          "worst": 174,
+          "blockedLength": 7338.077780268064,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9312977099236641,
+          "longest": 7308.126442389419,
+          "unknown": 0,
+          "coverage": 0.06870229007633588,
+          "clearance": -148.46610534111005,
+          "worst": 174,
+          "blockedLength": 7308.126442389419,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9809160305343512,
+          "longest": 7697.493834811806,
+          "unknown": 0,
+          "coverage": 0.019083969465648856,
+          "clearance": -51.283108497852936,
+          "worst": 84,
+          "blockedLength": 7697.493834811806,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9770992366412213,
+          "longest": 7667.542496933161,
+          "unknown": 0,
+          "coverage": 0.022900763358778626,
+          "clearance": -49.76922498374779,
+          "worst": 84,
+          "blockedLength": 7667.542496933161,
+          "unknownLength": 0
+        }
+      }
+    },
+    "-45": {
+      "labah": {
+        "native": {
+          "blocked": 0.7595419847328244,
+          "longest": 5870.46222421445,
+          "unknown": 0,
+          "coverage": 0.24045801526717558,
+          "clearance": -32.81972620305521,
+          "worst": 178,
+          "blockedLength": 5960.316237850385,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.7442748091603053,
+          "longest": 5840.510886335805,
+          "unknown": 0,
+          "coverage": 0.25572519083969464,
+          "clearance": -30.655578967509427,
+          "worst": 177,
+          "blockedLength": 5840.510886335805,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.9198473282442748,
+          "longest": 7218.272428753482,
+          "unknown": 0,
+          "coverage": 0.08015267175572519,
+          "clearance": -134.47524029122894,
+          "worst": 209,
+          "blockedLength": 7218.272428753482,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9198473282442748,
+          "longest": 7218.272428753482,
+          "unknown": 0,
+          "coverage": 0.08015267175572519,
+          "clearance": -130.10045718019944,
+          "worst": 209,
+          "blockedLength": 7218.272428753482,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.7099236641221374,
+          "longest": 2306.2530166556767,
+          "unknown": 0,
+          "coverage": 0.2900763358778626,
+          "clearance": -77.61093982272882,
+          "worst": 261,
+          "blockedLength": 5570.948845427998,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.6603053435114504,
+          "longest": 2306.2530166556767,
+          "unknown": 0,
+          "coverage": 0.33969465648854963,
+          "clearance": -75.56882122832485,
+          "worst": 261,
+          "blockedLength": 5181.581453005611,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.9656488549618321,
+          "longest": 7577.688483297224,
+          "unknown": 0,
+          "coverage": 0.03435114503816794,
+          "clearance": -136.88533389978147,
+          "worst": 149,
+          "blockedLength": 7577.688483297224,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9618320610687023,
+          "longest": 7547.737145418579,
+          "unknown": 0,
+          "coverage": 0.03816793893129771,
+          "clearance": -135.3555123860915,
+          "worst": 148,
+          "blockedLength": 7547.737145418579,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9809160305343512,
+          "longest": 7697.493834811804,
+          "unknown": 0,
+          "coverage": 0.019083969465648856,
+          "clearance": -38.498661076546796,
+          "worst": 90,
+          "blockedLength": 7697.493834811804,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9809160305343512,
+          "longest": 7697.493834811804,
+          "unknown": 0,
+          "coverage": 0.019083969465648856,
+          "clearance": -35.863832911986265,
+          "worst": 89,
+          "blockedLength": 7697.493834811804,
+          "unknownLength": 0
+        }
+      }
+    },
+    "-30": {
+      "labah": {
+        "native": {
+          "blocked": 0.6068702290076335,
+          "longest": 4013.479275738451,
+          "unknown": 0,
+          "coverage": 0.3931297709923664,
+          "clearance": -32.40039967422649,
+          "worst": 123,
+          "blockedLength": 4762.2627227045805,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.5763358778625954,
+          "longest": 4013.479275738451,
+          "unknown": 0,
+          "coverage": 0.42366412213740456,
+          "clearance": -30.839288441783538,
+          "worst": 124,
+          "blockedLength": 4522.652019675419,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.9007633587786259,
+          "longest": 7068.515739360258,
+          "unknown": 0,
+          "coverage": 0.09923664122137404,
+          "clearance": -134.2159393550612,
+          "worst": 178,
+          "blockedLength": 7068.515739360258,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9045801526717557,
+          "longest": 7098.467077238903,
+          "unknown": 0,
+          "coverage": 0.09541984732824428,
+          "clearance": -129.76202129030708,
+          "worst": 178,
+          "blockedLength": 7098.467077238903,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.7633587786259542,
+          "longest": 3084.9878015004515,
+          "unknown": 0,
+          "coverage": 0.2366412213740458,
+          "clearance": -88.26541138584207,
+          "worst": 248,
+          "blockedLength": 5990.267575729032,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.7366412213740458,
+          "longest": 3055.0364636218064,
+          "unknown": 0,
+          "coverage": 0.2633587786259542,
+          "clearance": -84.02194878581881,
+          "worst": 98,
+          "blockedLength": 5780.608210578515,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.9656488549618321,
+          "longest": 7577.6884832972255,
+          "unknown": 0,
+          "coverage": 0.03435114503816794,
+          "clearance": -139.40883999407106,
+          "worst": 123,
+          "blockedLength": 7577.6884832972255,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9618320610687023,
+          "longest": 7547.73714541858,
+          "unknown": 0,
+          "coverage": 0.03816793893129771,
+          "clearance": -138.00335907839053,
+          "worst": 121,
+          "blockedLength": 7547.73714541858,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690451,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -47.96839883338089,
+          "worst": 200,
+          "blockedLength": 7727.445172690451,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690451,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -44.7037352380853,
+          "worst": 201,
+          "blockedLength": 7727.445172690451,
+          "unknownLength": 0
+        }
+      }
+    },
+    "-15": {
+      "labah": {
+        "native": {
+          "blocked": 0.4580152671755725,
+          "longest": 3324.5985045296134,
+          "unknown": 0,
+          "coverage": 0.5419847328244275,
+          "clearance": -32.900695472044845,
+          "worst": 102,
+          "blockedLength": 3594.16054543742,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.4312977099236641,
+          "longest": 3354.5498424082584,
+          "unknown": 0,
+          "coverage": 0.5687022900763359,
+          "clearance": -31.625498712929584,
+          "worst": 103,
+          "blockedLength": 3384.501180286904,
+          "unknownLength": 0
+        }
+      },
+      "anahi": {
+        "native": {
+          "blocked": 0.8816793893129771,
+          "longest": 6858.856374209743,
+          "unknown": 0,
+          "coverage": 0.1183206106870229,
+          "clearance": -130.74943151243963,
+          "worst": 152,
+          "blockedLength": 6918.759049967033,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.8740458015267175,
+          "longest": 6858.856374209743,
+          "unknown": 0,
+          "coverage": 0.12595419847328243,
+          "clearance": -126.14398505713484,
+          "worst": 152,
+          "blockedLength": 6858.856374209743,
+          "unknownLength": 0
+        }
+      },
+      "axis": {
+        "native": {
+          "blocked": 0.7061068702290076,
+          "longest": 3803.819910587936,
+          "unknown": 0,
+          "coverage": 0.29389312977099236,
+          "clearance": -84.88761360457488,
+          "worst": 225,
+          "blockedLength": 5540.997507549356,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.683206106870229,
+          "longest": 3773.868572709291,
+          "unknown": 0,
+          "coverage": 0.31679389312977096,
+          "clearance": -79.92486876682324,
+          "worst": 226,
+          "blockedLength": 5361.2894802774845,
+          "unknownLength": 0
+        }
+      },
+      "nobile": {
+        "native": {
+          "blocked": 0.9618320610687023,
+          "longest": 7547.737145418582,
+          "unknown": 0,
+          "coverage": 0.03816793893129771,
+          "clearance": -158.88656987789636,
+          "worst": 98,
+          "blockedLength": 7547.737145418582,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9618320610687023,
+          "longest": 7547.737145418582,
+          "unknown": 0,
+          "coverage": 0.03816793893129771,
+          "clearance": -157.54811283802246,
+          "worst": 98,
+          "blockedLength": 7547.737145418582,
+          "unknownLength": 0
+        }
+      },
+      "jezero": {
+        "native": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690453,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -48.282388189311405,
+          "worst": 195,
+          "blockedLength": 7727.445172690453,
+          "unknownLength": 0
+        },
+        "common": {
+          "blocked": 0.9847328244274809,
+          "longest": 7727.445172690453,
+          "unknown": 0,
+          "coverage": 0.015267175572519083,
+          "clearance": -45.822610231873874,
+          "worst": 195,
+          "blockedLength": 7727.445172690453,
+          "unknownLength": 0
+        }
+      }
+    }
+  },
+  "cases": {
+    "nobile": {
+      "anahi": {
+        "counts": [
+          {
+            "factor": 0.75,
+            "native": 3,
+            "common": 3
+          },
+          {
+            "factor": 1,
+            "native": 5,
+            "common": 5
+          },
+          {
+            "factor": 1.25,
+            "native": 5,
+            "common": 5
+          }
+        ],
+        "comparisons": [
+          {
+            "angle": -75,
+            "native": 1.956820741404818,
+            "common": 1.956820741404818
+          },
+          {
+            "angle": -60,
+            "native": 0.5822829825039759,
+            "common": 0.6641697139576438
+          },
+          {
+            "angle": -45,
+            "native": 0.4792214060583222,
+            "common": 0.4392862888867955
+          },
+          {
+            "angle": -30,
+            "native": 0.6788969919159572,
+            "common": 0.5990267575729037
+          },
+          {
+            "angle": -15,
+            "native": 0.9185076949451189,
+            "common": 0.9185076949451189
+          },
+          {
+            "angle": 0,
+            "native": 0.9185076949451189,
+            "common": 0.8785725777735921
+          },
+          {
+            "angle": 15,
+            "native": 2.5831764507689545,
+            "common": 2.489711136452501
+          },
+          {
+            "angle": 30,
+            "native": 2.675652850492301,
+            "common": 2.795458202006881
+          },
+          {
+            "angle": 45,
+            "native": 2.3961070302916134,
+            "common": 2.595782616149246
+          },
+          {
+            "angle": 60,
+            "native": 4.392862888867956,
+            "common": 4.432798006039483
+          },
+          {
+            "angle": 75,
+            "native": 4.632473591897118,
+            "common": 4.712343826240172
+          }
+        ]
+      },
+      "axis": {
+        "counts": [
+          {
+            "factor": 0.75,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1.25,
+            "native": 1,
+            "common": 2
+          }
+        ],
+        "comparisons": [
+          {
+            "angle": -75,
+            "native": 2.2914778629512136,
+            "common": 2.3798430903663887
+          },
+          {
+            "angle": -60,
+            "native": 2.995133787864516,
+            "common": 2.995133787864516
+          },
+          {
+            "angle": -45,
+            "native": 7.02858062218873,
+            "common": 6.988645505017203
+          },
+          {
+            "angle": -30,
+            "native": 5.990267575729032,
+            "common": 5.990267575729032
+          },
+          {
+            "angle": -15,
+            "native": 4.991889646440861,
+            "common": 5.031824763612388
+          },
+          {
+            "angle": 0,
+            "native": 4.153252185838795,
+            "common": 4.113317068667269
+          },
+          {
+            "angle": 15,
+            "native": 1.097245198561781,
+            "common": 1.0130634475538882
+          },
+          {
+            "angle": 30,
+            "native": 1.2946458346915668,
+            "common": 1.1898730383207359
+          },
+          {
+            "angle": 45,
+            "native": 1.7557251908396942,
+            "common": 1.9338422391857502
+          },
+          {
+            "angle": 60,
+            "native": 3.9535765999811603,
+            "common": 2.264631043256997
+          },
+          {
+            "angle": 75,
+            "native": 2.7544191616429545,
+            "common": 2.561051992904199
+          }
+        ]
+      },
+      "labah": {
+        "counts": [
+          {
+            "factor": 0.75,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1.25,
+            "native": 0,
+            "common": 0
+          }
+        ],
+        "comparisons": [
+          {
+            "angle": -75,
+            "native": 3.314988980565046,
+            "common": 3.375272253193949
+          },
+          {
+            "angle": -60,
+            "native": 2.8348861499043583,
+            "common": 2.9665922633518935
+          },
+          {
+            "angle": -45,
+            "native": 2.9733030770493216,
+            "common": 2.9914266691023452
+          },
+          {
+            "angle": -30,
+            "native": 4.752278943411699,
+            "common": 4.712343826240172
+          },
+          {
+            "angle": -15,
+            "native": 5.630851521185291,
+            "common": 5.590916404013765
+          },
+          {
+            "angle": 0,
+            "native": 8.146763902991484,
+            "common": 8.18669902016301
+          },
+          {
+            "angle": 15,
+            "native": 8.945466246422026,
+            "common": 8.825660894907445
+          },
+          {
+            "angle": 30,
+            "native": 6.269813395929719,
+            "common": 6.189943161586665
+          },
+          {
+            "angle": 45,
+            "native": 6.189943161586665,
+            "common": 6.030202692900558
+          },
+          {
+            "angle": 60,
+            "native": 5.031824763612387,
+            "common": 4.951954529269334
+          },
+          {
+            "angle": 75,
+            "native": 3.59416054543742,
+            "common": 3.2347444908936778
+          }
+        ]
+      }
+    },
+    "jezero": {
+      "anahi": {
+        "counts": [
+          {
+            "factor": 0.75,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1.25,
+            "native": 1,
+            "common": 1
+          }
+        ],
+        "comparisons": [
+          {
+            "angle": -75,
+            "native": 2.0161088643029967,
+            "common": 1.9602780005070761
+          },
+          {
+            "angle": -60,
+            "native": 2.2384195144573598,
+            "common": 2.1557411533955637
+          },
+          {
+            "angle": -45,
+            "native": 2.742187977562347,
+            "common": 2.692474979091805
+          },
+          {
+            "angle": -30,
+            "native": 2.4642154434765806,
+            "common": 2.4302367443491937
+          },
+          {
+            "angle": -15,
+            "native": 2.3562012378036634,
+            "common": 2.2948964235788845
+          },
+          {
+            "angle": 0,
+            "native": 2.5409675549928807,
+            "common": 2.5260512687211367
+          },
+          {
+            "angle": 15,
+            "native": 2.7018304850561856,
+            "common": 2.6804573553854327
+          },
+          {
+            "angle": 30,
+            "native": 1.1181832808027528,
+            "common": 1.1181832808027528
+          },
+          {
+            "angle": 45,
+            "native": 1.5036120469907241,
+            "common": 1.5574695696895482
+          },
+          {
+            "angle": 60,
+            "native": 3.6340956626089453,
+            "common": 3.6340956626089453
+          },
+          {
+            "angle": 75,
+            "native": 4.1133170686672695,
+            "common": 4.5126682403825376
+          }
+        ]
+      },
+      "axis": {
+        "counts": [
+          {
+            "factor": 0.75,
+            "native": 1,
+            "common": 0
+          },
+          {
+            "factor": 1,
+            "native": 1,
+            "common": 1
+          },
+          {
+            "factor": 1.25,
+            "native": 1,
+            "common": 1
+          }
+        ],
+        "comparisons": [
+          {
+            "angle": -75,
+            "native": 2.3961070302916134,
+            "common": 2.156496327262453
+          },
+          {
+            "angle": -60,
+            "native": 3.4743551939228383,
+            "common": 3.4743551939228383
+          },
+          {
+            "angle": -45,
+            "native": 7.188321090874837,
+            "common": 7.188321090874837
+          },
+          {
+            "angle": -30,
+            "native": 6.189943161586665,
+            "common": 6.229878278758193
+          },
+          {
+            "angle": -15,
+            "native": 5.231500349470022,
+            "common": 5.271435466641549
+          },
+          {
+            "angle": 0,
+            "native": 4.312992654524902,
+            "common": 4.352927771696429
+          },
+          {
+            "angle": 15,
+            "native": 1.4775993353464947,
+            "common": 1.6373398040326028
+          },
+          {
+            "angle": 30,
+            "native": 0.6389618747444292,
+            "common": 0.7587672262590107
+          },
+          {
+            "angle": 45,
+            "native": 1.929798437504795,
+            "common": 1.8267136255450362
+          },
+          {
+            "angle": 60,
+            "native": 3.19480937372215,
+            "common": 1.9120852841821359
+          },
+          {
+            "angle": 75,
+            "native": 2.650355686121237,
+            "common": 2.4443524085833426
+          }
+        ]
+      },
+      "labah": {
+        "counts": [
+          {
+            "factor": 0.75,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1,
+            "native": 0,
+            "common": 0
+          },
+          {
+            "factor": 1.25,
+            "native": 0,
+            "common": 1
+          }
+        ],
+        "comparisons": [
+          {
+            "angle": -75,
+            "native": 1.3577939838319144,
+            "common": 1.0383130464596992
+          },
+          {
+            "angle": -60,
+            "native": 2.1165612100909237,
+            "common": 2.076626092919397
+          },
+          {
+            "angle": -45,
+            "native": 2.436042147463139,
+            "common": 2.4759772646346656
+          },
+          {
+            "angle": -30,
+            "native": 4.951954529269333,
+            "common": 4.951954529269333
+          },
+          {
+            "angle": -15,
+            "native": 5.870462224214452,
+            "common": 5.830527107042925
+          },
+          {
+            "angle": 0,
+            "native": 8.30650437167759,
+            "common": 8.42630972319217
+          },
+          {
+            "angle": 15,
+            "native": 9.863973941367144,
+            "common": 9.903909058538671
+          },
+          {
+            "angle": 30,
+            "native": 7.8272829656192675,
+            "common": 7.867218082790794
+          },
+          {
+            "angle": 45,
+            "native": 7.148385973703311,
+            "common": 7.068515739360257
+          },
+          {
+            "angle": 60,
+            "native": 5.790591989871398,
+            "common": 5.750656872699872
+          },
+          {
+            "angle": 75,
+            "native": 4.1133170686672695,
+            "common": 3.8167938931297707
+          }
+        ]
+      }
+    }
+  },
+  "relays": {
+    "anahi": {
+      "eligible": 62,
+      "without": {
+        "point": null,
+        "training": {
+          "count": 30,
+          "worstGap": 7487.834469661289,
+          "meanGap": 7203.29675981416,
+          "worstCoverage": 0.04580152671755725,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 7487.834469661289,
+          "meanGap": 6840.552778839459,
+          "worstCoverage": 0.04580152671755725,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 7278.175104510777,
+            "coverage": 0.07251908396946564,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 7278.175104510777,
+            "coverage": 0.07251908396946564,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 7248.223766632132,
+            "coverage": 0.07633587786259542,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 7278.175104510777,
+            "coverage": 0.07251908396946564,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 7278.175104510777,
+            "coverage": 0.07251908396946564,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 7248.223766632132,
+            "coverage": 0.07633587786259542,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 7218.272428753482,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 7218.272428753482,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 7188.321090874836,
+            "coverage": 0.08396946564885496,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 7218.272428753482,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 7218.272428753482,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 7218.272428753482,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 6888.807712088388,
+            "coverage": 0.08396946564885496,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 6858.856374209743,
+            "coverage": 0.1183206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 6798.953698452453,
+            "coverage": 0.13358778625954199,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 6888.807712088388,
+            "coverage": 0.12213740458015267,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 6858.856374209743,
+            "coverage": 0.12595419847328243,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 6828.905036331098,
+            "coverage": 0.1297709923664122,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 5930.364899971744,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 5930.364899971744,
+            "coverage": 0.08778625954198473,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 5900.413562093099,
+            "coverage": 0.09923664122137404,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 5930.364899971744,
+            "coverage": 0.09541984732824428,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 5930.364899971744,
+            "coverage": 0.10687022900763359,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 5930.364899971744,
+            "coverage": 0.12595419847328243,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 7487.834469661289,
+            "coverage": 0.04580152671755725,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 6679.148346937871,
+            "coverage": 0.04961832061068702,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 6649.197009059225,
+            "coverage": 0.061068702290076333,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 7487.834469661289,
+            "coverage": 0.04580152671755725,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 6649.197009059225,
+            "coverage": 0.05725190839694656,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 6619.24567118058,
+            "coverage": 0.06870229007633588,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 7098.4670772389045,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 6978.661725724323,
+            "coverage": 0.09923664122137404,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 6499.440319666001,
+            "coverage": 0.15648854961832062,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 7098.4670772389045,
+            "coverage": 0.08396946564885496,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 6978.661725724323,
+            "coverage": 0.11068702290076336,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 6469.488981787355,
+            "coverage": 0.16793893129770993,
+            "unknown": 0
+          }
+        ]
+      },
+      "primary": {
+        "point": {
+          "x": 4200,
+          "y": 3000
+        },
+        "training": {
+          "count": 30,
+          "worstGap": 4342.943992403548,
+          "meanGap": 2719.581479380981,
+          "worstCoverage": 0.1717557251908397,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 4702.360046947292,
+          "meanGap": 2515.0804001984543,
+          "worstCoverage": 0.21755725190839695,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 4702.360046947292,
+            "coverage": 0.21755725190839695,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 4043.4306136170985,
+            "coverage": 0.31679389312977096,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 3564.2092075587757,
+            "coverage": 0.4122137404580153,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 4133.284627253034,
+            "coverage": 0.30916030534351147,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 3684.0145590733564,
+            "coverage": 0.38549618320610685,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 3055.036463621808,
+            "coverage": 0.5190839694656488,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 3144.890477257741,
+            "coverage": 0.2480916030534351,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 2575.815057563483,
+            "coverage": 0.3282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 1497.5668939322577,
+            "coverage": 0.5076335877862596,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 2605.766395442128,
+            "coverage": 0.3244274809160305,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 1617.3722454468382,
+            "coverage": 0.4618320610687023,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 1497.5668939322577,
+            "coverage": 0.6068702290076335,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 3474.355193922839,
+            "coverage": 0.4618320610687023,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 3474.355193922839,
+            "coverage": 0.4847328244274809,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 2366.155692412968,
+            "coverage": 0.5458015267175572,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 3414.452518165549,
+            "coverage": 0.4847328244274809,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 2426.0583681702583,
+            "coverage": 0.5343511450381679,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 1707.2262590827745,
+            "coverage": 0.583969465648855,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 4372.895330282196,
+            "coverage": 0.38549618320610685,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 2905.2797742285816,
+            "coverage": 0.4122137404580153,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 2156.4963272624523,
+            "coverage": 0.46564885496183206,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 4372.895330282196,
+            "coverage": 0.4198473282442748,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 2845.3770984712914,
+            "coverage": 0.4580152671755725,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 2186.447665141098,
+            "coverage": 0.5,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 2695.6204090780643,
+            "coverage": 0.5267175572519084,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 1407.7128802963225,
+            "coverage": 0.5801526717557252,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 1257.9561909030967,
+            "coverage": 0.6526717557251909,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 2605.7663954421287,
+            "coverage": 0.583969465648855,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 1317.858866660387,
+            "coverage": 0.6526717557251909,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 1198.0535151458064,
+            "coverage": 0.6908396946564885,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 1497.5668939322584,
+            "coverage": 0.6450381679389313,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 1437.664218174968,
+            "coverage": 0.683206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 1257.956190903097,
+            "coverage": 0.767175572519084,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 1437.664218174968,
+            "coverage": 0.7290076335877863,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 1407.7128802963227,
+            "coverage": 0.767175572519084,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 1198.0535151458066,
+            "coverage": 0.7977099236641222,
+            "unknown": 0
+          }
+        ]
+      },
+      "locked": {
+        "point": {
+          "x": 4200,
+          "y": 3000
+        },
+        "training": {
+          "count": 30,
+          "worstGap": 4342.943992403548,
+          "meanGap": 2719.581479380981,
+          "worstCoverage": 0.1717557251908397,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 4702.360046947292,
+          "meanGap": 2515.0804001984543,
+          "worstCoverage": 0.21755725190839695,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 4702.360046947292,
+            "coverage": 0.21755725190839695,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 4043.4306136170985,
+            "coverage": 0.31679389312977096,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 3564.2092075587757,
+            "coverage": 0.4122137404580153,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 4133.284627253034,
+            "coverage": 0.30916030534351147,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 3684.0145590733564,
+            "coverage": 0.38549618320610685,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 3055.036463621808,
+            "coverage": 0.5190839694656488,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 3144.890477257741,
+            "coverage": 0.2480916030534351,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 2575.815057563483,
+            "coverage": 0.3282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 1497.5668939322577,
+            "coverage": 0.5076335877862596,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 2605.766395442128,
+            "coverage": 0.3244274809160305,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 1617.3722454468382,
+            "coverage": 0.4618320610687023,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 1497.5668939322577,
+            "coverage": 0.6068702290076335,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 3474.355193922839,
+            "coverage": 0.4618320610687023,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 3474.355193922839,
+            "coverage": 0.4847328244274809,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 2366.155692412968,
+            "coverage": 0.5458015267175572,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 3414.452518165549,
+            "coverage": 0.4847328244274809,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 2426.0583681702583,
+            "coverage": 0.5343511450381679,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 1707.2262590827745,
+            "coverage": 0.583969465648855,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 4372.895330282196,
+            "coverage": 0.38549618320610685,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 2905.2797742285816,
+            "coverage": 0.4122137404580153,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 2156.4963272624523,
+            "coverage": 0.46564885496183206,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 4372.895330282196,
+            "coverage": 0.4198473282442748,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 2845.3770984712914,
+            "coverage": 0.4580152671755725,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 2186.447665141098,
+            "coverage": 0.5,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 2695.6204090780643,
+            "coverage": 0.5267175572519084,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 1407.7128802963225,
+            "coverage": 0.5801526717557252,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 1257.9561909030967,
+            "coverage": 0.6526717557251909,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 2605.7663954421287,
+            "coverage": 0.583969465648855,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 1317.858866660387,
+            "coverage": 0.6526717557251909,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 1198.0535151458064,
+            "coverage": 0.6908396946564885,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 1497.5668939322584,
+            "coverage": 0.6450381679389313,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 1437.664218174968,
+            "coverage": 0.683206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 1257.956190903097,
+            "coverage": 0.767175572519084,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 1437.664218174968,
+            "coverage": 0.7290076335877863,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 1407.7128802963227,
+            "coverage": 0.767175572519084,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 1198.0535151458066,
+            "coverage": 0.7977099236641222,
+            "unknown": 0
+          }
+        ]
+      }
+    },
+    "axis": {
+      "eligible": 116,
+      "without": {
+        "point": null,
+        "training": {
+          "count": 30,
+          "worstGap": 7158.369752996193,
+          "meanGap": 4775.241635785327,
+          "worstCoverage": 0.0648854961832061,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 7487.834469661293,
+          "meanGap": 4743.9591273342985,
+          "worstCoverage": 0.04580152671755725,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 5870.462224214454,
+            "coverage": 0.15267175572519084,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 5870.462224214454,
+            "coverage": 0.16030534351145037,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 5780.608210578518,
+            "coverage": 0.183206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 5840.510886335809,
+            "coverage": 0.1717557251908397,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 5810.559548457163,
+            "coverage": 0.17938931297709923,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 5780.608210578518,
+            "coverage": 0.18702290076335878,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 2366.155692412967,
+            "coverage": 0.24427480916030533,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 2306.2530166556767,
+            "coverage": 0.2900763358778626,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 2306.2530166556767,
+            "coverage": 0.3473282442748092,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 2336.2043545343217,
+            "coverage": 0.2862595419847328,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 2306.2530166556767,
+            "coverage": 0.33969465648854963,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 2276.3016787770316,
+            "coverage": 0.3816793893129771,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 3833.7712484665813,
+            "coverage": 0.2786259541984733,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 3803.819910587936,
+            "coverage": 0.29389312977099236,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 3773.868572709291,
+            "coverage": 0.31679389312977096,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 3803.819910587936,
+            "coverage": 0.3015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 3773.868572709291,
+            "coverage": 0.31679389312977096,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 3743.9172348306456,
+            "coverage": 0.33969465648854963,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 7487.834469661293,
+            "coverage": 0.04580152671755725,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 6619.2456711805835,
+            "coverage": 0.09541984732824428,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 6439.537643908712,
+            "coverage": 0.12213740458015267,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 6619.2456711805835,
+            "coverage": 0.08778625954198473,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 6499.440319666002,
+            "coverage": 0.1183206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 6409.586306030067,
+            "coverage": 0.13358778625954199,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 5900.4135620930965,
+            "coverage": 0.0916030534351145,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 5900.4135620930965,
+            "coverage": 0.11068702290076336,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 5870.462224214451,
+            "coverage": 0.1183206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 5900.4135620930965,
+            "coverage": 0.10687022900763359,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 5900.4135620930965,
+            "coverage": 0.11068702290076336,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 5870.462224214451,
+            "coverage": 0.1183206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 4552.603357554065,
+            "coverage": 0.04961832061068702,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 3923.625262102517,
+            "coverage": 0.07251908396946564,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 3773.868572709291,
+            "coverage": 0.09923664122137404,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 3923.625262102517,
+            "coverage": 0.0648854961832061,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 3863.7225863452263,
+            "coverage": 0.08015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 3743.9172348306456,
+            "coverage": 0.09923664122137404,
+            "unknown": 0
+          }
+        ]
+      },
+      "primary": {
+        "point": {
+          "x": 6300,
+          "y": 8100
+        },
+        "training": {
+          "count": 30,
+          "worstGap": 3144.8904772577416,
+          "meanGap": 1362.785873478354,
+          "worstCoverage": 0.5076335877862596,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 3654.0632211947113,
+          "meanGap": 1662.299252264807,
+          "worstCoverage": 0.32061068702290074,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 3624.111883316066,
+            "coverage": 0.3893129770992366,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 3624.111883316066,
+            "coverage": 0.3931297709923664,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 3624.111883316066,
+            "coverage": 0.3931297709923664,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 3654.0632211947113,
+            "coverage": 0.3893129770992366,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 3624.111883316066,
+            "coverage": 0.3931297709923664,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 3594.1605454374208,
+            "coverage": 0.40076335877862596,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 928.4914742379997,
+            "coverage": 0.7748091603053435,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 868.5887984807094,
+            "coverage": 0.8091603053435115,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 868.5887984807094,
+            "coverage": 0.8320610687022901,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 958.4428121166449,
+            "coverage": 0.7938931297709924,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 928.4914742379997,
+            "coverage": 0.8282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 449.27006817967725,
+            "coverage": 0.851145038167939,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 329.46471666509683,
+            "coverage": 0.9045801526717557,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 329.46471666509683,
+            "coverage": 0.9312977099236641,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 329.46471666509683,
+            "coverage": 0.9351145038167938,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 329.46471666509683,
+            "coverage": 0.9312977099236641,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 329.46471666509683,
+            "coverage": 0.9312977099236641,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 329.46471666509683,
+            "coverage": 0.9351145038167938,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 1347.8102045390328,
+            "coverage": 0.8129770992366412,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 1347.8102045390328,
+            "coverage": 0.8129770992366412,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 1138.1508393885165,
+            "coverage": 0.8282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 1317.8588666603875,
+            "coverage": 0.816793893129771,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 1317.8588666603875,
+            "coverage": 0.8206106870229007,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 1317.8588666603875,
+            "coverage": 0.8282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 1168.102177267161,
+            "coverage": 0.6564885496183206,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 1078.2481636312257,
+            "coverage": 0.6717557251908397,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 1048.2968257525806,
+            "coverage": 0.6946564885496184,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 1108.199501509871,
+            "coverage": 0.683206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 1078.2481636312257,
+            "coverage": 0.6984732824427481,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 1048.2968257525806,
+            "coverage": 0.7022900763358778,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 2905.279774228581,
+            "coverage": 0.32061068702290074,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 2785.4744227140004,
+            "coverage": 0.366412213740458,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 2755.5230848353553,
+            "coverage": 0.3893129770992366,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 2815.4257605926455,
+            "coverage": 0.36259541984732824,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 2785.4744227140004,
+            "coverage": 0.37404580152671757,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 2755.5230848353553,
+            "coverage": 0.40076335877862596,
+            "unknown": 0
+          }
+        ]
+      },
+      "locked": {
+        "point": {
+          "x": 6600,
+          "y": 7800
+        },
+        "training": {
+          "count": 30,
+          "worstGap": 2456.009706048903,
+          "meanGap": 1322.8507563068274,
+          "worstCoverage": 0.4580152671755725,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 5361.289480277486,
+          "meanGap": 1823.703684166395,
+          "worstCoverage": 0.26717557251908397,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 5361.289480277486,
+            "coverage": 0.3053435114503817,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 5361.289480277486,
+            "coverage": 0.30916030534351147,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 3684.0145590733564,
+            "coverage": 0.33587786259541985,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 5331.338142398841,
+            "coverage": 0.32061068702290074,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 3713.9658969520015,
+            "coverage": 0.3282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 3684.0145590733564,
+            "coverage": 0.3435114503816794,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 748.7834469661288,
+            "coverage": 0.732824427480916,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 569.0754196942579,
+            "coverage": 0.7938931297709924,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 359.41605454374184,
+            "coverage": 0.851145038167939,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 688.8807712088385,
+            "coverage": 0.8015267175572519,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 479.22140605832243,
+            "coverage": 0.8587786259541985,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 329.46471666509666,
+            "coverage": 0.8969465648854962,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 718.832109087484,
+            "coverage": 0.8778625954198473,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 688.8807712088388,
+            "coverage": 0.8854961832061069,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 688.8807712088388,
+            "coverage": 0.8893129770992366,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 688.8807712088388,
+            "coverage": 0.8854961832061069,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 658.9294333301937,
+            "coverage": 0.8893129770992366,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 658.9294333301937,
+            "coverage": 0.8893129770992366,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 1317.8588666603875,
+            "coverage": 0.8129770992366412,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 1317.8588666603875,
+            "coverage": 0.816793893129771,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 1317.8588666603875,
+            "coverage": 0.8206106870229007,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 1317.8588666603875,
+            "coverage": 0.816793893129771,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 1317.8588666603875,
+            "coverage": 0.8206106870229007,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 1317.8588666603875,
+            "coverage": 0.8282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 1168.102177267161,
+            "coverage": 0.6412213740458015,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 1078.2481636312257,
+            "coverage": 0.6564885496183206,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 1048.2968257525806,
+            "coverage": 0.6679389312977099,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 1108.199501509871,
+            "coverage": 0.6526717557251909,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 1078.2481636312257,
+            "coverage": 0.6641221374045801,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 1048.2968257525806,
+            "coverage": 0.6793893129770993,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 2905.279774228581,
+            "coverage": 0.26717557251908397,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 2785.4744227140004,
+            "coverage": 0.30916030534351147,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 2755.5230848353553,
+            "coverage": 0.3473282442748092,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 2815.4257605926455,
+            "coverage": 0.3053435114503817,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 2785.4744227140004,
+            "coverage": 0.3320610687022901,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 2755.5230848353553,
+            "coverage": 0.3702290076335878,
+            "unknown": 0
+          }
+        ]
+      }
+    },
+    "labah": {
+      "eligible": 305,
+      "without": {
+        "point": null,
+        "training": {
+          "count": 30,
+          "worstGap": 6140.024265122258,
+          "meanGap": 2519.905893523346,
+          "worstCoverage": 0.1450381679389313,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 6679.148346937874,
+          "meanGap": 2886.9761788582978,
+          "worstCoverage": 0.1183206106870229,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 6679.148346937874,
+            "coverage": 0.1183206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 6649.197009059229,
+            "coverage": 0.13740458015267176,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 6619.2456711805835,
+            "coverage": 0.14122137404580154,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 6679.148346937874,
+            "coverage": 0.13358778625954199,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 6649.197009059229,
+            "coverage": 0.1450381679389313,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 6619.2456711805835,
+            "coverage": 0.15648854961832062,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 5870.46222421445,
+            "coverage": 0.22900763358778625,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 5870.46222421445,
+            "coverage": 0.24045801526717558,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 5780.608210578514,
+            "coverage": 0.2633587786259542,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 5870.46222421445,
+            "coverage": 0.25190839694656486,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 5840.510886335805,
+            "coverage": 0.25572519083969464,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 5750.656872699869,
+            "coverage": 0.26717557251908397,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 3354.5498424082584,
+            "coverage": 0.48854961832061067,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 3324.5985045296134,
+            "coverage": 0.5419847328244275,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 3264.6958287723232,
+            "coverage": 0.5763358778625954,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 3354.5498424082584,
+            "coverage": 0.5534351145038168,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 3354.5498424082584,
+            "coverage": 0.5687022900763359,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 3324.5985045296134,
+            "coverage": 0.5763358778625954,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 599.0267575729034,
+            "coverage": 0.6908396946564885,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 329.4647166650969,
+            "coverage": 0.7748091603053435,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 179.70802727187103,
+            "coverage": 0.8969465648854962,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 509.17274393696795,
+            "coverage": 0.7442748091603053,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 299.5133787864517,
+            "coverage": 0.8549618320610687,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 179.70802727187103,
+            "coverage": 0.9618320610687023,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 419.31873030103225,
+            "coverage": 0.7519083969465649,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 239.61070302916127,
+            "coverage": 0.8625954198473282,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 179.70802727187095,
+            "coverage": 0.9312977099236641,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 209.65936515051612,
+            "coverage": 0.8893129770992366,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 179.70802727187095,
+            "coverage": 0.9236641221374046,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 179.70802727187095,
+            "coverage": 0.9732824427480916,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 1078.248163631226,
+            "coverage": 0.6450381679389313,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 808.6861227234194,
+            "coverage": 0.7213740458015268,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 778.7347848447744,
+            "coverage": 0.7862595419847328,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 1048.2968257525808,
+            "coverage": 0.7442748091603053,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 1018.3454878739357,
+            "coverage": 0.7977099236641222,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 838.6374606020646,
+            "coverage": 0.8282442748091603,
+            "unknown": 0
+          }
+        ]
+      },
+      "primary": {
+        "point": {
+          "x": 3000,
+          "y": 6600
+        },
+        "training": {
+          "count": 30,
+          "worstGap": 5870.462224214451,
+          "meanGap": 2029.702330242854,
+          "worstCoverage": 0.25190839694656486,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 4462.749343918128,
+          "meanGap": 1896.0860840397872,
+          "worstCoverage": 0.20610687022900764,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 4223.138640888969,
+            "coverage": 0.20610687022900764,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 4223.138640888969,
+            "coverage": 0.21374045801526717,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 4193.187303010324,
+            "coverage": 0.21755725190839695,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 4223.138640888969,
+            "coverage": 0.20610687022900764,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 4223.138640888969,
+            "coverage": 0.2099236641221374,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 4193.187303010324,
+            "coverage": 0.22137404580152673,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 4462.749343918128,
+            "coverage": 0.4122137404580153,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 4432.798006039482,
+            "coverage": 0.42748091603053434,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 4342.943992403547,
+            "coverage": 0.44656488549618323,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 4432.798006039482,
+            "coverage": 0.4312977099236641,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 4402.846668160837,
+            "coverage": 0.4389312977099237,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 4342.943992403547,
+            "coverage": 0.44656488549618323,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 2366.155692412968,
+            "coverage": 0.6908396946564885,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 2366.155692412968,
+            "coverage": 0.6984732824427481,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 2306.2530166556776,
+            "coverage": 0.7061068702290076,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 2366.155692412968,
+            "coverage": 0.6984732824427481,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 2366.155692412968,
+            "coverage": 0.6984732824427481,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 2336.204354534323,
+            "coverage": 0.7022900763358778,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 359.41605454374206,
+            "coverage": 0.9198473282442748,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 119.80535151458069,
+            "coverage": 0.9541984732824428,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 59.902675757290346,
+            "coverage": 0.9732824427480916,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 149.75668939322586,
+            "coverage": 0.950381679389313,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 89.85401363593552,
+            "coverage": 0.9809160305343512,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 0,
+            "coverage": 1,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 209.65936515051612,
+            "coverage": 0.950381679389313,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 59.90267575729032,
+            "coverage": 0.9847328244274809,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 29.95133787864516,
+            "coverage": 0.9961832061068703,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 29.95133787864516,
+            "coverage": 0.9961832061068703,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 0,
+            "coverage": 1,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 0,
+            "coverage": 1,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 269.5620409078065,
+            "coverage": 0.8282442748091603,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 269.5620409078065,
+            "coverage": 0.8854961832061069,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 269.5620409078065,
+            "coverage": 0.9236641221374046,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 209.65936515051615,
+            "coverage": 0.8854961832061069,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 179.708027271871,
+            "coverage": 0.9389312977099237,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 149.75668939322583,
+            "coverage": 0.9580152671755725,
+            "unknown": 0
+          }
+        ]
+      },
+      "locked": {
+        "point": {
+          "x": 6300,
+          "y": 8100
+        },
+        "training": {
+          "count": 30,
+          "worstGap": 1527.5182318109032,
+          "meanGap": 836.6407047434881,
+          "worstCoverage": 0.3473282442748092,
+          "maxUnknown": 0
+        },
+        "validation": {
+          "count": 36,
+          "worstGap": 1707.2262590827745,
+          "meanGap": 823.6617916627422,
+          "worstCoverage": 0.5076335877862596,
+          "maxUnknown": 0
+        },
+        "holdout": [
+          {
+            "angle": -75,
+            "id": "native/low",
+            "longest": 1257.9561909030972,
+            "coverage": 0.5610687022900763,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/nominal",
+            "longest": 1228.0048530244521,
+            "coverage": 0.6183206106870229,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "native/high",
+            "longest": 1168.1021772671618,
+            "coverage": 0.6755725190839694,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/low",
+            "longest": 1257.9561909030972,
+            "coverage": 0.6526717557251909,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/nominal",
+            "longest": 1198.0535151458068,
+            "coverage": 0.6984732824427481,
+            "unknown": 0
+          },
+          {
+            "angle": -75,
+            "id": "common/high",
+            "longest": 1168.1021772671618,
+            "coverage": 0.7213740458015268,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/low",
+            "longest": 1198.0535151458062,
+            "coverage": 0.5076335877862596,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/nominal",
+            "longest": 1198.0535151458062,
+            "coverage": 0.5648854961832062,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "native/high",
+            "longest": 1138.1508393885158,
+            "coverage": 0.6335877862595419,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/low",
+            "longest": 1198.0535151458062,
+            "coverage": 0.6030534351145038,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/nominal",
+            "longest": 1168.1021772671609,
+            "coverage": 0.6335877862595419,
+            "unknown": 0
+          },
+          {
+            "angle": -45,
+            "id": "common/high",
+            "longest": 1108.1995015098705,
+            "coverage": 0.7061068702290076,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/low",
+            "longest": 1707.2262590827745,
+            "coverage": 0.5725190839694656,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/nominal",
+            "longest": 1677.2749212041292,
+            "coverage": 0.6335877862595419,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "native/high",
+            "longest": 1317.8588666603873,
+            "coverage": 0.6908396946564885,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/low",
+            "longest": 1707.2262590827745,
+            "coverage": 0.6526717557251909,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/nominal",
+            "longest": 1677.2749212041292,
+            "coverage": 0.6717557251908397,
+            "unknown": 0
+          },
+          {
+            "angle": -15,
+            "id": "common/high",
+            "longest": 1347.8102045390324,
+            "coverage": 0.7099236641221374,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/low",
+            "longest": 599.0267575729034,
+            "coverage": 0.7290076335877863,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/nominal",
+            "longest": 299.5133787864517,
+            "coverage": 0.8129770992366412,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "native/high",
+            "longest": 119.80535151458069,
+            "coverage": 0.9198473282442748,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/low",
+            "longest": 479.22140605832277,
+            "coverage": 0.7824427480916031,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/nominal",
+            "longest": 299.5133787864517,
+            "coverage": 0.8816793893129771,
+            "unknown": 0
+          },
+          {
+            "angle": 15,
+            "id": "common/high",
+            "longest": 59.902675757290346,
+            "coverage": 0.9847328244274809,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/low",
+            "longest": 239.61070302916127,
+            "coverage": 0.8053435114503816,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/nominal",
+            "longest": 239.61070302916127,
+            "coverage": 0.9045801526717557,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "native/high",
+            "longest": 149.7566893932258,
+            "coverage": 0.9656488549618321,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/low",
+            "longest": 209.65936515051612,
+            "coverage": 0.9312977099236641,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/nominal",
+            "longest": 149.7566893932258,
+            "coverage": 0.9580152671755725,
+            "unknown": 0
+          },
+          {
+            "angle": 45,
+            "id": "common/high",
+            "longest": 0,
+            "coverage": 1,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/low",
+            "longest": 569.0754196942581,
+            "coverage": 0.6984732824427481,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/nominal",
+            "longest": 569.0754196942581,
+            "coverage": 0.7786259541984732,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "native/high",
+            "longest": 269.5620409078065,
+            "coverage": 0.8549618320610687,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/low",
+            "longest": 569.0754196942581,
+            "coverage": 0.7977099236641222,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/nominal",
+            "longest": 569.0754196942581,
+            "coverage": 0.8587786259541985,
+            "unknown": 0
+          },
+          {
+            "angle": 75,
+            "id": "common/high",
+            "longest": 539.124081815613,
+            "coverage": 0.8854961832061069,
+            "unknown": 0
+          }
+        ]
+      }
+    }
+  }
+}
