@@ -3,147 +3,161 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Rahat Relay by Tuwaiq SPACE: see where terrain cuts a rover's radio link, on real elevation data from Harrat Rahat, the Moon and Mars.">
 <link rel="icon" href="logo.png">
-<title>Rahat Relay</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<title>Rahat Atlas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+</head><body>
 <style>
-/* Layout: one full-screen 3D terrain. Everything else floats on it: top bar with modes, a side panel per mode, a bottom bar for time or the route. One typeface. Single dark look, by design. */
+/* Rahat Atlas. One full-screen 3D terrain; every scene floats over it. Fonts load from the project (offline), Thmanyah first when installed on the presenting machine. */
+@font-face{font-family:"Plex Arabic Local";font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200E,U+2010-2011,U+204F,U+2E41}
+@font-face{font-family:"Plex Arabic Local";font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200E,U+2010-2011,U+204F,U+2E41}
+@font-face{font-family:"Plex Arabic Local";font-weight:700;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200E,U+2010-2011,U+204F,U+2E41}
+@font-face{font-family:"Plex Arabic Local";font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Plex Arabic Local";font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Plex Arabic Local";font-weight:700;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
-  --bg:#0B1020; --glass:rgba(18,26,45,.9); --card:#19223A; --line:#34425B;
+  --bg:#0B1020; --bg2:#121A2D; --glass:rgba(18,26,45,.9); --card:#19223A; --line:#34425B;
   --fg:#F5F7FC; --soft:#B5C1D4; --muted:#8A9AB3;
-  --brand:#4F2AB8; --sand:#8966E8; --bad:#8966E8; --relay:#C9B8F5; --ok:#F5F7FC;
-  --font:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
-  --pw:370px; --gap:14px;
+  --brand:#4F2AB8; --acc:#8966E8; --bad:#8966E8; --relay:#C9B8F5; --ok:#F5F7FC;
+  --font:"Thmanyah Sans","Thmanyah Sans Text","thmanyahsans","Plex Arabic Local",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--fg)}
 body{font-family:var(--font);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
-button,input{font:inherit;color:inherit}
+button,input,select{font:inherit;color:inherit}
 a{color:var(--relay)}
 :focus-visible{outline:2px solid var(--relay);outline-offset:2px}
-h1,h2,h3{margin:0;line-height:1.2;text-wrap:balance}
+h1,h2,h3{margin:0;line-height:1.25;text-wrap:balance}
 p{margin:0}
 .num{direction:ltr;unicode-bidi:isolate}
 .app{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% 20%,#19223A 0%,#0B1020 70%)}
 #gl{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
-#gl.placing{cursor:crosshair}
+#gl.placing,#gl.picking{cursor:crosshair}
 .glass{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:8px 16px;font-weight:600;font-size:14.5px;cursor:pointer;background:var(--card);color:var(--fg);transition:background .15s,transform .1s}
-.btn:hover{background:rgba(255,255,255,.12)} .btn:active{transform:scale(.97)}
-.btn.sand{background:var(--sand);color:#fff} .btn.sand:hover{background:#9B7DF0}
-.btn.purple{background:var(--brand);color:#fff} .btn.purple:hover{background:#6038D6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:8px 16px;font-weight:600;font-size:14.5px;cursor:pointer;background:var(--card);color:var(--fg);transition:background .15s,transform .1s;text-decoration:none;white-space:nowrap}
+.btn:hover{background:#243050} .btn:active{transform:scale(.97)}
+.btn.acc{background:var(--acc);color:#fff} .btn.acc:hover{background:#9B7DF0}
+.btn.brand{background:var(--brand);color:#fff} .btn.brand:hover{background:#6038D6}
 .btn[aria-pressed="true"]{background:var(--relay);color:#160F33}
 .btn:disabled{opacity:.5;cursor:default}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:0;border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600;cursor:pointer;background:var(--card);color:var(--soft)}
+.chip[aria-pressed="true"]{background:var(--fg);color:#121A2D}
+.kick{color:var(--acc);font-weight:700;font-size:13.5px}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--soft);z-index:1;pointer-events:none}
+.loading.err{color:#F5F7FC;background:rgba(11,16,32,.94);z-index:20;padding:24px;text-align:center;pointer-events:auto}
 
 /* top bar */
-.top{position:absolute;top:max(12px,env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:10px;z-index:5;pointer-events:none}
+.top{position:absolute;top:max(12px,env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:10px;z-index:7;pointer-events:none}
 .top>*{pointer-events:auto}
-.logo{display:flex;align-items:center;gap:9px;padding:6px 14px 6px 6px;font-weight:700;font-size:16px;white-space:nowrap}
-[dir="rtl"] .logo{padding:6px 6px 6px 14px}
-.logo img{display:block;height:30px;width:auto;margin-inline:6px}
-.intro-logo{align-self:flex-start;width:190px;height:auto}
-.loading.err{color:#F5F7FC;background:rgba(11,16,32,.94);z-index:20;padding:24px;text-align:center;pointer-events:auto}
-.modes{display:flex;gap:2px;padding:4px;margin-inline:auto}
+.logo{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;white-space:nowrap}
+[dir="rtl"] .logo{padding:6px 8px 6px 14px}
+.logo img{display:block;height:28px;width:auto}
+.logo b{font-size:16px;font-weight:700}
+.modes{display:flex;gap:2px;padding:4px;margin-inline:auto;overflow-x:auto;scrollbar-width:none;max-width:100%}
 .mode{border:0;background:transparent;border-radius:999px;padding:6px 14px;font-weight:600;font-size:14.5px;color:var(--soft);cursor:pointer;white-space:nowrap}
 .mode:hover{color:var(--fg)}
 .mode[aria-selected="true"]{background:var(--fg);color:#121A2D}
 .lang{border:0;padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer}
 
-/* world switcher */
-.worlds-bar{position:absolute;top:calc(max(12px,env(safe-area-inset-top,0px)) + 56px);inset-inline-start:max(12px,env(safe-area-inset-left,0px));display:flex;gap:6px;z-index:4;flex-wrap:wrap}
-.wbtn{border:0;border-radius:999px;padding:5px 14px 5px 5px;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--soft)}
-[dir="rtl"] .wbtn{padding:5px 5px 5px 14px}
-.wbtn i{width:26px;height:26px;border-radius:50%;background-size:cover;background-position:center}
-.wbtn[aria-selected="true"]{background:var(--fg);color:#121A2D}
+/* floating rows under the top bar */
+.sub{position:absolute;top:calc(max(12px,env(safe-area-inset-top,0px)) + 58px);inset-inline-start:max(12px,env(safe-area-inset-left,0px));display:flex;gap:6px;z-index:4;flex-wrap:wrap;align-items:center;max-width:calc(100% - 24px)}
+.sitebtn{border:0;border-radius:999px;padding:5px 14px 5px 5px;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--soft)}
+[dir="rtl"] .sitebtn{padding:5px 5px 5px 14px}
+.sitebtn i{width:26px;height:26px;border-radius:50%;background-size:cover;background-position:center}
+.sitebtn[aria-pressed="true"]{background:var(--fg);color:#121A2D}
+.tools{position:absolute;top:calc(max(12px,env(safe-area-inset-top,0px)) + 58px);inset-inline-end:max(12px,env(safe-area-inset-right,0px));display:flex;gap:6px;z-index:4;align-items:center}
+.tool{border:0;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--soft)}
+.tool[aria-pressed="true"]{background:var(--acc);color:#fff}
+.north{width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
+.north i{display:block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:14px solid var(--acc)}
 
-/* side panel */
-.panel{position:absolute;top:calc(max(12px,env(safe-area-inset-top,0px)) + 56px);bottom:max(12px,env(safe-area-inset-bottom,0px));inset-inline-end:max(12px,env(safe-area-inset-right,0px));width:var(--pw);z-index:4;display:flex;flex-direction:column;overflow:hidden}
-.panel .scroll{overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;overscroll-behavior:contain}
-.panel .grab{display:none}
-.sec:not([hidden])~.sec{border-top:1px solid var(--line);padding-top:14px}
-.sec{display:flex;flex-direction:column;gap:10px}
-.kick{color:var(--sand);font-weight:600;font-size:13.5px}
-.panel h2{font-size:22px;font-weight:700}
-.panel p{color:var(--soft);font-size:14.5px}
-.status{display:flex;gap:12px;align-items:flex-start}
-.status .light{flex:0 0 13px;height:13px;border-radius:50%;margin-top:8px;background:var(--ok);box-shadow:0 0 14px var(--ok)}
+/* scene card (mission, lab, results) */
+.card{position:absolute;inset-inline-start:max(12px,env(safe-area-inset-left,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:4;width:min(440px,calc(100% - 24px));padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.card h1{font-size:26px;font-weight:700}
+.card h2{font-size:21px;font-weight:700}
+.card p{color:var(--soft);font-size:15px}
+.card .meta{font-size:12.5px;color:var(--muted)}
+.card .nav{display:flex;align-items:center;gap:8px;margin-top:2px}
+.card .nav .num{font-weight:700;color:var(--muted);font-size:13px;margin-inline-end:auto}
+.chev{display:inline-block;line-height:1;font-size:20px}
+[dir="rtl"] .chev{transform:scaleX(-1)}
+.dots{display:flex;gap:5px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--acc);width:18px;border-radius:4px}
+.note{font-size:13px;color:var(--relay);background:rgba(137,102,232,.16);border-radius:10px;padding:7px 10px}
+
+/* bottom bar (story timeline, rover) */
+.bottom{position:absolute;bottom:max(12px,env(safe-area-inset-bottom,0px));inset-inline-end:max(12px,env(safe-area-inset-right,0px));inset-inline-start:calc(max(12px,env(safe-area-inset-left,0px)) + 456px);z-index:4;padding:10px 14px;display:flex;align-items:center;gap:12px}
+.bottom.wide{inset-inline-start:max(12px,env(safe-area-inset-left,0px))}
+.bottom .date{font-weight:700;min-width:8.5em;white-space:nowrap}
+.bottom input[type=range]{flex:1;min-width:0}
+.chaps{display:flex;gap:4px;flex-wrap:wrap}
+.chap{border:0;border-radius:999px;padding:5px 11px;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--muted)}
+.chap.on{background:var(--card);color:var(--fg)}
+.bx{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.xrow{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.status{display:flex;gap:9px;align-items:center;flex:1 1 200px;min-width:0}
+.status .light{flex:0 0 12px;height:12px;border-radius:50%;background:var(--ok);box-shadow:0 0 14px var(--ok)}
 .status.bad .light{background:var(--bad);box-shadow:0 0 14px var(--bad)}
 .status.rel .light{background:var(--relay);box-shadow:0 0 14px var(--relay)}
-.status h2{font-size:20px}
-.lab{display:flex;align-items:baseline;gap:10px;font-size:14px;color:var(--soft)}
-.lab output{margin-inline-start:auto;color:var(--fg);font-weight:600}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;margin:0}
-input[type=range]::-webkit-slider-runnable-track{height:6px;background:rgba(255,255,255,.14);border-radius:6px}
-input[type=range]::-moz-range-track{height:6px;background:rgba(255,255,255,.14);border-radius:6px}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--sand);margin-top:-8px;border:4px solid #121A2D}
-input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--sand);border:4px solid #121A2D}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.fact{background:var(--card);border-radius:12px;padding:9px 11px}
-.fact b{display:block;font-size:20px;font-weight:700;line-height:1.25}
-.fact span{font-size:12.5px;color:var(--muted);line-height:1.35;display:block}
-.fact b.bad{color:var(--bad)} .fact b.rel{color:var(--relay)}
-.challenge{background:linear-gradient(135deg,rgba(137,102,232,.24),rgba(137,102,232,.06));border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:9px}
-.challenge h3{font-size:16px;color:var(--sand)}
-.row{display:flex;gap:6px;flex-wrap:wrap}
-.score{display:flex;flex-direction:column;gap:5px}
-.score .who{display:flex;justify-content:space-between;font-size:13.5px}
-.score .bar{height:9px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;direction:ltr}
-.score .bar i{display:block;height:100%;border-radius:6px;transition:width .4s}
+.status h2{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xrow .btn{padding:7px 14px;font-size:14px}
+.cover{display:flex;align-items:baseline;gap:6px;font-size:13px;color:var(--soft);white-space:nowrap}
+.cover b{font-size:17px;color:var(--fg)}
+.cover b.rel{color:var(--relay)}
+.stripwrap{display:flex;flex-direction:column;gap:2px}
 canvas.chart{width:100%;display:block}
-#profile{height:120px}
-.log{display:flex;flex-direction:column;gap:5px;font-size:13.5px;color:var(--soft)}
-.log div::before{content:"• ";color:var(--sand)}
-.log .bad{color:#A88BF0} .log .rel{color:var(--relay)}
-.chap{all:unset;cursor:pointer;display:block;border-radius:12px;padding:10px 12px;background:var(--card)}
-.chap:hover{background:rgba(255,255,255,.1)}
-.chap.on{background:rgba(137,102,232,.2);box-shadow:inset 3px 0 0 var(--sand)}
-[dir="rtl"] .chap.on{box-shadow:inset -3px 0 0 var(--sand)}
-.chap .d{font-size:12.5px;color:var(--sand);font-weight:600}
-.chap h3{font-size:16px;margin:1px 0 2px}
-.chap p{font-size:14px;display:none}
-.chap.on p{display:block}
-.verdict{border-radius:12px;padding:12px 14px;background:linear-gradient(135deg,rgba(79,42,184,.55),rgba(79,42,184,.2));font-size:14.5px}
-.verdict b{display:block;font-size:20px}
-.wcard{all:unset;cursor:pointer;display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center;border-radius:14px;padding:8px;background:var(--card)}
-.wcard:hover{background:rgba(255,255,255,.1)}
-.wcard .ph{width:76px;height:76px;border-radius:10px;background-size:cover;background-position:center}
-.wcard h3{font-size:16px}
-.wcard .big{font-size:24px;font-weight:700;color:var(--bad);line-height:1.2}
-.wcard .sm{font-size:13px;color:var(--soft)}
-.wcard .sm b{color:var(--relay)}
-.sensbox svg{width:100%;height:auto;display:block;direction:ltr;touch-action:none;cursor:ew-resize}
-.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.readout div{background:var(--card);border-radius:10px;padding:6px 8px}
-.readout b{display:block;font-size:18px}
-.readout span{font-size:12px;color:var(--muted)}
-.steps{display:flex;flex-direction:column;gap:8px;counter-reset:s}
-.steps p{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
-.steps p::before{counter-increment:s;content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--sand);color:#fff;font-weight:700;display:grid;place-items:center;font-size:13px}
-.bulge{display:grid;grid-template-columns:4.5em 1fr 4.5em;align-items:center;gap:8px;font-size:14px}
-.bulge .b{height:10px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;direction:ltr}
-.bulge .b i{display:block;height:100%;border-radius:6px}
-.bulge output{font-weight:700;text-align:end}
-.src{font-size:13.5px;color:var(--soft);display:flex;flex-direction:column;gap:6px}
-.src b{color:var(--fg)}
-
-/* bottom bar */
-.bottom{position:absolute;bottom:max(12px,env(safe-area-inset-bottom,0px));inset-inline-start:max(12px,env(safe-area-inset-left,0px));inset-inline-end:calc(max(12px,env(safe-area-inset-right,0px)) + var(--pw) + var(--gap));z-index:4;padding:10px 14px;display:flex;align-items:center;gap:12px}
-.bottom .date{font-weight:700;min-width:8.5em;white-space:nowrap}
-.bottom input{flex:1;min-width:0}
-.bottom .stripwrap{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 #strip{height:16px}
 .keys{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:12px;color:var(--muted)}
 .keys i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-inline-end:5px}
-.tools{position:absolute;inset-inline-start:max(12px,env(safe-area-inset-left,0px));bottom:calc(max(12px,env(safe-area-inset-bottom,0px)) + 78px);display:flex;gap:6px;z-index:4;flex-wrap:wrap;align-items:center}
-.tool{border:0;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--soft)}
-.tool[aria-pressed="true"]{background:rgba(137,102,232,.95);color:#fff}
-.north{width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
-.north i{display:block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:14px solid var(--sand)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;background:rgba(255,255,255,.14);border-radius:6px}
+input[type=range]::-moz-range-track{height:6px;background:rgba(255,255,255,.14);border-radius:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--acc);margin-top:-8px;border:4px solid #121A2D}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--acc);border:4px solid #121A2D}
+.verdict{position:absolute;bottom:calc(100% + 10px);inset-inline-start:0;max-width:min(460px,calc(100vw - 24px));font-size:13.5px;padding:10px 14px}
+.verdict b{display:block;font-size:15px}
+
+.hint{position:absolute;top:calc(max(12px,env(safe-area-inset-top,0px)) + 58px);inset-inline-start:max(12px,env(safe-area-inset-left,0px));z-index:4;max-width:min(380px,calc(100% - 24px));padding:12px 16px;display:flex;flex-direction:column;gap:4px}
+.hint b{font-size:17px}
+.hint span{color:var(--soft);font-size:14px}
+.mk-pin .dot{width:14px;height:14px;border-radius:50%;background:var(--relay);box-shadow:0 0 0 6px rgba(201,184,245,.25),0 0 24px var(--relay)}
+.mk-pin .lbl{left:16px}
+.mk-veh .dot{width:10px;height:10px;border-radius:50%;background:var(--fg);box-shadow:0 0 0 3px rgba(11,16,32,.8)}
+.mk-veh .lbl{left:14px;top:-12px;font-size:12.5px}
+select.sel{border:0;border-radius:999px;padding:6px 12px;background:var(--card);font-weight:600;font-size:13.5px}
+.bottom .btn.sm{padding:6px 12px;font-size:13px}
+/* floating profile card */
+.prof{position:absolute;inset-inline-start:max(12px,env(safe-area-inset-left,0px));bottom:calc(max(12px,env(safe-area-inset-bottom,0px)) + 112px);z-index:4;width:min(420px,calc(100% - 24px));padding:10px 14px 8px}
+.prof .lab{font-size:13px;color:var(--soft);display:flex;justify-content:space-between;gap:10px}
+.prof canvas{height:110px}
+
+/* results */
+.res .big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.res .big b{font-size:44px;font-weight:700;line-height:1}
+.res .big b.after{color:var(--relay)}
+.res .big span{color:var(--muted);font-size:14px}
+.res .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;direction:ltr;display:flex}
+.res .bar i{display:block;height:100%}
+details{border-top:1px solid var(--line);padding-top:8px}
+summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--muted)}
+details[open] summary::after{content:"–"}
+details .in{display:flex;flex-direction:column;gap:6px;font-size:13.5px;color:var(--soft);padding:8px 0 2px}
+details table{width:100%;border-collapse:collapse;font-size:12.5px}
+details td,details th{padding:4px 6px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+details th{color:var(--muted);font-weight:600}
+.card.res{max-height:calc(100% - 100px);overflow-y:auto}
+
+/* lab */
+.legend{direction:ltr;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.legend .ramp{flex:1;height:8px;border-radius:5px;background:linear-gradient(90deg,#0B1020,#4F2AB8,#8966E8,#C9B8F5,#F5F7FC);direction:ltr}
+.split-lbl{position:absolute;top:calc(max(12px,env(safe-area-inset-top,0px)) + 104px);z-index:3;font-weight:700;font-size:14px;padding:4px 12px;border-radius:999px;background:rgba(11,16,32,.8)}
+#splitA{left:16px} #splitB{right:16px}
+.splitline{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(245,247,252,.5);z-index:2;pointer-events:none}
 
 /* markers */
 .markers{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
@@ -157,249 +171,191 @@ canvas.chart{width:100%;display:block}
 .mk-rover.relayed .dot{background:var(--relay);box-shadow:0 0 0 2px var(--relay),0 0 26px rgba(201,184,245,.7)}
 .mk-rover .lbl{left:22px;top:-14px}
 @keyframes pulse{50%{transform:scale(1.08)}}
-.mk-heli .dot{width:26px;height:26px;border-radius:50%;background:#0B1020;border:2px solid var(--sand);display:grid;place-items:center;font-size:13px}
-.mk-heli .dot::before{content:"";width:16px;height:2px;background:var(--sand);box-shadow:0 5px 0 -0.5px var(--sand)}
+.mk-heli .dot{width:26px;height:26px;border-radius:50%;background:#0B1020;border:2px solid var(--acc);display:grid;place-items:center}
+.mk-heli .dot::before{content:"";width:16px;height:2px;background:var(--acc);box-shadow:0 5px 0 -0.5px var(--acc)}
 .mk-heli.flying .dot::before{animation:spin .25s linear infinite}
 @keyframes spin{to{transform:rotate(180deg)}}
 .mk-relay{pointer-events:auto;cursor:grab;touch-action:none}
 .mk-relay .dot{width:20px;height:20px;background:var(--relay);transform:rotate(45deg);border:3px solid #0B1020;box-shadow:0 0 0 2px var(--relay)}
 .mk-relay.dead .dot{background:#34425B;box-shadow:0 0 0 2px var(--bad)}
-.mk-best .dot{width:18px;height:18px;transform:rotate(45deg);border:2px dashed var(--sand)}
-.mk-best .lbl{color:#fff;background:var(--sand)}
+.mk-best .dot{width:18px;height:18px;transform:rotate(45deg);border:2px dashed var(--acc)}
+.mk-best .lbl{color:#fff;background:var(--acc)}
+.mk-pt .dot{width:14px;height:14px;border-radius:50%;background:var(--relay);border:3px solid #0B1020}
 .callout{position:absolute;left:0;top:0;pointer-events:none}
 .callout svg{position:absolute;left:0;top:0;overflow:visible}
 .callout .bubble{position:absolute;left:48px;top:-96px;width:max-content;max-width:220px;white-space:normal;background:var(--bad);color:#fff;font-size:14px;font-weight:600;line-height:1.35;padding:8px 12px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .callout .bubble small{display:block;font-weight:400;opacity:.92;font-size:12.5px}
 
-/* intro */
-.intro{position:absolute;inset:0;z-index:8;display:grid;place-items:center;padding:20px;background:radial-gradient(60% 60% at 50% 50%,rgba(11,16,32,.35),rgba(11,16,32,.8))}
-.intro .card{max-width:560px;padding:28px;display:flex;flex-direction:column;gap:14px}
-.intro h1{font-size:clamp(30px,5vw,46px);font-weight:700}
-.intro h1 span{color:var(--sand)}
-.intro p{color:var(--soft);font-size:16px}
-.intro .row{gap:10px;margin-top:6px}
-.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--soft);z-index:1;pointer-events:none}
+/* presentation mode */
+body.present .card,body.present .bottom,body.present .prof{font-size:110%}
+body.present .card h1{font-size:34px}
+.pbar{position:absolute;top:calc(max(12px,env(safe-area-inset-top,0px)) + 58px);left:50%;transform:translateX(-50%);z-index:8;display:flex;align-items:center;gap:8px;padding:6px}
+.pbar .num{font-weight:700;min-width:4.5em;text-align:center}
+.deck{position:absolute;inset:0;z-index:6;background:rgba(11,16,32,.95);display:flex;flex-direction:column;align-items:center;gap:12px;padding:calc(max(12px,env(safe-area-inset-top,0px)) + 112px) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.deck-stage{flex:1;min-height:0;width:100%;position:relative;touch-action:pan-y}
+.deck-stage img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.5);user-select:none;-webkit-user-drag:none}
 
 @media (max-width:820px){
-  :root{--sheet:40vh}
-  .logo b{display:none} .logo{padding:6px!important}
-  .modes{margin-inline:0;overflow-x:auto;scrollbar-width:none} .mode{padding:6px 10px;font-size:13.5px}
-  .panel{top:auto;left:8px;right:8px;width:auto;height:var(--sheet);bottom:max(8px,env(safe-area-inset-bottom,0px))}
-  .panel .grab{display:block;width:100%;border:0;background:transparent;padding:8px 0 0;cursor:pointer}
-  .panel .grab::before{content:"";display:block;width:44px;height:5px;border-radius:5px;background:rgba(255,255,255,.3);margin:0 auto}
-  .panel .scroll{padding:10px 14px 16px}
-  body.mini .panel{height:56px}
-  .bottom{inset-inline:8px;bottom:calc(var(--sheet) + 16px);padding:8px 12px}
-  body.mini .bottom{bottom:72px}
-  .bottom .date{min-width:0;font-size:13px}
-  .tools{bottom:calc(var(--sheet) + 84px);inset-inline-start:8px}
-  body.mini .tools{bottom:140px}
-  .worlds-bar{top:calc(max(12px,env(safe-area-inset-top,0px)) + 54px);inset-inline-start:8px}
-  .wbtn span{display:none} .wbtn{padding:4px!important}
+  .logo b{display:none}
+  .mode{padding:6px 10px;font-size:13.5px}
+  .card{bottom:auto;top:calc(max(12px,env(safe-area-inset-top,0px)) + 100px);padding:14px 16px;gap:8px}
+  .card h1{font-size:21px} .card h2{font-size:18px} .card p{font-size:14px}
+  .bottom{inset-inline:8px!important;bottom:max(8px,env(safe-area-inset-bottom,0px))}
+  .tools{top:calc(max(12px,env(safe-area-inset-top,0px)) + 100px);flex-direction:column;align-items:flex-end;inset-inline-end:8px}
+  body.has-card .tools{display:none}
+  .sub{inset-inline-start:8px}
+  .sitebtn span{display:none} .sitebtn{padding:4px!important}
+  .prof{bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 150px);inset-inline-start:8px}
+  .status{flex-basis:100%}
+  .card.res{top:auto;bottom:max(8px,env(safe-area-inset-bottom,0px));max-height:62vh}
+}
+@media (max-width:820px){
+  .hint{display:none!important}
+  .card .meta{display:none}
+  body.ch4 #mcText{display:none}
+  #labCard{top:auto;bottom:max(8px,env(safe-area-inset-bottom,0px));max-height:46vh;overflow-y:auto}
+  .mode{padding:6px 9px;font-size:13px}
+  .modes{margin-inline:0;flex:1;min-width:0}
 }
 @media (prefers-reduced-motion:reduce){.mk-rover .dot,.mk-heli .dot::before{animation:none}}
-
-/* no side panel: everything lives on the 3D and in the bottom bar */
-.panel{display:none!important}
-.bottom{inset-inline-end:max(12px,env(safe-area-inset-right,0px))}
-.bx{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
-.xrow{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}
-.xrow .status{align-items:center;gap:9px;flex:1 1 220px;min-width:0}
-.xrow .status .light{margin-top:0}
-.xrow .status h2{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.xrow .status p{display:none}
-.xrow .btn{padding:7px 14px;font-size:14px}
-.ant{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--soft);white-space:nowrap}
-.ant input{width:120px;flex:none}
-.ant output{font-weight:700;color:var(--fg);min-width:3.4em}
-.xbtns{display:flex;gap:6px;flex-wrap:wrap}
-.bottom .verdict{position:absolute;bottom:calc(100% + 10px);inset-inline-start:0;max-width:min(460px,calc(100vw - 24px));font-size:13.5px;padding:10px 14px;background:var(--glass)}
-.bottom .verdict b{font-size:15px}
-.bottom .score{position:absolute;bottom:calc(100% + 10px);inset-inline-start:0;width:260px;padding:10px 14px}
-.tools{bottom:auto;top:calc(max(12px,env(safe-area-inset-top,0px)) + 56px);inset-inline-start:auto;inset-inline-end:max(12px,env(safe-area-inset-right,0px))}
-@media (max-width:820px){
-  .bottom{bottom:max(8px,env(safe-area-inset-bottom,0px))!important;inset-inline:8px}
-  .tools{top:calc(max(12px,env(safe-area-inset-top,0px)) + 104px)!important;bottom:auto!important;inset-inline-start:auto!important;inset-inline-end:8px;flex-direction:column;align-items:flex-end}
-  .xrow{gap:8px}
-  .xrow .status{flex-basis:100%}
-  .ant input{width:90px}
-  .bottom .score{width:220px}
-}
-
-/* presentation viewer */
-.top{z-index:7!important}
-.deck{position:absolute;inset:0;z-index:6;background:rgba(11,16,32,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(max(12px,env(safe-area-inset-top,0px)) + 64px) 16px max(16px,env(safe-area-inset-bottom,0px))}
-.deck-stage{flex:1;min-height:0;width:100%;position:relative;touch-action:pan-y}
-.deck-stage img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.5);user-select:none;-webkit-user-drag:none}
-.deck-bar{display:flex;align-items:center;gap:8px;padding:8px;flex-wrap:wrap;justify-content:center}
-.deck-bar .num{min-width:4.5em;text-align:center;font-weight:700}
-.deck-bar .chev{display:inline-block;font-size:22px;line-height:1}
-[dir="rtl"] .deck-bar .chev{transform:scaleX(-1)}
-a.btn{text-decoration:none}
-body.deck-open .bottom,body.deck-open .tools,body.deck-open .worlds-bar,body.deck-open .markers{visibility:hidden}
 </style>
-</head>
-<body>
 
 <div class="app" id="app">
   <canvas id="gl"></canvas>
   <div class="loading" id="loading" data-i18n="loading">نحمّل بيانات الارتفاع…</div>
+  <div class="splitline" id="splitLine" hidden></div>
+  <div class="split-lbl" id="splitA" hidden></div><div class="split-lbl" id="splitB" hidden></div>
   <div class="markers">
-    <div class="mk mk-base" id="mkBase"><div class="dot"></div><div class="lbl" id="lblBase">القاعدة</div></div>
+    <div class="mk mk-base" id="mkBase" hidden><div class="dot"></div><div class="lbl" id="lblBase">القاعدة</div></div>
     <div class="mk mk-best" id="mkBest" hidden><div class="dot"></div><div class="lbl" id="lblBest">أفضل موقع</div></div>
     <div class="callout" id="callout" hidden><svg width="1" height="1"><path d="M0 0 L42 -62" stroke="#8966E8" stroke-width="2" fill="none"/><circle r="5" fill="#8966E8"/></svg><div class="bubble" id="bubble"></div></div>
-    <div class="mk mk-heli" id="mkHeli" hidden><div class="dot"></div><div class="lbl">Ingenuity</div></div>
-    <div class="mk mk-relay" id="mkRelay" hidden><div class="dot"></div><div class="lbl" id="lblRelay">محطتك</div></div>
-    <div class="mk mk-rover" id="mkRover"><div class="dot"></div><div class="lbl" id="lblRover">المركبة</div></div>
+    <div class="mk mk-heli" id="mkHeli" hidden><div class="dot"></div><div class="lbl" data-i18n="ingen">إنجينيويتي</div></div>
+    <div class="mk mk-relay" id="mkRelay" hidden><div class="dot"></div><div class="lbl" id="lblRelay">المحطة</div></div>
+    <div class="mk mk-rover" id="mkRover" hidden><div class="dot"></div><div class="lbl" id="lblRover">المركبة</div></div>
+    <div class="mk mk-pin" id="mkPin" hidden><div class="dot"></div><div class="lbl" id="lblPin"></div></div>
+    <div class="mk mk-veh" id="mkPers" hidden><div class="dot"></div><div class="lbl" data-i18n="pers">بيرسيفيرانس</div></div>
+    <div class="mk mk-pt" id="mkP1" hidden><div class="dot"></div><div class="lbl">A</div></div>
+    <div class="mk mk-pt" id="mkP2" hidden><div class="dot"></div><div class="lbl">B</div></div>
   </div>
 
   <header class="top">
-    <div class="logo glass"><img src="logo.png" alt="Tuwaiq SPACE" width="70" height="26"><b>Rahat Relay</b></div>
+    <div class="logo glass"><img src="logo.png" alt="Tuwaiq Space" width="75" height="28"><b data-i18n="name">أطلس رهط</b></div>
     <nav class="modes glass" role="tablist" id="modes">
-      <button class="mode" role="tab" type="button" data-mode="story" aria-selected="true" data-i18n="mStory">قصة Ingenuity</button>
-      <button class="mode" role="tab" type="button" data-mode="explore" aria-selected="false" data-i18n="mExplore">الخريطة</button>
-      <button class="mode" role="tab" type="button" data-mode="deck" aria-selected="false" data-i18n="mDeck">العرض التقديمي</button>
+      <button class="mode" role="tab" type="button" data-mode="mission" aria-selected="true" data-i18n="mMission">المهمة</button>
+      <button class="mode" role="tab" type="button" data-mode="lab" aria-selected="false" data-i18n="mLab">مختبر التضاريس</button>
+      <button class="mode" role="tab" type="button" data-mode="rover" aria-selected="false" data-i18n="mRover">محاكاة المركبة</button>
+      <button class="mode" role="tab" type="button" data-mode="results" aria-selected="false" data-i18n="mResults">النتائج</button>
+      <button class="mode" role="tab" type="button" data-mode="present" aria-selected="false" data-i18n="mPresent">وضع العرض</button>
     </nav>
     <button class="lang glass" id="langBtn" type="button">English</button>
   </header>
 
-  <div class="worlds-bar" id="worldsBar" hidden>
-    <button class="wbtn glass" type="button" data-site="rahat" aria-selected="true"><i style="background-image:url(data/rahat_tex.jpg)"></i><span data-i18n="tRahat">حرّة رهط</span></button>
-    <button class="wbtn glass" type="button" data-site="moon" aria-selected="false"><i style="background-image:url(data/moon_tex.jpg)"></i><span data-i18n="tMoon">القمر</span></button>
-    <button class="wbtn glass" type="button" data-site="mars" aria-selected="false"><i style="background-image:url(data/mars_tex.jpg)"></i><span data-i18n="tMars">المريخ</span></button>
+  <div class="hint glass" id="hint" hidden><b id="hintT"></b><span id="hintP"></span></div>
+  <!-- lab: site picker + layers -->
+  <div class="sub" id="labBar" hidden>
+    <div class="chips" id="siteChips"></div>
   </div>
-
-  <div class="tools">
+  <div class="tools" id="tools">
     <button class="tool glass" type="button" id="covBtn" aria-pressed="true" data-i18n="cov">ظل الإشارة</button>
     <button class="tool glass" type="button" id="exBtn" aria-pressed="false" data-i18n="ex3">ضخّم الارتفاع ×3</button>
     <div class="north glass"><i id="northI"></i></div>
   </div>
 
-  <aside class="panel glass" id="panel">
-    <button class="grab" type="button" id="grab" aria-label="Toggle panel"></button>
-    <div class="scroll">
-      <!-- STORY -->
-      <div data-pane="story" class="sec">
-        <div class="kick" data-i18n="stK">فوهة جيزيرو، المريخ · تضاريس HiRISE حقيقية</div>
-        <h2 data-i18n="stH">تلّ واحد أسكت Ingenuity 63 يومًا</h2>
-        <p data-i18n="stP">حرّك الزمن في الأسفل، أو اسحب المركبة نحو القمة. ثم انقر على التضاريس لتضع محطة ترحيل، وشاهد كم يومًا كانت ستنقذ.</p>
-      </div>
-      <div data-pane="story" class="sec" id="chapters">
-        <button class="chap" type="button" data-t="0.05"><div class="d" data-i18n="c1d">26 أبريل 2023</div><h3 data-i18n="c1h">الرحلة 52</h3><p data-i18n="c1p">Ingenuity تقلع لرحلة طولها 363 مترًا تستغرق 139 ثانية. المركبة Perseverance هي صلتها الوحيدة بالأرض.</p></button>
-        <button class="chap" type="button" data-t="0.30"><div class="d" data-i18n="c2d">لحظة الهبوط</div><h3 data-i18n="c2h">التل يقطع الخط</h3><p data-i18n="c2p">هبطت المروحية خلف حافة الدلتا، فصار التل بينها وبين المركبة وانقطع الاتصال. الفريق كان يتوقع ذلك.</p></button>
-        <button class="chap" type="button" data-t="0.62"><div class="d" data-i18n="c3d">مايو ويونيو</div><h3 data-i18n="c3h">63 يومًا من الصمت</h3><p data-i18n="c3p">المروحية سليمة لكن لا أحد يسمعها. المركبة تصعد التل ببطء. المنطقة المضيئة هي حيث كان يمكن سماع المروحية.</p></button>
-        <button class="chap" type="button" data-t="1"><div class="d" data-i18n="c4d">28 يونيو 2023</div><h3 data-i18n="c4h">من القمة، عادت الإشارة</h3><p data-i18n="c4p">حين بلغت Perseverance القمة رأت المروحية من جديد، وعاد الاتصال.</p></button>
-      </div>
-      <div data-pane="story" class="sec"><p style="font-size:12.5px;color:var(--muted)" data-i18n="stNote">التضاريس حقيقية من نموذج HiRISE لحافة الدلتا الغربية. موقعا المروحية والمركبة توضيحيان. التواريخ والأرقام من بيان JPL.</p></div>
-
-      <!-- EXPLORE -->
-      <div data-pane="explore" class="sec">
-        
-        
-      </div>
-      <div data-pane="explore" class="sec">
-        <div class="challenge">
-          <h3 data-i18n="chH">تحدٍّ: أين تضع محطة الترحيل؟</h3>
-          <p id="chP" data-i18n="chP">اضغط «ضع محطة» ثم انقر على التضاريس. سنقارن موقعك بأفضل موقع يجده الحاسوب.</p>
-          
-          
-        </div>
-      </div>
-      <div data-pane="explore" class="sec">
-        
-        
-        <div class="facts">
-          <div class="fact"><b class="bad num" id="mBlocked">—</b><span data-i18n="mBlocked">من المسار لا يرى القاعدة</span></div>
-          <div class="fact"><b class="rel num" id="mStill">—</b><span data-i18n="mStill">يبقى بلا اتصال مع الترحيل</span></div>
-          <div class="fact"><b class="num" id="mGap">—</b><span data-i18n="mGap">أطول مسافة بلا إشارة</span></div>
-          <div class="fact"><b class="num" id="mMast">—</b><span data-i18n="mMast">طول الهوائي اللازم لرؤية المركبة هنا</span></div>
-        </div>
-      </div>
-      <div data-pane="explore" class="sec">
-        <div class="lab" data-i18n="profCap">ما بين القاعدة والمركبة الآن</div>
-        <canvas class="chart" id="profile" aria-label="Elevation profile"></canvas>
-      </div>
-      <div data-pane="explore" class="sec">
-        <div class="lab" data-i18n="logH">ما حدث في هذه الرحلة</div>
-        <div class="log" id="log"></div>
-      </div>
-
-      <!-- WORLDS -->
-      <div data-pane="worlds" class="sec">
-        <div class="kick" data-i18n="wK">الأرض والقمر والمريخ</div>
-        <h2 data-i18n="wH">المشكلة نفسها في ثلاثة عوالم</h2>
-        <p data-i18n="wP">مسار بطول 3 كم تقريبًا في كل موقع. القاعدة 3 م، المركبة 1.5 م، الترحيل 3 م. انقر على عالم لتطير إليه.</p>
-      </div>
-      <div data-pane="worlds" class="sec" id="wcards"></div>
-      <div data-pane="worlds" class="sec sensbox">
-        <h3 data-i18n="sensH">هل يكفي هوائي أطول؟</h3>
-        <p data-i18n="sensP">اسحب على الرسم لترفع هوائي القاعدة من 2 إلى 10 م. على القمر يختفي الحجب تقريبًا، وعلى المريخ لا يتغير شيء.</p>
-        <svg id="sens" viewBox="0 0 340 200" role="img" aria-label="Antenna height vs blocked share"></svg>
-        <div class="readout" id="sensRead"></div>
-      </div>
-
-      <!-- HOW -->
-      <div data-pane="how" class="sec">
-        <div class="kick" data-i18n="hK">كيف نحسبها</div>
-        <h2 data-i18n="hH">الكوكب ينحني، والخط لا ينحني</h2>
-        <div class="steps">
-          <p data-i18n="m1">نقصّ نافذة من نموذج ارتفاع مفتوح حول القاعدة، ونعيد شبكها على 512 × 512 نقطة.</p>
-          <p data-i18n="m2">نخفض كل نقطة بمقدار انحناء الكوكب عن القاعدة، فيصبح خط الرؤية خطًا مستقيمًا.</p>
-          <p data-i18n="m3">نتتبع الخط من هوائي القاعدة إلى المركبة كل نصف خلية. إذا ارتفعت الأرض فوقه فالنقطة محجوبة.</p>
-          <p data-i18n="m4">نجرب أكثر من 1300 موقع ترحيل، ونختار الذي يرى القاعدة ويعيد أكبر جزء من المسار.</p>
-        </div>
-      </div>
-      <div data-pane="how" class="sec">
-        <h3 data-i18n="cvH">جرّب انحناء الكوكب</h3>
-        <div class="lab"><span data-i18n="dist">المسافة بين الهوائيين</span><output id="dOut" class="num">6.0 km</output></div>
-        <input type="range" id="dR" min="0.5" max="10" step="0.1" value="6" aria-label="Distance" style="direction:ltr">
-        <div id="bulges" class="sec" style="gap:8px"></div>
-      </div>
-      <div data-pane="how" class="sec src">
-        <h3 data-i18n="srcH">البيانات</h3>
-        <span data-i18n="s1"><b>حرّة رهط:</b> نموذج Copernicus GLO-30 (30 م) وصورة Sentinel-2 من 8 نوفمبر 2025.</span>
-        <span data-i18n="s2"><b>حافة شاكلتون:</b> نقاط ليزر LOLA الخام من LRO، شبكناها بدقة 20 م، وإضاءة بشمس منخفضة 7° كما في القطب.</span>
-        <span data-i18n="s3"><b>فوهة جيزيرو:</b> نموذج HiRISE بدقة 1 م وصورته، فوق حافة الدلتا الغربية.</span>
-        <span><a href="https://www.jpl.nasa.gov/news/nasas-ingenuity-mars-helicopter-phones-home/" target="_blank" rel="noopener" data-i18n="s4">قصة Ingenuity: بيان JPL، 30 يونيو 2023</a></span>
-        <span style="color:var(--muted)" data-i18n="limits">نقيس خط الرؤية الهندسي فقط، دون منطقة فرينل أو الحيود أو قوة الإرسال. </span>
-      </div>
+  <!-- mission scene card -->
+  <section class="card glass" id="missionCard">
+    <div class="kick" id="mcKick"></div>
+    <h1 id="mcTitle"></h1>
+    <p id="mcText"></p>
+    <div class="meta" id="mcMeta"></div>
+    <div class="note" id="mcNote" hidden></div>
+    <div class="chips" id="mcActions"></div>
+    <div class="nav">
+      <span class="num" id="mcNum">1 / 5</span>
+      <div class="dots" id="mcDots"></div>
+      <button class="btn" type="button" id="mcPrev" aria-label="Previous"><span class="chev">‹</span></button>
+      <button class="btn acc" type="button" id="mcNext" aria-label="Next"><span class="chev">›</span></button>
     </div>
-  </aside>
+  </section>
 
-  <div class="bottom glass" id="bottom">
-    <div id="bStory" style="display:contents">
-      <button class="btn sand" type="button" id="tPlay" data-i18n="tPlay">▶ شغّل</button>
-      <input type="range" id="tRange" min="0" max="1000" value="50" aria-label="Timeline">
-      <span class="date num" id="tDate">26 Apr 2023</span>
-      <div class="verdict glass" id="verdict"></div>
+  <!-- lab card -->
+  <section class="card glass" id="labCard" hidden>
+    <div class="kick" data-i18n="labK">مختبر التضاريس</div>
+    <h2 id="labTitle"></h2>
+    <p data-i18n="labP">افحص الارتفاع والميل والخشونة. اختر منطقتين للمقارنة على المقياس نفسه، أو حدّد نقطتين لعرض مقطع الارتفاع بينهما.</p>
+    <div class="chips" id="layerChips">
+      <button class="chip" type="button" data-layer="0" aria-pressed="true" data-i18n="lSurf">السطح</button>
+      <button class="chip" type="button" data-layer="1" aria-pressed="false" data-i18n="lElev">الارتفاع النسبي</button>
+      <button class="chip" type="button" data-layer="2" aria-pressed="false" data-i18n="lSlope">الميل</button>
+      <button class="chip" type="button" data-layer="3" aria-pressed="false" data-i18n="lRough">الخشونة</button>
+      <button class="chip" type="button" id="splitBtn" aria-pressed="false" data-i18n="lSplit">العرض المقسوم</button>
+      <select class="sel" id="splitSel" hidden aria-label="Compare with"></select>
     </div>
-    <div id="bExplore" class="bx" hidden>
-      <div class="score glass" id="score" hidden>
-            <div class="who"><span data-i18n="you">موقعك</span><b class="num" id="scYou">—</b></div><div class="bar"><i id="barYou" style="background:var(--relay);width:0"></i></div>
-            <div class="who"><span data-i18n="pc">الحاسوب</span><b class="num" id="scPc">—</b></div><div class="bar"><i id="barPc" style="background:var(--sand);width:0"></i></div>
-          </div>
-      <div class="xrow"><div class="status" id="status"><span class="light"></span><div><h2 id="stH2">—</h2><p id="stP2">—</p></div></div><button class="btn" type="button" id="playBtn" data-i18n="drive">▶ قُد المركبة</button><label class="ant"><span data-i18n="hb">طول هوائي القاعدة</span><input type="range" id="hbR" min="2" max="10" value="3" step="0.5" aria-label="Base antenna height" style="direction:ltr"><output id="hbOut" class="num">3.0 m</output></label><div class="xbtns">
-            <button class="btn purple" type="button" id="placeBtn" aria-pressed="false" data-i18n="place">ضع محطة</button>
-            <button class="btn" type="button" id="bestBtn" data-i18n="best">اكشف أفضل موقع</button>
-            <button class="btn" type="button" id="clearBtn" data-i18n="remove">امسح</button>
-          </div></div>
+    <div class="legend" id="legend" hidden><span id="legLo" class="num"></span><div class="ramp"></div><span id="legHi" class="num"></span></div>
+    <div class="row chips"><button class="btn" type="button" id="profBtn" aria-pressed="false" data-i18n="lProf">حدّد نقطتين</button><span class="meta" id="labStats"></span></div>
+    <div class="meta" id="labMeta"></div>
+  </section>
+
+  <!-- results card -->
+  <section class="card glass res" id="resCard" hidden>
+    <div class="kick" data-i18n="resK">النتائج</div>
+    <div class="big"><b class="num" id="rBefore">22.1%</b><span data-i18n="rBeforeL">قبل الترحيل</span><b class="num after" id="rAfter">93.1%</b><span data-i18n="rAfterL">مع أفضل محطة اختبرناها</span></div>
+    <div class="bar"><i id="rBarA" style="background:#F5F7FC;width:22.1%"></i><i id="rBarB" style="background:#C9B8F5;width:71%"></i></div>
+    <p id="rText"></p>
+    <details><summary data-i18n="dMethod">المنهجية والمصادر</summary><div class="in" id="dMethodIn"></div></details>
+    <details><summary data-i18n="dData">نماذج الارتفاع المستخدمة</summary><div class="in" id="dDataIn"></div></details>
+    <details><summary data-i18n="dRules">قواعد استخدام البيانات</summary><div class="in" id="dRulesIn"></div></details>
+  </section>
+
+  <!-- elevation profile -->
+  <section class="prof glass" id="prof" hidden>
+    <div class="lab"><span id="profCap" data-i18n="profCap">مقطع الارتفاع</span><span class="num" id="profLen"></span></div>
+    <canvas class="chart" id="profile" aria-label="Elevation profile"></canvas>
+  </section>
+
+  <!-- bottom bar -->
+  <div class="bottom glass" id="bottom" hidden>
+    <div id="bStory" class="bx" hidden>
+      <div class="xrow">
+        <button class="btn acc" type="button" id="tPlay" data-i18n="tPlay">▶ شغّل</button>
+        <input type="range" id="tRange" min="0" max="1000" value="50" aria-label="Timeline">
+        <span class="date num" id="tDate">26 Apr 2023</span>
+      </div>
+      <div class="chaps" id="chaps">
+        <button class="chap" type="button" data-t="0.12" data-i18n="ch1">الهبوط</button>
+        <button class="chap" type="button" data-t="0.45" data-i18n="ch2">انقطاع الاتصال</button>
+        <button class="chap" type="button" data-t="1" data-i18n="ch3">عودة الاتصال</button>
+        <button class="chap" type="button" data-t="-1" data-i18n="ch4">جرّب الفكرة على الأرض</button>
+      </div>
+      <div class="verdict glass" id="verdict" hidden></div>
+    </div>
+    <div id="bRover" class="bx" hidden>
+      <div class="xrow">
+        <div class="status" id="status"><span class="light"></span><h2 id="stH2">—</h2></div>
+        <button class="btn" type="button" id="playBtn" data-i18n="drive">▶ شغّل المركبة</button>
+        <button class="btn brand" type="button" id="placeBtn" aria-pressed="false" data-i18n="place">ضع المحطة</button>
+        <button class="btn" type="button" id="bestBtn" data-i18n="best">ابحث عن أفضل موقع</button>
+        <button class="btn" type="button" id="clearBtn" data-i18n="remove">أزل المحطة</button>
+        <button class="btn sm" type="button" id="profToggle" aria-pressed="true" data-i18n="profCap">مقطع الارتفاع</button>
+        <div class="cover"><span data-i18n="covL">التغطية</span><b class="num" id="covBefore">—</b><span>→</span><b class="num rel" id="covAfter">—</b></div>
+      </div>
       <div class="stripwrap">
         <canvas class="chart" id="strip" aria-label="Link along the route"></canvas>
-        <input type="range" id="roverR" min="0" max="299" value="150" aria-label="Rover position">
-        <div class="keys"><span><i style="background:#F5F7FC"></i><span data-i18n="kClear">ترى القاعدة</span></span><span><i style="background:var(--bad)"></i><span data-i18n="kBad">محجوبة</span></span><span><i style="background:var(--relay)"></i><span data-i18n="kRel">أعادها الترحيل</span></span></div>
+        <input type="range" id="roverR" min="0" max="261" value="100" aria-label="Route position">
+        <div class="keys"><span data-i18n="routePos">موضع المركبة على المسار</span><span><i style="background:#F5F7FC"></i><span data-i18n="kClear">خط رؤية مباشر</span></span><span><i style="background:var(--bad)"></i><span data-i18n="kBad">محجوب</span></span><span><i style="background:var(--relay)"></i><span data-i18n="kRel">عبر الترحيل</span></span></div>
       </div>
     </div>
   </div>
 
+  <!-- presentation controls -->
+  <div class="pbar glass" id="pbar" hidden>
+    <button class="btn" type="button" id="pPrev" aria-label="Previous scene"><span class="chev">‹</span></button>
+    <span class="num" id="pNum">1 / 8</span>
+    <button class="btn acc" type="button" id="pNext" aria-label="Next scene"><span class="chev">›</span></button>
+    <button class="btn" type="button" id="pReset" data-i18n="pReset">إعادة ضبط التجربة</button>
+    <button class="btn" type="button" id="pSlides" aria-pressed="false" data-i18n="pSlides">الشرائح</button>
+  </div>
   <div class="deck" id="deck" hidden>
     <div class="deck-stage" id="deckStage"><img id="deckImg" alt=""></div>
-    <div class="deck-bar glass">
-      <button class="btn" type="button" id="deckPrev" aria-label="Previous slide"><span class="chev">‹</span></button>
-      <span class="num" id="deckN">1 / 11</span>
-      <button class="btn" type="button" id="deckNext" aria-label="Next slide"><span class="chev">›</span></button>
-      <a class="btn" id="deckPdf" href="deck/Rahat_Relay.pdf" download data-i18n="deckPdf">تحميل PDF</a>
-      <button class="btn" type="button" id="deckClose" data-i18n="deckClose">العودة إلى الخريطة</button>
-    </div>
   </div>
 </div>
 
@@ -410,446 +366,500 @@ window.addEventListener('unhandledrejection',function(e){ __fail('3D failed to s
 </script>
 <script src="vendor.js" onerror="__fail('Could not load the 3D engine (vendor.js). Please reload the page.')"></script>
 <script type="module">
-const {THREE,OrbitControls,Line2,LineMaterial,LineGeometry}=window.__T;
+const {THREE,OrbitControls,Line2,LineMaterial,LineGeometry,GLTFLoader,DRACOLoader}=window.__T;
 THREE.ColorManagement.enabled = false;
-const FONT='"IBM Plex Sans Arabic",system-ui,sans-serif';
+const FONT=getComputedStyle(document.documentElement).getPropertyValue('--font')||'system-ui';
 const $=id=>document.getElementById(id);
 
-const EN = {
-  loading:'Loading elevation data…', mStory:'Ingenuity’s story', mExplore:'Map', mDeck:'Presentation', deckPdf:'Download PDF', deckClose:'Back to the map', mWorlds:'Three worlds', mHow:'How it works',
-  tRahat:'Harrat Rahat', tMoon:'Moon', tMars:'Mars', cov:'Signal shadow', ex3:'Exaggerate height ×3',
-  stK:'Jezero crater, Mars · real HiRISE terrain', stH:'One hill silenced Ingenuity for 63 days',
-  stP:'Move time at the bottom, or drag the rover toward the crest. Then click the terrain to drop a relay, and see how many days it would have saved.',
-  c1d:'26 April 2023', c1h:'Flight 52', c1p:'Ingenuity takes off on a 363 m, 139 second flight. Perseverance is its only link to Earth.',
-  c2d:'Touchdown', c2h:'The hill cuts the line', c2p:'The helicopter landed behind the delta’s edge. The hill now sat between it and the rover, and the link dropped. The team expected it.',
-  c3d:'May and June', c3h:'63 days of silence', c3p:'The helicopter is fine, but nobody can hear it. The rover climbs slowly. The lit ground is where Ingenuity could have been heard.',
-  c4d:'28 June 2023', c4h:'From the top, the signal is back', c4p:'When Perseverance reached the crest it saw the helicopter again, and the link returned.',
-  stNote:'Terrain is real, from the HiRISE model of the western delta front. Helicopter and rover positions are illustrative. Dates and figures are from JPL.',
-  drive:'▶ Drive the rover', pause:'❚❚ Stop',
-  chH:'Challenge: where would you put the relay?', chP:'Press Place relay, then click the terrain. We’ll compare your spot with the best one the computer finds.',
-  you:'Your spot', pc:'Computer', place:'Place relay', placing:'Now click the terrain', best:'Show best spot', searching:'Searching…', remove:'Clear',
-  hb:'Base antenna height', mBlocked:'of the route can’t see the base', mStill:'still cut off with the relay', mGap:'longest stretch without signal', mMast:'antenna needed to see the rover here',
-  profCap:'Between the base and the rover right now', logH:'What happened on this drive',
-  wK:'Earth, Moon and Mars', wH:'The same problem on three worlds', wP:'A route of about 3 km at each site. Base 3 m, rover 1.5 m, relay 3 m. Click a world to fly there.',
-  sensH:'Would a taller antenna do?', sensP:'Drag across the chart to raise the base antenna from 2 to 10 m. On the Moon the blocking nearly disappears; on Mars nothing changes.',
-  hK:'How it works', hH:'The planet curves. The radio line doesn’t.',
-  m1:'Cut a window from an open elevation model around the base and resample it to 512 × 512 points.',
-  m2:'Lower every point by the planet’s curvature drop from the base, so the line of sight becomes a straight line.',
-  m3:'Trace the line from the base antenna to the rover every half cell. If the ground rises above it, that point is blocked.',
-  m4:'Try more than 1,300 relay spots and pick the one that sees the base and wins back the most route.',
-  cvH:'Try the planet’s curve', dist:'Distance between antennas', srcH:'The data',
-  s1:'<b>Harrat Rahat:</b> Copernicus GLO-30 elevation (30 m) and a Sentinel-2 image from 8 Nov 2025.',
-  s2:'<b>Shackleton rim:</b> raw LOLA laser shots from LRO, gridded by us at 20 m, lit by a low 7° sun as at the pole.',
-  s3:'<b>Jezero crater:</b> HiRISE 1 m elevation model and image over the western delta front.',
-  s4:'Ingenuity story: JPL news release, 30 June 2023',
-  limits:'Geometric line of sight only, without Fresnel zone, diffraction or transmit power.',
-  kClear:'sees the base', kBad:'blocked', kRel:'saved by relay', tPlay:'▶ Play', tPause:'❚❚ Pause',
-  inH:'One hill silenced a helicopter on Mars for <span>63 days</span>.',
-  inP:'We are Tuwaiq SPACE. We built Rahat Relay to find where a rover’s signal disappears behind terrain, and where one relay brings it back. Behind this card is real terrain from Jezero crater.',
-  inStory:'▶ See what happened', inExplore:'Try the map yourself'
-};
+/* ================= text ================= */
+const EN={ loading:'Loading elevation data…', name:'Rahat Atlas', mMission:'Mission', mLab:'Terrain Lab', mRover:'Rover Simulation', mResults:'Results', mPresent:'Presentation Mode',
+  cov:'Signal shadow', ex3:'Height ×3', ingen:'Ingenuity', pers:'Perseverance', labK:'Terrain Lab',
+  labP:'Inspect elevation, slope, and roughness. Compare two sites at the same scale, or select two points to plot the elevation profile between them.',
+  lSurf:'Surface', lElev:'Relative elevation', lSlope:'Slope', lRough:'Roughness', lSplit:'Split view', lProf:'Pick two points',
+  resK:'Results', rBeforeL:'direct', rAfterL:'with the best tested relay', dMethod:'Methods and sources', dData:'Elevation models used', dRules:'Data rules',
+  profCap:'Elevation profile', tPlay:'▶ Play', tPause:'❚❚ Pause', ch1:'Descent', ch2:'Contact lost', ch3:'Contact restored', ch4:'Try it on Earth',
+  drive:'▶ Play rover', stop:'❚❚ Pause', place:'Place relay', placing:'Click the terrain…', best:'Find best location', remove:'Remove relay', covL:'Coverage',
+  routePos:'Route position', kClear:'Direct line of sight', kBad:'Blocked', kRel:'Via relay', pReset:'Reset', pSlides:'Slides' };
 const AR={}; document.querySelectorAll('[data-i18n]').forEach(el=>{ AR[el.dataset.i18n]=el.innerHTML; });
-Object.assign(AR,{pause:'❚❚ توقف', placing:'الآن انقر على التضاريس', searching:'نبحث…', tPause:'❚❚ إيقاف'});
-let lang='ar'; try{ const s=localStorage.getItem('rr-lang'); if(s==='en'||s==='ar') lang=s; }catch(e){}
-const T=k=>(lang==='en'?EN:AR)[k] ?? EN[k] ?? k, L2=(ar,en)=>lang==='en'?en:ar;
+Object.assign(AR,{ tPause:'❚❚ إيقاف', stop:'❚❚ إيقاف', placing:'اضغط على التضاريس…' });
+let lang='ar'; try{ const s=localStorage.getItem('ra-lang'); if(s==='en'||s==='ar') lang=s; }catch(e){}
+const T=k=>(lang==='en'?EN:AR)[k] ?? EN[k] ?? k, L2=(ar,en)=>lang==='en'?en:ar, LL=a=>a[lang==='en'?1:0];
 const hooks=[];
-function applyLang(){ document.documentElement.lang=lang; document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML=T(el.dataset.i18n); }); $('langBtn').textContent=lang==='ar'?'English':'العربية'; hooks.forEach(f=>f()); }
-$('langBtn').addEventListener('click',()=>{ lang=lang==='ar'?'en':'ar'; try{localStorage.setItem('rr-lang',lang)}catch(e){} applyLang(); });
+function applyLang(){ const h=document.documentElement; h.lang=lang; h.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML=T(el.dataset.i18n); });
+  $('langBtn').textContent=lang==='ar'?'English':'العربية'; document.title=lang==='ar'?'أطلس رهط':'Rahat Atlas';
+  hooks.forEach(f=>f()); }
+$('langBtn').onclick=()=>{ lang=lang==='ar'?'en':'ar'; try{ localStorage.setItem('ra-lang',lang); }catch(e){} applyLang(); };
 
-const SITES = {
-  rahat:{ name:{ar:'حرّة رهط',en:'Harrat Rahat'}, world:{ar:'الأرض، قرب المدينة',en:'Earth, near Madinah'}, R:6371000, L:5000, N:512,
-    h:'data/rahat_h.txt', q:[823.0,0.003448538948653391], tex:'data/rahat_tex.jpg', proj:{lat:24.3575, lon:39.8195, ox:0, oy:0},
-    base:[-964,277], ctrl:[[-964,277],[468,-24],[1929,75]], sun:[0.35,0.71,0.61], shade:0.35, color:'#F5F7FC' },
-  moon:{ name:{ar:'حافة شاكلتون',en:'Shackleton rim'}, world:{ar:'القمر، القطب الجنوبي',en:'Moon, south pole'}, R:1737400, L:8000, N:512,
-    h:'data/moon_h.txt', q:[-1997.0,0.05438768154527994], tex:'data/moon_tex.jpg', proj:{lat:-89.9657911192468, lon:106.81034394422213, ox:0, oy:0},
-    base:[-1500,-410], ctrl:[[-1500,-410],[-250,-1540],[1000,-1550]], sun:[-0.7,0.3,0.65], shade:0.55, color:'#8966E8', cam:[0.8,0.42,0.3] },
-  mars:{ name:{ar:'فوهة جيزيرو',en:'Jezero crater'}, world:{ar:'المريخ، حافة الدلتا',en:'Mars, delta front'}, R:3396190, L:4000, N:512,
-    h:'data/mars_h.txt', q:[-2569.0,0.002532997634851606], tex:'data/mars_tex.jpg', proj:{lat:18.5009, lon:77.4285, ox:0, oy:0},
-    base:[1300,-300], ctrl:[[1300,-300],[700,-150],[200,200],[-300,700],[-900,900],[-1400,1100]], sun:[-0.62,0.72,0.3], shade:0.3, color:'#B5C1D4' }
-};
-const H_ROVER = 1.5, H_RELAY = 3.0, NROUTE = 300;
+const NAMES={ labah:['قطاع اللابة','Al Labah sector'], anahi:['قطاع العناهي','Al Anahi sector'], axis:['محور الفوّهات الجنوبي','Southern vent axis'],
+  nobile:['حافة نوبيل 1','Nobile Rim 1'], jezero:['فوهة جيزيرو','Jezero Crater'], f52:['جيزيرو، موقع الرحلة 52','Jezero, Flight 52 area'] };
+const WORLD={ srtm:['حرّة رهط، الأرض','Harrat Rahat, Earth'], lola:['القطب الجنوبي للقمر','Lunar south pole'], ctx:['المريخ','Mars'] };
+const SRC={ srtm:['NASA SRTM GL1 v003','NASA SRTM GL1 v003'], lola:['NASA LRO / LOLA Site06','NASA LRO / LOLA Site06'], ctx:['USGS / NASA JPL، نموذج CTX','USGS / NASA JPL CTX DEM'] };
+const LINKS={ srtm:'https://portal.opentopography.org/raster?opentopoID=OTSRTM.082016.4326.1', lola:'https://pgda.gsfc.nasa.gov/products/78',
+  ctx:'https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic', jpl:'https://www.jpl.nasa.gov/news/nasas-ingenuity-mars-helicopter-phones-home/',
+  geo:'https://doi.org/10.3133/sim3428' };
+const RADIUS={ srtm:6371000, lola:1737400, ctx:3396190 };
+const LOOK={ srtm:{sun:[0.45,0.75,0.45],shade:0.3}, lola:{sun:[-0.5,0.35,0.6],shade:0.25}, ctx:{sun:[-0.6,0.6,0.3],shade:0.25} };
+const nf=(v,d=1)=>v.toLocaleString(lang==='ar'?'ar-SA-u-nu-latn':'en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
 
+/* ================= line of sight (same method as the analysis files) ================= */
+const BASE_H=6, ROVER_H=2, RELAY_H=8, HELI_ANT=0.5, PERS_ANT=2.2;
+function elevation(g,p){ if(Math.min(p.x,p.y)<0||Math.max(p.x,p.y)>g.size) return NaN;
+  const u=p.x/g.step, v=p.y/g.step, c=Math.min(Math.floor(u),g.n-2), r=Math.min(Math.floor(v),g.n-2), V=g.values, n=g.n;
+  const a=V[r*n+c], b=V[r*n+c+1], d=V[(r+1)*n+c], e=V[(r+1)*n+c+1]; if(Math.max(a,b,d,e)===65535) return NaN;
+  const x=u-c, y=v-r; return g.origin+(a+(b-a)*x+(d-a)*y+(a-b-d+e)*x*y)/10; }
+const elevC=(g,x,y)=>elevation(g,{x:Math.max(0,Math.min(g.size,x)),y:Math.max(0,Math.min(g.size,y))});
+const lerpP=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t}), dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+function lineOfSight(g,a,b,hA,hB,R=g.R){
+  const zA=elevation(g,a)+hA, zB=elevation(g,b)+hB; if(!Number.isFinite(zA+zB)) return {clear:false,clearance:NaN,at:0};
+  const dx=b.x-a.x, dy=b.y-a.y, curv=(dx*dx+dy*dy)/(2*R);
+  const cross=(o,d)=>{ const i=o/g.step; if(!d) return Infinity; const nx=d>0?Math.floor(i+1e-9)+1:Math.ceil(i-1e-9)-1; return (nx*g.step-o)/d; };
+  let nX=cross(a.x,dx), nY=cross(a.y,dy); const iX=g.step/Math.abs(dx), iY=g.step/Math.abs(dy);
+  const gap=t=>zA+(zB-zA)*t-curv*t*(1-t)-elevation(g,lerpP(a,b,t));
+  let s=0, left=hA, min=hA, at=0;
+  while(s<1){ const e=Math.min(nX,nY,1), m=(s+e)/2, mid=gap(m), right=e===1?hB:gap(e);
+    if(!Number.isFinite(mid+right)) return {clear:false,clearance:NaN,at:m};
+    const q=2*(left+right-2*mid), lin=right-left-q;
+    if(q>0){ const t=-lin/(2*q), vx=left+t*(lin+t*q); if(t>0&&t<1&&vx<min){ min=vx; at=s+(e-s)*t; } }
+    if(right<min){ min=right; at=e; }
+    if(e===nX) nX+=iX; if(e===nY) nY+=iY; s=e; left=right; }
+  return {clear:min>0,clearance:min,at}; }
+function routePoint(route,p){ const sp=route.slice(1).map((q,i)=>dist(q,route[i])); let t=Math.max(0,Math.min(1,p))*sp.reduce((a,b)=>a+b,0);
+  for(let i=0;i<sp.length;i++){ if(t<=sp[i]&&sp[i]>0) return lerpP(route[i],route[i+1],t/sp[i]); t-=sp[i]; } return route[route.length-1]; }
+function sampleRoute(route,spacing=30){ const length=route.slice(1).reduce((d,p,i)=>d+dist(route[i],p),0), n=Math.max(1,Math.ceil(length/spacing));
+  return {length,points:Array.from({length:n},(_,i)=>routePoint(route,(i+.5)/n))}; }
+function coverage(g,base,pts,direct,relay){ const back=relay&&lineOfSight(g,base,relay,BASE_H,RELAY_H).clear;
+  const via=pts.map((p,i)=>!direct[i]&&back?lineOfSight(g,relay,p,RELAY_H,ROVER_H).clear:false);
+  const flags=direct.map((c,i)=>c||via[i]); return {flags,via,back:!!back,connected:flags.filter(Boolean).length,total:pts.length}; }
+async function optimize(g,base,pts,direct,onRow){ let best={point:null,connected:direct.filter(Boolean).length,tested:0,eligible:0}, bd=Infinity;
+  for(let row=1;row<28;row++){ for(let col=1;col<28;col++){ best.tested++; const p={x:col*g.size/28,y:row*g.size/28}, d=dist(p,base), s=g.step;
+      const sx=(elevation(g,{x:p.x+s,y:p.y})-elevation(g,{x:p.x-s,y:p.y}))/(2*s), sy=(elevation(g,{x:p.x,y:p.y+s})-elevation(g,{x:p.x,y:p.y-s}))/(2*s);
+      if(d<100||Math.atan(Math.hypot(sx,sy))*180/Math.PI>20||!lineOfSight(g,base,p,BASE_H,RELAY_H).clear) continue;
+      best.eligible++; const c=coverage(g,base,pts,direct,p);
+      if(c.connected>best.connected||(c.connected===best.connected&&d<bd)){ best.point=p; best.connected=c.connected; bd=d; } }
+    onRow&&onRow(row/27); await new Promise(r=>setTimeout(r,0)); }
+  return best; }
 
-class Terrain {
-  constructor(cfg, Z){
-    this.cfg=cfg; this.N=cfg.N; this.L=cfg.L; this.c=cfg.L/(cfg.N-1); this.R=cfg.R; this.Z=Z;
-    const N=this.N, He=new Float32Array(N*N), [bx,by]=cfg.base;
-    let mn=Infinity, mx=-Infinity;
-    for(let i=0;i<N;i++){ const y=this.L/2-i*this.c;
-      for(let j=0;j<N;j++){ const x=-this.L/2+j*this.c, r2=(x-bx)**2+(y-by)**2;
-        const v=Z[i*N+j]-r2/(2*this.R); He[i*N+j]=v; if(v<mn)mn=v; if(v>mx)mx=v; } }
-    this.He=He; this.hmin=mn; this.hmax=mx;
-    this.route = buildRoute(cfg.ctrl);
-  }
-  sample(A,x,y){ const N=this.N; let fx=(x+this.L/2)/this.c, fy=(this.L/2-y)/this.c;
-    fx=Math.min(Math.max(fx,0),N-1.001); fy=Math.min(Math.max(fy,0),N-1.001);
-    const j=fx|0,i=fy|0,u=fx-j,v=fy-i,k=i*N+j;
-    return A[k]*(1-u)*(1-v)+A[k+1]*u*(1-v)+A[k+N]*(1-u)*v+A[k+N+1]*u*v; }
-  he(x,y){ return this.sample(this.He,x,y); }
-  z(x,y){ return this.sample(this.Z,x,y); }
-  inside(x,y){ return Math.abs(x)<=this.L/2 && Math.abs(y)<=this.L/2; }
-  // straight-line test on curvature-lowered surface == d(D-d)/2R bulge test
-  los(ax,ay,ah,bx,by,bh,full){
-    const za=this.he(ax,ay)+ah, zb=this.he(bx,by)+bh, dx=bx-ax, dy=by-ay, D=Math.hypot(dx,dy);
-    const n=Math.max(2,Math.ceil(D/(this.c*0.5)));
-    let first=-1, worst=-Infinity, worstT=0;
-    for(let k=1;k<n;k++){ const t=k/n, ex=this.he(ax+dx*t,ay+dy*t)-(za+(zb-za)*t);
-      if(ex>0){ if(first<0){ first=t; if(!full) return {vis:false,t}; } }
-      if(full && ex>worst){ worst=ex; worstT=t; } }
-    return {vis:first<0, t:first, D, worst, worstT};
-  }
-  // smallest base mast height that sees target point
-  mastNeeded(tx,ty,th){ const [bx,by]=this.cfg.base; if(this.los(bx,by,0,tx,ty,th).vis) return 0;
-    let lo=0,hi=400; if(!this.los(bx,by,hi,tx,ty,th).vis) return Infinity;
-    for(let k=0;k<22;k++){ const m=(lo+hi)/2; if(this.los(bx,by,m,tx,ty,th).vis) hi=m; else lo=m; } return hi; }
-}
-function catmull(ctrl,k=30){ const P=[ctrl[0],...ctrl,ctrl[ctrl.length-1]], out=[];
-  for(let i=1;i<P.length-2;i++){ const [p0,p1,p2,p3]=[P[i-1],P[i],P[i+1],P[i+2]];
-    for(let s=0;s<k;s++){ const t=s/k,t2=t*t,t3=t2*t;
-      out.push([0,1].map(a=>0.5*(2*p1[a]+(-p0[a]+p2[a])*t+(2*p0[a]-5*p1[a]+4*p2[a]-p3[a])*t2+(-p0[a]+3*p1[a]-3*p2[a]+p3[a])*t3))); } }
-  out.push(P[P.length-2]); return out; }
-function buildRoute(ctrl){ const pts=catmull(ctrl), cs=[0];
-  for(let i=1;i<pts.length;i++) cs.push(cs[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
-  const L=cs[cs.length-1], out=[]; let j=0;
-  for(let i=0;i<NROUTE;i++){ const s=L*i/(NROUTE-1); while(j<cs.length-2&&cs[j+1]<s) j++;
-    const t=(s-cs[j])/((cs[j+1]-cs[j])||1); out.push({x:pts[j][0]+(pts[j+1][0]-pts[j][0])*t, y:pts[j][1]+(pts[j+1][1]-pts[j][1])*t, s}); }
-  out.length_m=L; return out; }
+/* ================= data ================= */
+const META=await (await fetch('data/atlas.json')).json();
+async function bin(url){ const r=await fetch(url); if(!r.ok) throw new Error(url+' '+r.status); const s=atob((await r.text()).trim()), u=new Uint8Array(s.length); for(let i=0;i<s.length;i++) u[i]=s.charCodeAt(i); return u; }
+async function u16(url){ const gz=await bin(url); return new Uint16Array(await new Response(new Blob([gz]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()); }
+const grids={}, gridP={};
+function getGrid(id){ if(gridP[id]) return gridP[id];
+  return gridP[id]=(async()=>{ let g;
+    if(id==='f52'){ const rec=await (await fetch('flight52/record.json')).json(), v=await u16('flight52/terrain.txt'), j=META.sites.jezero;
+      g={id,...rec.grid,values:v,source:'ctx',vs:3.25,look:{sun:[-0.85,0.42,0.3],shade:0.9},tex:'data/jezero_tex.jpg',rec,
+        uvx:[(rec.grid.west-j.west)/j.size, 1-(j.north-rec.grid.north)/j.size-rec.grid.size/j.size, rec.grid.size/j.size, rec.grid.size/j.size]}; }
+    else { const m=META.sites[id]; g={...m,values:await u16('data/'+id+'.txt'),vs:1,tex:'data/'+id+'_tex.jpg',uvx:[0,0,1,1]}; }
+    g.R=RADIUS[g.source]; return grids[id]=g; })(); }
 
-function analyse(tr, hb, relay){
-  const [bx,by]=tr.cfg.base, r=tr.route, n=r.length;
-  const direct=new Uint8Array(n), via=new Uint8Array(n);
-  const relayOK = relay ? tr.los(bx,by,hb,relay.x,relay.y,H_RELAY).vis : false;
-  for(let i=0;i<n;i++){ direct[i]=tr.los(bx,by,hb,r[i].x,r[i].y,H_ROVER).vis?1:0;
-    if(relayOK && !direct[i]) via[i]=tr.los(relay.x,relay.y,H_RELAY,r[i].x,r[i].y,H_ROVER).vis?1:0; }
-  const step=r.length_m/(n-1);
-  let blocked=0, still=0, gapD=0, gapR=0, runD=0, runR=0, first=-1;
-  for(let i=0;i<n;i++){ if(!direct[i]){ blocked++; runD++; if(first<0) first=i; } else runD=0;
-    const ok=direct[i]||via[i]; if(!ok){ still++; runR++; } else runR=0;
-    gapD=Math.max(gapD,runD); gapR=Math.max(gapR,runR); }
-  return {direct,via,relayOK,blocked:blocked/n,still:still/n,recovered:blocked?(blocked-still)/blocked:1,
-    gapD:gapD*step,gapR:gapR*step,first:first<0?null:r[first].s,n};
-}
-async function bestRelay(tr, hb, onProgress){
-  const [bx,by]=tr.cfg.base, r=tr.route, a0=analyse(tr,hb,null);
-  const idx=[]; for(let i=0;i<r.length;i++) if(!a0.direct[i]) idx.push(i);
-  if(!idx.length) return null;
-  const score=(x,y)=>{ if(!tr.inside(x,y)) return -1; if(!tr.los(bx,by,hb,x,y,H_RELAY).vis) return -1;
-    let s=0; for(const i of idx) if(tr.los(x,y,H_RELAY,r[i].x,r[i].y,H_ROVER).vis) s++;
-    let dmin=Infinity; for(let i=0;i<r.length;i+=5) dmin=Math.min(dmin,Math.hypot(r[i].x-x,r[i].y-y));
-    return s*1e5 - dmin; };
-  const G=36, half=tr.L/2*0.94, sp=2*half/(G-1); let best={v:-Infinity,x:0,y:0};
-  for(let gi=0;gi<G;gi++){ for(let gj=0;gj<G;gj++){ const x=-half+gj*sp, y=-half+gi*sp, v=score(x,y); if(v>best.v) best={v,x,y}; }
-    if(gi%3===2){ onProgress&&onProgress(gi/G*0.8); await new Promise(res=>setTimeout(res,0)); } }
-  if(best.v<0) return null;
-  const f=sp/4; const c0={...best};
-  for(let a=-4;a<=4;a++) for(let b=-4;b<=4;b++){ const x=c0.x+a*f, y=c0.y+b*f, v=score(x,y); if(v>best.v) best={v,x,y}; }
-  onProgress&&onProgress(1);
-  return {x:best.x,y:best.y};
-}
-
-/* aeqd inverse on a sphere: local metres -> lat/lon */
-function toLatLon(cfg,x,y){ const p=cfg.proj, X=x-p.ox, Y=y-p.oy, rho=Math.hypot(X,Y), R=cfg.R;
-  const p0=p.lat*Math.PI/180, l0=p.lon*Math.PI/180; if(rho<1e-6) return [p.lat,p.lon];
-  const c=rho/R, lat=Math.asin(Math.cos(c)*Math.sin(p0)+Y*Math.sin(c)*Math.cos(p0)/rho);
-  const lon=l0+Math.atan2(X*Math.sin(c), rho*Math.cos(p0)*Math.cos(c)-Y*Math.sin(p0)*Math.sin(c));
-  return [lat*180/Math.PI, ((lon*180/Math.PI+540)%360)-180]; }
-const fmtLL=(cfg,x,y)=>{ const [la,lo]=toLatLon(cfg,x,y); return `${Math.abs(la).toFixed(4)}°${la<0?'S':'N'} ${Math.abs(lo).toFixed(4)}°${lo<0?'W':'E'}`; };
-const km=m=> m>=1000?(m/1000).toFixed(2)+' km':Math.round(m)+' m';
-const pct=v=>(v*100).toFixed(1)+'%';
-
-/* ---------------- data ---------------- */
-const terrains={};
-async function loadTerrain(key){ if(terrains[key]) return terrains[key];
-  const cfg=SITES[key]; const res=await fetch(cfg.h); if(!res.ok) throw new Error(cfg.h+' '+res.status);
-  const b64=(await res.text()).trim(), bin=atob(b64), u8=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i);
-  const q=new Uint16Array(u8.buffer), Z=new Float32Array(q.length), [lo,sc]=cfg.q; for(let i=0;i<q.length;i++) Z[i]=lo+q[i]*sc;
-  return terrains[key]=new Terrain(cfg,Z); }
-
-
-/* ================= the one 3D view ================= */
+/* ================= renderer ================= */
 const canvas=$('gl'), host=$('app');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.outputColorSpace=THREE.LinearSRGBColorSpace;
-const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(42,1,5,60000), controls=new OrbitControls(camera,canvas);
-controls.enableDamping=true; controls.dampingFactor=0.08; controls.maxPolarAngle=Math.PI*0.47; controls.minDistance=250; controls.maxDistance=16000; controls.screenSpacePanning=false;
-const C=160, covData=new Uint8Array(C*C*4), covTex=new THREE.DataTexture(covData,C,C,THREE.RGBAFormat);
-covTex.magFilter=covTex.minFilter=THREE.LinearFilter; covTex.needsUpdate=true;
-const uniforms={ map:{value:null}, cov:{value:covTex}, covOn:{value:1}, shade:{value:0.3}, sun:{value:new THREE.Vector3(0,1,0)} };
-const terrainMat=new THREE.ShaderMaterial({ uniforms, extensions:{derivatives:true},
-  vertexShader:`varying vec2 vUv; varying vec3 vN; varying vec3 vW; void main(){ vUv=uv; vN=normal; vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz; gl_Position=projectionMatrix*viewMatrix*w; }`,
-  fragmentShader:`uniform sampler2D map; uniform sampler2D cov; uniform float covOn; uniform float shade; uniform vec3 sun;
-    varying vec2 vUv; varying vec3 vN; varying vec3 vW;
-    void main(){ vec3 c=texture2D(map,vUv).rgb; float l=max(dot(normalize(vN),normalize(sun)),0.); c*=mix(1.0,0.62+0.55*l,shade);
-      vec4 k=texture2D(cov,vUv); float blocked=1.-k.r; float rest=k.g*blocked;
-      c=mix(c, c*0.5+vec3(0.12,0.07,0.28), covOn*0.62*(blocked-rest));
-      c=mix(c, c*0.55+vec3(0.36,0.32,0.52), covOn*0.5*rest);
-      vec2 g=abs(fract(vW.xz/1000.+.5)-.5)*1000.; vec2 fw=fwidth(vW.xz)*1.2; float gl=1.-min(min(smoothstep(0.,fw.x,g.x),smoothstep(0.,fw.y,g.y)),1.);
-      c=mix(c,vec3(0.92,0.77,0.55),gl*0.10); gl_FragColor=vec4(c,1.); }` });
-let mesh=null, skirt=null, tr=null, key=null, ex=1, mode='story', exploreKey='rahat', dirty=true;
-const H=(x,y)=>(tr.he(x,y)-tr.hmin)*ex, W=(x,y,dh=0)=>new THREE.Vector3(x,H(x,y)+dh*ex,-y);
+const scene=new THREE.Scene(), sceneB=new THREE.Scene(), gScene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(40,1,5,80000), controls=new OrbitControls(camera,canvas);
+controls.enableDamping=true; controls.dampingFactor=0.08; controls.maxPolarAngle=Math.PI*0.47; controls.screenSpacePanning=false; controls.autoRotateSpeed=0.35;
+scene.add(new THREE.HemisphereLight(0xf1d6c4,0x2a1a22,1.5)); const sunL=new THREE.DirectionalLight(0xffe0bc,2.6); sunL.position.set(-400,300,150); scene.add(sunL);
+const C=140, covData=new Uint8Array(C*C*4), covTex=new THREE.DataTexture(covData,C,C,THREE.RGBAFormat); covTex.magFilter=covTex.minFilter=THREE.LinearFilter; covTex.needsUpdate=true;
+const blank=new THREE.DataTexture(new Uint8Array([255,255,255,255]),1,1,THREE.RGBAFormat); blank.needsUpdate=true;
+const VS=`varying vec2 vUv; varying vec3 vN; varying vec3 vW; void main(){ vUv=uv; vN=normal; vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz; gl_Position=projectionMatrix*viewMatrix*w; }`;
+const FS=`uniform sampler2D map; uniform sampler2D cov; uniform sampler2D lay; uniform vec4 uvx; uniform vec3 layCh; uniform float covOn, layOn, shade, gridOn; uniform vec3 sun;
+  varying vec2 vUv; varying vec3 vN; varying vec3 vW;
+  vec3 ramp(float t){ vec3 a=vec3(.043,.063,.125), b=vec3(.31,.165,.72), c=vec3(.537,.4,.91), d=vec3(.79,.72,.96), e=vec3(.96,.97,.99);
+    t=clamp(t,0.,1.)*4.; if(t<1.) return mix(a,b,t); if(t<2.) return mix(b,c,t-1.); if(t<3.) return mix(c,d,t-2.); return mix(d,e,t-3.); }
+  void main(){ vec3 c=texture2D(map,uvx.xy+vUv*uvx.zw).rgb; float l=max(dot(normalize(vN),normalize(sun)),0.);
+    c*=mix(1.0,0.62+0.55*l,shade);
+    float lv=dot(texture2D(lay,vUv).rgb,layCh); c=mix(c,ramp(lv)*(0.55+0.5*l),layOn);
+    vec4 k=texture2D(cov,vUv); float blocked=1.-k.r; float rest=k.g*blocked;
+    c=mix(c,c*0.5+vec3(0.12,0.07,0.28),covOn*0.62*(blocked-rest)); c=mix(c,c*0.55+vec3(0.36,0.32,0.52),covOn*0.5*rest);
+    vec2 g=abs(fract(vW.xz/1000.+.5)-.5)*1000.; vec2 fw=fwidth(vW.xz)*1.2; float gl=1.-min(min(smoothstep(0.,fw.x,g.x),smoothstep(0.,fw.y,g.y)),1.);
+    c=mix(c,vec3(0.96,0.97,0.99),gl*0.10*gridOn); gl_FragColor=vec4(c,1.); }`;
+function makeMat(){ return new THREE.ShaderMaterial({ extensions:{derivatives:true}, vertexShader:VS, fragmentShader:FS,
+  uniforms:{ map:{value:blank}, cov:{value:blank}, lay:{value:blank}, uvx:{value:new THREE.Vector4(0,0,1,1)}, layCh:{value:new THREE.Vector3(1,0,0)},
+    covOn:{value:0}, layOn:{value:0}, shade:{value:0.3}, gridOn:{value:1}, sun:{value:new THREE.Vector3(0,1,0)} } }); }
+const texCache={};
+const loadTex=url=>texCache[url]||(texCache[url]=new Promise((res,rej)=>{ new THREE.TextureLoader().load(url,t=>{ t.colorSpace=THREE.NoColorSpace; t.anisotropy=renderer.capabilities.getMaxAnisotropy(); res(t); },undefined,()=>rej(new Error(url))); }));
+let ex=1;
+const layCache={};
+function layerTex(g){ if(layCache[g.id]) return layCache[g.id]; const n=g.n, s=g.step, V=g.values, Z=i=>g.origin+V[i]/10;
+  const sl=new Float32Array(n*n), ro=new Float32Array(n*n);
+  for(let r=0;r<n;r++) for(let c=0;c<n;c++){ const k=r*n+c, L=Z(r*n+Math.max(0,c-1)), Rr=Z(r*n+Math.min(n-1,c+1)), U=Z(Math.max(0,r-1)*n+c), D=Z(Math.min(n-1,r+1)*n+c), z=Z(k);
+    sl[k]=Math.atan(Math.hypot((Rr-L)/(2*s),(D-U)/(2*s)))*180/Math.PI; ro[k]=Math.hypot(L+Rr-2*z,U+D-2*z)/Math.sqrt(18); }
+  const p98=a=>{ const b=Float32Array.from(a).sort(); return b[Math.floor(b.length*0.98)]||1; }, sMax=p98(sl), rMax=p98(ro);
+  const d=new Uint8Array(n*n*4);
+  for(let r=0;r<n;r++) for(let c=0;c<n;c++){ const k=r*n+c, o=((n-1-r)*n+c)*4;
+    d[o]=Math.round((Z(k)-g.min)/(g.max-g.min)*255); d[o+1]=Math.min(255,Math.round(sl[k]/sMax*255)); d[o+2]=Math.min(255,Math.round(ro[k]/rMax*255)); d[o+3]=255; }
+  const t=new THREE.DataTexture(d,n,n,THREE.RGBAFormat); t.magFilter=t.minFilter=THREE.LinearFilter; t.needsUpdate=true;
+  return layCache[g.id]={tex:t,sMax,rMax}; }
+function buildTerrain(g,tex,mat){ const n=g.n, S=g.size, geo=new THREE.PlaneGeometry(S,S,n-1,n-1); geo.rotateX(-Math.PI/2);
+  const pos=geo.attributes.position; for(let k=0;k<n*n;k++) pos.setY(k,(g.origin+g.values[k]/10-g.min)*ex*g.vs); geo.computeVertexNormals();
+  const grp=new THREE.Group(), mesh=new THREE.Mesh(geo,mat); grp.add(mesh);
+  const floor=-Math.max(40,(g.max-g.min)*0.12)*ex*g.vs-20, P=[], col=[], edge=[];
+  for(let j=0;j<n;j++) edge.push([0,j]); for(let i=0;i<n;i++) edge.push([i,n-1]); for(let j=n-1;j>=0;j--) edge.push([n-1,j]); for(let i=n-1;i>=0;i--) edge.push([i,0]);
+  const hy=(i,j)=>(g.origin+g.values[i*n+j]/10-g.min)*ex*g.vs;
+  for(let e=0;e<edge.length-1;e++){ const a=edge[e], b=edge[e+1], pa=[-S/2+a[1]*g.step,hy(a[0],a[1]),-S/2+a[0]*g.step], pb=[-S/2+b[1]*g.step,hy(b[0],b[1]),-S/2+b[0]*g.step];
+    P.push(...pa, pa[0],floor,pa[2], ...pb, ...pb, pa[0],floor,pa[2], pb[0],floor,pb[2]); const t=[.2,.24,.33], d=[.07,.09,.15]; col.push(...t,...d,...t,...t,...d,...d); }
+  const sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.Float32BufferAttribute(P,3)); sg.setAttribute('color',new THREE.Float32BufferAttribute(col,3));
+  grp.add(new THREE.Mesh(sg,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide}))); mat.uniforms.map.value=tex;
+  mat.uniforms.uvx.value.set(...g.uvx); const lk=g.look||LOOK[g.source]; mat.uniforms.sun.value.set(...lk.sun).normalize(); mat.uniforms.shade.value=lk.shade;
+  mat.uniforms.gridOn.value=g.id==='f52'?0.6:1;
+  return {grp,mesh}; }
+const matA=makeMat(), matB=makeMat(); matA.uniforms.cov.value=covTex;
+let cur=null, curObj=null, objB=null, siteKey=null, loadTok=0;
+async function showSite(id){ if(id===siteKey&&cur) return cur; const tok=++loadTok; siteKey=id; $('loading').hidden=false;
+  const g=await getGrid(id), tex=await loadTex(g.tex); if(tok!==loadTok) return null;
+  if(curObj){ scene.remove(curObj.grp); curObj.grp.traverse(o=>o.geometry&&o.geometry.dispose()); }
+  cur=g; curObj=buildTerrain(g,tex,matA); scene.add(curObj.grp); matA.uniforms.lay.value=layerTex(g).tex; $('loading').hidden=true; return g; }
+async function rebuild(){ if(!cur) return; const g=cur; siteKey=null; cur=null; await showSite(g.id); if(split.on) await setSplitSite(split.b,true); refreshScene(); }
+const Wp=(g,p,dh=0)=>new THREE.Vector3(p.x-g.size/2,(elevC(g,p.x,p.y)-g.min+dh)*ex*g.vs,p.y-g.size/2);
+
+/* lines */
 function mkLine(color,width,o={}){ const m=new LineMaterial({color,linewidth:width,vertexColors:!!o.vc,dashed:!!o.dashed,dashSize:o.ds??40,gapSize:o.gs??30,transparent:true,opacity:o.op??1,depthTest:o.depth??true});
   const l=new Line2(new LineGeometry(),m); l.renderOrder=o.ro??1; l.visible=false; scene.add(l); return l; }
 function setLine(l,pts,cols){ const g=new LineGeometry(); g.setPositions(pts.flatMap(p=>[p.x,p.y,p.z])); if(cols) g.setColors(cols); l.geometry.dispose(); l.geometry=g; l.computeLineDistances(); l.visible=true; }
-const routeLine=mkLine(0xffffff,4,{vc:true,ro:2}), losMain=mkLine(0xF5F7FC,2.5,{ro:3}), losGhost=mkLine(0x8966E8,1.4,{dashed:true,depth:false,op:0.6,ro:4});
-const relLines=[mkLine(0xC9B8F5,2.5,{ro:3}),mkLine(0xC9B8F5,2.5,{ro:3})];
-const pathLine=mkLine(0xB5C1D4,2,{dashed:true,ds:20,gs:16,ro:2}), flightLine=mkLine(0xC9B8F5,1.5,{dashed:true,ds:10,gs:10,op:0.8,ro:2});
-const ALL_LINES=[routeLine,losMain,losGhost,...relLines,pathLine,flightLine];
-function buildMesh(){ const N=tr.N, L=tr.L; if(mesh){ mesh.geometry.dispose(); scene.remove(mesh); }
-  const geo=new THREE.PlaneGeometry(L,L,N-1,N-1); geo.rotateX(-Math.PI/2); const pos=geo.attributes.position;
-  for(let k=0;k<N*N;k++) pos.setY(k,(tr.He[k]-tr.hmin)*ex); geo.computeVertexNormals(); mesh=new THREE.Mesh(geo,terrainMat); scene.add(mesh);
-  if(skirt){ skirt.geometry.dispose(); scene.remove(skirt); }
-  const floor=-Math.max(40,(tr.hmax-tr.hmin)*0.15)*ex-20, P=[], col=[], edge=[];
-  for(let j=0;j<N;j++) edge.push([0,j]); for(let i=0;i<N;i++) edge.push([i,N-1]); for(let j=N-1;j>=0;j--) edge.push([N-1,j]); for(let i=N-1;i>=0;i--) edge.push([i,0]);
-  for(let e=0;e<edge.length-1;e++){ const a=edge[e], b=edge[e+1];
-    const pa=[-L/2+a[1]*tr.c,(tr.He[a[0]*N+a[1]]-tr.hmin)*ex,-(L/2-a[0]*tr.c)], pb=[-L/2+b[1]*tr.c,(tr.He[b[0]*N+b[1]]-tr.hmin)*ex,-(L/2-b[0]*tr.c)];
-    P.push(...pa, pa[0],floor,pa[2], ...pb, ...pb, pa[0],floor,pa[2], pb[0],floor,pb[2]); const t=[.22,.18,.2], d=[.06,.06,.1]; col.push(...t,...d,...t,...t,...d,...d); }
-  const sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.Float32BufferAttribute(P,3)); sg.setAttribute('color',new THREE.Float32BufferAttribute(col,3));
-  skirt=new THREE.Mesh(sg,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide})); scene.add(skirt); dirty=true; }
-const texCache={};
-const loadTex=url=>texCache[url]||(texCache[url]=new Promise(res=>{ new THREE.TextureLoader().load(url,t=>{ t.colorSpace=THREE.NoColorSpace; t.anisotropy=renderer.capabilities.getMaxAnisotropy(); res(t); }); }));
-function computeCoverage(src,hs,ht,rel){ const L=tr.L;
-  for(let i=0;i<C;i++){ const y=L/2-(i+0.5)*L/C, row=C-1-i; for(let j=0;j<C;j++){ const x=-L/2+(j+0.5)*L/C, o=(row*C+j)*4;
-    const v=tr.los(src.x,src.y,hs,x,y,ht).vis; covData[o]=v?255:0; covData[o+1]=(!v&&rel)?(tr.los(rel.x,rel.y,H_RELAY,x,y,ht).vis?255:0):0; covData[o+3]=255; } }
-  covTex.needsUpdate=true; dirty=true; }
-let covTimer=0; const scheduleCov=f=>{ clearTimeout(covTimer); covTimer=setTimeout(f,60); };
-async function loadSite(k){ if(k===key) return; key=k; $('loading').hidden=false;
-  const t=await loadTerrain(k), tex=await loadTex(t.cfg.tex); if(key!==k) return;
-  tr=t; uniforms.map.value=tex; uniforms.shade.value=tr.cfg.shade; uniforms.sun.value.set(...tr.cfg.sun).normalize(); buildMesh(); $('loading').hidden=true; }
-/* camera flights */
-let fly=null;
-function flyTo(target,pos,ms=1100){ fly={t0:performance.now(),ms,a:{t:controls.target.clone(),p:camera.position.clone()},b:{t:target,p:pos}}; }
+const routeLine=mkLine(0xffffff,4,{vc:true,ro:2}), losMain=mkLine(0xF5F7FC,2.5,{ro:3}), losGhost=mkLine(0x8966E8,1.6,{dashed:true,depth:false,op:0.75,ro:4,ds:30,gs:22});
+const relLines=[mkLine(0xC9B8F5,2.5,{ro:3}),mkLine(0xC9B8F5,2.5,{ro:3})], flightLine=mkLine(0xC9B8F5,1.6,{dashed:true,ds:8,gs:8,op:0.85,ro:2}), profLine=mkLine(0xC9B8F5,2.5,{ro:3,depth:false});
+const ALL_LINES=[routeLine,losMain,losGhost,...relLines,flightLine,profLine];
+const hideLines=()=>ALL_LINES.forEach(l=>l.visible=false);
+
 /* markers */
-const mk={base:$('mkBase'),rover:$('mkRover'),relay:$('mkRelay'),best:$('mkBest'),call:$('callout'),heli:$('mkHeli')};
-const tmp=new THREE.Vector3();
-function place(el,v){ tmp.copy(v).project(camera); const w=canvas.clientWidth,h=canvas.clientHeight; el.style.transform=`translate(${(tmp.x*0.5+0.5)*w}px,${(-tmp.y*0.5+0.5)*h}px) translate(-50%,-50%)`; el.style.visibility=tmp.z>1?'hidden':'visible'; }
-function placeCall(v){ tmp.copy(v).project(camera); mk.call.style.transform=`translate(${(tmp.x*0.5+0.5)*canvas.clientWidth}px,${(-tmp.y*0.5+0.5)*canvas.clientHeight}px)`; }
-const P3={}; // world positions of markers, filled by updates
-function updateMarkers(){ for(const k of ['base','rover','relay','best','heli']) if(P3[k]&&!mk[k].hidden) place(mk[k],P3[k]); if(P3.call&&!mk.call.hidden) placeCall(P3.call);
-  const o=new THREE.Vector3(0,0,0).project(camera), nn=new THREE.Vector3(0,0,-500).project(camera);
-  $('northI').style.transform=`rotate(${Math.atan2(-(nn.y-o.y)*canvas.clientHeight,(nn.x-o.x)*canvas.clientWidth)*180/Math.PI+90}deg)`; }
+const MK={base:$('mkBase'),rover:$('mkRover'),relay:$('mkRelay'),best:$('mkBest'),call:$('callout'),heli:$('mkHeli'),pers:$('mkPers'),pin:$('mkPin'),p1:$('mkP1'),p2:$('mkP2')};
+const P3={}; const tmp=new THREE.Vector3();
+function hideMarkers(){ for(const k in MK) MK[k].hidden=true; }
+function place(el,v,call){ tmp.copy(v).project(camera); const w=canvas.clientWidth,h=canvas.clientHeight, x=(tmp.x*0.5+0.5)*w, y=(-tmp.y*0.5+0.5)*h;
+  el.style.transform=call?`translate(${x}px,${y}px)`:`translate(${x}px,${y}px) translate(-50%,-50%)`; el.style.visibility=(tmp.z>1||Math.abs(tmp.x)>1.1||Math.abs(tmp.y)>1.1)?'hidden':'visible'; }
+function updateMarkers(){ for(const k in MK) if(P3[k]&&!MK[k].hidden) place(MK[k],P3[k],k==='call'); }
+function callout(v,html){ if(!v){ MK.call.hidden=true; return; } P3.call=v; $('bubble').innerHTML=html; MK.call.hidden=false; }
+
 /* picking */
 const ray=new THREE.Raycaster(), ndc=new THREE.Vector2();
-function pick(ev){ if(!tr) return null; const r=canvas.getBoundingClientRect(); ndc.set(((ev.clientX-r.left)/r.width)*2-1,-((ev.clientY-r.top)/r.height)*2+1); ray.setFromCamera(ndc,camera);
-  const o=ray.ray.origin, d=ray.ray.direction; let prev=0; const step=tr.c*0.7;
-  for(let t=0;t<60000;t+=step){ const x=o.x+d.x*t, y=-(o.z+d.z*t), wy=o.y+d.y*t; if(!tr.inside(x,y)){ prev=t; continue; }
-    if(wy<=H(x,y)){ let a=prev,b=t; for(let k=0;k<20;k++){ const m=(a+b)/2; if(o.y+d.y*m<=H(o.x+d.x*m,-(o.z+d.z*m))) b=m; else a=m; } return {x:o.x+d.x*b,y:-(o.z+d.z*b)}; } prev=t; }
-  return null; }
+function pick(ev){ if(!curObj) return null; const r=canvas.getBoundingClientRect(); if(split.on&&ev.clientX-r.left>r.width/2) return null;
+  ndc.set(((ev.clientX-r.left)/(split.on?r.width/2:r.width))*2-1,-((ev.clientY-r.top)/r.height)*2+1); ray.setFromCamera(ndc,camera);
+  const h=ray.intersectObject(curObj.mesh)[0]; if(!h) return null; const p={x:h.point.x+cur.size/2,y:h.point.z+cur.size/2};
+  return (p.x<0||p.y<0||p.x>cur.size||p.y>cur.size)?null:p; }
 
-/* ================= story mode (Ingenuity, in 3D) ================= */
-const S={ t:0.05, relay:null, playing:false, CREST:300, ready:false };
-const SY=150, ROVER0=1250, HELI0=560, HELI1=200, HP=2.0, HI=0.5, HR=3.0;
-const cl=(a,b,v)=>Math.min(1,Math.max(0,(v-a)/(b-a))), ease=v=>v<.5?2*v*v:1-Math.pow(-2*v+2,2)/2, dayF=v=>cl(0.32,0.98,v), flightF=v=>cl(0.10,0.30,v);
-const see=(ax,ay,ha,bx,by,hb)=>tr.los(ax,ay,ha,bx,by,hb).vis;
-function sState(v){ const fl=flightF(v); let hx=HELI0, halt=0;
-  if(fl>0){ hx=HELI0+(HELI1-HELI0)*ease(fl); halt= fl<0.15?12*fl/0.15: fl>0.85?12*(1-fl)/0.15:12; }
-  const rx=ROVER0+(S.CREST-ROVER0)*dayF(v), day=v<0.31?0:Math.round(63*dayF(v)), r=S.relay;
-  const direct=see(rx,SY,HP,hx,SY,HI+halt), via=!!r && see(rx,SY,HP,r.x,r.y,HR) && see(r.x,r.y,HR,hx,SY,HI+halt);
-  return {hx,halt,rx,day,direct,via,fl}; }
-function lostDays(r){ let n=0; for(let d=0;d<=63;d++){ const rx=ROVER0+(S.CREST-ROVER0)*d/63; if(!(see(rx,SY,HP,HELI1,SY,HI)||(r&&see(rx,SY,HP,r.x,r.y,HR)&&see(r.x,r.y,HR,HELI1,SY,HI)))) n++; } return n; }
-const MON={ar:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو'],en:['Jan','Feb','Mar','Apr','May','Jun','Jul']};
+/* camera flights */
+let fly=null;
+function flyTo(target,pos,ms=1200){ fly={t0:performance.now(),ms,a:{t:controls.target.clone(),p:camera.position.clone()},b:{t:target,p:pos}}; }
+function frame(g,dir=[0.25,0.62,0.75],k=1,center){ const c=center||{x:g.size/2,y:g.size/2}, t=Wp(g,c); t.y=(elevC(g,c.x,c.y)-g.min)*ex*g.vs*0.5;
+  const m=innerWidth<820?1.55:1, d=g.size*1.05*k*m, v=new THREE.Vector3(...dir).normalize();
+  controls.minDistance=g.size*0.06; controls.maxDistance=g.size*3; flyTo(t,t.clone().addScaledVector(v,d)); }
+
+/* ================= globe (Earth chapter) ================= */
+const GR=1000; let globe=null;
+function llDir(lat,lon){ const p=lat*Math.PI/180, l=lon*Math.PI/180; return new THREE.Vector3(Math.cos(p)*Math.cos(l),Math.sin(p),-Math.cos(p)*Math.sin(l)); }
+async function ensureGlobe(){ if(globe) return; const tex=await loadTex('img/earth.webp'); tex.colorSpace=THREE.NoColorSpace;
+  globe=new THREE.Mesh(new THREE.SphereGeometry(GR,96,64),new THREE.ShaderMaterial({uniforms:{map:{value:tex},sun:{value:new THREE.Vector3(0.3,0.5,1).normalize()}},
+    vertexShader:`varying vec2 vUv; varying vec3 vN; void main(){ vUv=uv; vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
+    fragmentShader:`uniform sampler2D map; uniform vec3 sun; varying vec2 vUv; varying vec3 vN; void main(){ vec3 c=texture2D(map,vUv).rgb; float l=dot(vN,normalize(sun)); c*=0.25+0.95*smoothstep(-0.25,0.6,l); float r=1.-max(dot(vN,vec3(0,0,1)),0.); c+=vec3(.42,.36,.85)*pow(r,3.)*0.55; gl_FragColor=vec4(c,1.); }`}));
+  const atm=new THREE.Mesh(new THREE.SphereGeometry(GR*1.06,64,48),new THREE.ShaderMaterial({transparent:true,side:THREE.BackSide,depthWrite:false,blending:THREE.AdditiveBlending,
+    vertexShader:`varying vec3 vN; void main(){ vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
+    fragmentShader:`varying vec3 vN; void main(){ float i=pow(max(0.,0.72-dot(vN,vec3(0,0,1))),2.4); gl_FragColor=vec4(vec3(.54,.4,.91)*i*1.6,i); }`}));
+  gScene.add(globe,atm); }
+const RAHAT_LL=[24.134,39.897];
+
+/* ================= Flight 52 ================= */
+const F={ models:null, loading:null, heli:null, pers:null, path:null, rec:null, recovery:null, rot:[] };
+function representativeRecovery(g,rec){ const from=rec.rover[rec.rover.length-1], land=rec.flight[rec.flight.length-1]; let win=null, best=Infinity;
+  for(let y=-300;y<=300;y+=5) for(let x=-300;x<=300;x+=5){ const p={x:from.x+x,y:from.y+y}, sp=dist(from,p);
+    if(sp>=best||sp>300||p.x<g.step||p.y<g.step||p.x>g.size-g.step||p.y>g.size-g.step) continue;
+    const h=elevation(g,p), dx=(elevation(g,{x:p.x+g.step,y:p.y})-elevation(g,{x:p.x-g.step,y:p.y}))/(2*g.step), dy=(elevation(g,{x:p.x,y:p.y+g.step})-elevation(g,{x:p.x,y:p.y-g.step}))/(2*g.step);
+    if(h<elevation(g,from)+3||Math.hypot(dx,dy)>Math.tan(20*Math.PI/180)) continue;
+    if(lineOfSight(g,p,land,PERS_ANT,HELI_ANT).clearance>=0.4){ win=p; best=sp; } }
+  return win||from; }
+function loadModels(){ if(F.loading) return F.loading;
+  return F.loading=(async()=>{ const mount=(obj,w)=>{ const grp=new THREE.Group(), box=new THREE.Box3().setFromObject(obj), sz=box.getSize(new THREE.Vector3()), c=box.getCenter(new THREE.Vector3()), u=w/Math.max(sz.x,sz.z);
+      obj.scale.multiplyScalar(u); obj.position.sub(new THREE.Vector3(c.x,box.min.y,c.z).multiplyScalar(u)); grp.add(obj); grp.visible=false; scene.add(grp); return grp; };
+    try{ const draco=new DRACOLoader().setDecoderPath('flight52/draco/'); const ld=new GLTFLoader().setDRACOLoader(draco);
+      const [a,b]=await Promise.all(['ingenuity','perseverance'].map(async n=>ld.parseAsync((await bin('flight52/'+n+'.txt')).buffer,'flight52/'))); draco.dispose();
+      for(const s of [a.scene,b.scene]) s.traverse(o=>{ if(o.isMesh&&o.material&&'transmission' in o.material) o.material.transmission=0; });
+      F.heli=mount(a.scene,41); F.pers=mount(b.scene,42); F.rot=[a.scene.getObjectByName('rotors_01'),a.scene.getObjectByName('rotors_02')].filter(Boolean); }
+    catch(e){ console.warn('models',e); const mat=new THREE.MeshStandardMaterial({color:0xd8dce6,roughness:.6});
+      const h=new THREE.Group(); h.add(new THREE.Mesh(new THREE.BoxGeometry(10,8,10),mat)); const r=new THREE.Mesh(new THREE.CylinderGeometry(20,20,1,24),mat); r.position.y=14; h.add(r);
+      const p=new THREE.Group(); const bx=new THREE.Mesh(new THREE.BoxGeometry(30,14,40),mat); bx.position.y=10; p.add(bx);
+      F.heli=h; F.pers=p; h.visible=p.visible=false; scene.add(h,p); }
+    dirty(); })(); }
+const SOL0=775, SOL1=838, MON={ar:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو'],en:['Jan','Feb','Mar','Apr','May','Jun','Jul']};
 const dateFor=d=>{ const x=new Date(Date.UTC(2023,3,26+d)); return `${x.getUTCDate()} ${MON[lang][x.getUTCMonth()]} 2023`; };
-function enterStory(){ S.ready=true;
-  for(let x=ROVER0;x>=150;x-=5){ if(see(x,SY,HP,HELI1,SY,HI)){ S.CREST=x; break; } }
-  mk.base.hidden=true; mk.best.hidden=true; mk.heli.hidden=false; routeLine.visible=false;
-  computeCoverage({x:HELI1,y:SY},HI,HP,null);
-  const pts=[]; for(let k=0;k<=40;k++){ const x=ROVER0+(S.CREST-ROVER0)*k/40; pts.push(W(x,SY,0.5)); } setLine(pathLine,pts);
-  const fp=[]; for(let k=0;k<=40;k++){ const f=k/40, x=HELI0+(HELI1-HELI0)*f, a=f<0.15?12*f/0.15:f>0.85?12*(1-f)/0.15:12; fp.push(W(x,SY,HI+a)); } setLine(flightLine,fp);
-  const tg=W(560,SY), zm=host.clientWidth<760?2.5:1; flyTo(tg,new THREE.Vector3(tg.x+250*zm,tg.y+700*zm,tg.z+1350*zm)); updateStory(); }
-function updateStory(){ if(mode!=='story'||!S.ready) return; const s=sState(S.t);
-  const R=W(s.rx,SY,HP), Hh=W(s.hx,SY,HI+s.halt); P3.rover=R; P3.heli=Hh;
-  relLines.forEach(l=>l.visible=false); losGhost.visible=false;
-  if(s.direct){ setLine(losMain,[R,Hh]); losMain.material.color.set(0xEEF0F6); mk.call.hidden=true; }
-  else { if(s.via){ losMain.visible=false; const Rl=W(S.relay.x,S.relay.y,HR); setLine(relLines[0],[R,Rl]); setLine(relLines[1],[Rl,Hh]); relLines.forEach(l=>{l.material.color.set(0xC9B8F5);l.material.opacity=1;}); }
-    else { setLine(losMain,[R,Hh]); losMain.material.color.set(0x8966E8); }
-    setLine(losGhost,[R,Hh]);
-    const L1=tr.los(s.rx,SY,HP,s.hx,SY,HI+s.halt,true); P3.call=W(s.rx+(s.hx-s.rx)*L1.worstT,SY); mk.call.hidden=!!s.via;
-    $('bubble').innerHTML=L2(`هذا التل حجب الإشارة<small>يعلو الخط ${L1.worst.toFixed(1)} م</small>`,`This hill blocked the signal<small>${L1.worst.toFixed(1)} m above the line</small>`); }
-  if(S.relay){ P3.relay=W(S.relay.x,S.relay.y,HR); mk.relay.hidden=false; const ok=see(S.relay.x,S.relay.y,HR,HELI1,SY,HI); mk.relay.className='mk mk-relay'+(ok?'':' dead'); $('lblRelay').textContent=L2('محطتك','Your relay'); } else mk.relay.hidden=true;
-  mk.rover.className='mk mk-rover'+(s.direct?'':s.via?' relayed':' blocked'); $('lblRover').textContent='Perseverance';
-  mk.heli.className='mk mk-heli'+(s.fl>0&&s.fl<1?' flying':'');
-  uniforms.covOn.value= st.cov && S.t>=0.30 ? 1:0;
-  $('tDate').textContent= s.fl>0&&s.fl<1 ? L2(`في الجو · ${Math.round(s.fl*139)} ث`,`In flight · ${Math.round(s.fl*139)} s`) : s.day>0? L2(`اليوم ${s.day} · ${dateFor(s.day)}`,`Day ${s.day} · ${dateFor(s.day)}`) : dateFor(0);
-  const ci=S.t<0.10?0:S.t<0.31?1:S.t<0.975?2:3; document.querySelectorAll('.chap').forEach((c,i)=>c.classList.toggle('on',i===ci));
-  if(!S.relay) $('verdict').innerHTML=L2('<b>جرّب أنت</b>انقر على التضاريس لتضع محطة ترحيل بارتفاع 3 م. سنحسب كم يومًا من الـ 63 كانت ستنقذ.','<b>Your turn</b>Click the terrain to drop a 3 m relay. We’ll count how many of the 63 days it would have saved.');
-  else { const seesH=see(S.relay.x,S.relay.y,HR,HELI1,SY,HI), lost=lostDays(S.relay);
-    $('verdict').innerHTML=!seesH?L2('<b>هذا الموقع لا يرى المروحية</b>جرّب مكانًا أعلى على حافة الدلتا، داخل المنطقة المضيئة.','<b>This spot can’t see the helicopter</b>Try higher on the delta edge, inside the lit area.')
-      : lost===0?L2('<b>صفر أيام بلا إشارة</b>بمحطتك هنا كان الاتصال سيبقى طوال الوقت بدل 63 يومًا من الصمت.','<b>Zero days without signal</b>With your relay here, the link would have held the whole time instead of 63 silent days.')
-      : L2(`<b class="num">${lost} / 63</b>يومًا بلا إشارة مع محطتك. اسحبها لمكان أفضل.`,`<b class="num">${lost} / 63</b>days without signal with your relay. Drag it somewhere better.`); }
-  dirty=true; }
-function setT(v){ S.t=Math.min(1,Math.max(0,v)); $('tRange').value=Math.round(S.t*1000); updateStory(); }
-$('tRange').addEventListener('input',e=>{ stopStory(); S.t=e.target.value/1000; updateStory(); });
-document.querySelectorAll('.chap').forEach(c=>c.addEventListener('click',()=>{ stopStory(); setT(+c.dataset.t); }));
+const cl=(a,b,v)=>Math.min(1,Math.max(0,(v-a)/(b-a))), ease=v=>v<.5?2*v*v:1-Math.pow(-2*v+2,2)/2;
+const S={ t:0.3, playing:false };
+function storyState(t){ const g=cur, rec=F.rec, fl=cl(0,0.3,t), alt=rec.altitude*Math.max(0,Math.min(1,fl/0.07,(1-fl)/0.12));
+  const heli=routePoint(rec.flight,fl), gain=ease(cl(0.36,1,t)), rp=routePoint(F.path,gain);
+  // sol along the rover path (by distance), mapped to the 63 days
+  const seg=F.path.slice(1).map((q,i)=>dist(q,F.path[i])), tot=seg.reduce((a,b)=>a+b,0); let s=gain*tot, sol=SOL1;
+  for(let i=0;i<seg.length;i++){ if(s<=seg[i]){ const a=F.solAt[i], b=F.solAt[i+1]; sol=a+(b-a)*(seg[i]?s/seg[i]:0); break; } s-=seg[i]; }
+  const day=t<0.3?0:Math.round(Math.max(0,Math.min(63,(sol-SOL0)/(SOL1-SOL0)*63)));
+  const link=lineOfSight(g,rp,heli,PERS_ANT,HELI_ANT+alt); return {heli,alt,rp,gain,link,day,flying:fl<1}; }
+let sLast=null;
+function updateStory(){ if(mode!=='mission'||chap!==4||!F.rec||!cur||cur.id!=='f52') return; const g=cur, s=storyState(S.t);
+  if(F.heli){ F.heli.visible=F.pers.visible=true; const hp=Wp(g,s.heli,s.alt); F.heli.position.copy(hp); F.pers.position.copy(Wp(g,s.rp));
+    const ahead=routePoint(F.rec.flight,Math.min(1,cl(0,0.3,S.t)+0.015)); if(dist(ahead,s.heli)>0.1) F.heli.rotation.y=Math.atan2(ahead.x-s.heli.x,ahead.y-s.heli.y);
+    const nx=routePoint(F.path,Math.min(1,s.gain+0.02)); if(dist(nx,s.rp)>0.1) F.pers.rotation.y=Math.atan2(nx.x-s.rp.x,nx.y-s.rp.y); }
+  const a=Wp(g,s.rp,PERS_ANT+6), b=Wp(g,s.heli,s.alt+HELI_ANT+4);
+  P3.heli=Wp(g,s.heli,s.alt+14); P3.pers=Wp(g,s.rp,14); MK.heli.hidden=false; MK.pers.hidden=false; MK.heli.classList.toggle('flying',s.alt>0.3);
+  if(s.link.clear){ setLine(losMain,[a,b]); losGhost.visible=false; callout(null); }
+  else { const bp=lerpP(s.rp,s.heli,s.link.at), bv=Wp(g,bp,1); setLine(losMain,[a,bv]); setLine(losGhost,[bv,b]);
+    callout(bv,L2('تلّ يحجب الخط<small>خط الرؤية من شبكة الارتفاعات</small>','A hill blocks the line<small>line of sight from the elevation grid</small>')); }
+  $('tRange').value=Math.round(S.t*1000); $('tDate').textContent=dateFor(s.day); $('tDate').style.direction=document.documentElement.dir;
+  const v=$('verdict'), st=s.link.clear?(S.t<0.3?'fly':'ok'):'lost'; v.hidden=false;
+  v.innerHTML= st==='fly'?L2('<b>الرحلة 52، 26 أبريل 2023</b>إنجينيويتي تطير على المسار المنشور، وخط الرؤية إلى بيرسيفيرانس واضح.','<b>Flight 52, 26 April 2023</b>Ingenuity flies the published path, with a clear line of sight to Perseverance.')
+    : st==='lost'?L2(`<b>اليوم ${s.day} من 63: لا اتصال</b>تلّ بين المروحية والمركبة يقطع خط الرؤية.`,`<b>Day ${s.day} of 63: no contact</b>A hill between the helicopter and the rover cuts the line of sight.`)
+    : L2('<b>28 يونيو 2023: عاد الاتصال</b>صعدت المركبة إلى قمة التل فانكشف خط الرؤية.','<b>28 June 2023: contact restored</b>The rover crested the hill and the line of sight opened.');
+  $('mcNote').hidden=!(s.link.clear&&S.t>0.9); $('mcNote').textContent=L2('ملاحظة المحاكاة: موضع استعادة الاتصال تقديري ومحسوب من التضاريس.','Simulation note: the recovery position is estimated from the terrain.');
+  document.querySelectorAll('#chaps .chap').forEach(c=>{ const tt=+c.dataset.t; c.classList.toggle('on',tt>=0&&Math.abs(tt-S.t)<0.06||(tt===1&&S.t>0.97)); });
+  sLast=s; }
+function setT(v){ S.t=Math.min(1,Math.max(0,v)); updateStory(); }
 function stopStory(){ S.playing=false; $('tPlay').textContent=T('tPlay'); }
-function playStory(){ if(S.playing){ stopStory(); return; } S.playing=true; $('tPlay').textContent=T('tPause'); if(S.t>=0.999) S.t=0; let last=performance.now();
-  const step=now=>{ if(!S.playing||mode!=='story') return; S.t=Math.min(1,S.t+(now-last)/16000); last=now; setT(S.t); if(S.t<1) requestAnimationFrame(step); else stopStory(); }; requestAnimationFrame(step); }
-$('tPlay').addEventListener('click',playStory);
+function playStory(){ if(S.playing){ stopStory(); return; } S.playing=true; $('tPlay').textContent=T('tPause'); if(S.t>=0.999) S.t=0; }
+$('tPlay').onclick=playStory; $('tRange').oninput=e=>{ stopStory(); setT(e.target.value/1000); };
+document.querySelectorAll('#chaps .chap').forEach(c=>c.onclick=()=>{ const t=+c.dataset.t; stopStory(); if(t<0){ setMode('rover'); return; } setT(t); });
 
-/* ================= explore mode ================= */
-const st={ hb:3, idx:150, relay:null, an:null, placing:false, playing:false, cov:true, user:false }, bestCache={};
-const logEl=$('log'); let lastState=null, bestPos=null;
-function log(msg,cls=''){ const d=document.createElement('div'); d.className=cls; d.textContent=msg; logEl.prepend(d); while(logEl.children.length>5) logEl.lastChild.remove(); }
-async function getBest(){ const k=key+'|'+st.hb; if(!bestCache[k]){ const r=await bestRelay(tr,st.hb); bestCache[k]={pos:r,rec:r?analyse(tr,st.hb,r).recovered:1}; } return bestCache[k]; }
-function enterExplore(){ mk.heli.hidden=true; mk.base.hidden=false; pathLine.visible=false; flightLine.visible=false;
-  st.relay=null; st.user=false; mk.best.hidden=true; bestPos=null; setPlacing(false); lastState=null;
-  st.an=analyse(tr,st.hb,null); let start=Math.round(NROUTE*0.6); for(let i=0;i<NROUTE;i++) if(!st.an.direct[i]){ start=Math.min(NROUTE-1,i+12); break; }
-  st.idx=start; $('roverR').value=st.idx; uniforms.covOn.value=st.cov?1:0; updateExplore(true); updateScore();
-  const [bx,by]=tr.cfg.base, pts=[{x:bx,y:by},...tr.route]; let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9; for(const q of pts){ x0=Math.min(x0,q.x); x1=Math.max(x1,q.x); y0=Math.min(y0,q.y); y1=Math.max(y1,q.y); }
-  const cx=(x0+x1)/2, cy=(y0+y1)/2, R=Math.max(...pts.map(q=>Math.hypot(q.x-cx,q.y-cy))), tg=W(cx,cy), sp=Math.max(1600,R*2.9)*(host.clientWidth<760?2:1);
-  const cm=tr.cfg.cam||[-0.45,0.5,0.62]; flyTo(tg,new THREE.Vector3(tg.x+sp*cm[0],tg.y+sp*cm[1],tg.z+sp*cm[2]));
-  logEl.innerHTML=''; log(L2(`${tr.cfg.name.ar}: مسار ${km(tr.route.length_m)}، ${pct(st.an.blocked)} منه لا يرى القاعدة`,`${tr.cfg.name.en}: ${km(tr.route.length_m)} route, ${pct(st.an.blocked)} of it can’t see the base`)); getBest(); }
-function drawRoute(){ const a=st.an, cols=[]; for(let i=0;i<NROUTE;i++) cols.push(...(a.direct[i]?[0.96,0.97,0.99]:a.via[i]?[0.79,0.72,0.96]:[0.54,0.40,0.91])); setLine(routeLine,tr.route.map(p=>W(p.x,p.y,4)),cols); }
-function updateExplore(full){ if(mode==='story'||!tr) return;
-  if(full){ st.an=analyse(tr,st.hb,st.relay); drawRoute(); const [bx,by]=tr.cfg.base; scheduleCov(()=>computeCoverage({x:bx,y:by},st.hb,H_ROVER,st.relay&&st.an.relayOK?st.relay:null)); }
-  const a=st.an, p=tr.route[st.idx], [bx,by]=tr.cfg.base, L1=tr.los(bx,by,st.hb,p.x,p.y,H_ROVER,true);
-  const relOK=a.relayOK, viaOK=!L1.vis&&relOK&&tr.los(st.relay.x,st.relay.y,H_RELAY,p.x,p.y,H_ROVER).vis, s=L1.vis?'ok':viaOK?'rel':'bad';
-  const A=W(bx,by,st.hb), B=W(p.x,p.y,H_ROVER); P3.base=A; P3.rover=B;
-  setLine(losMain,[A,B]); losMain.material.color.set(L1.vis?0xEEF0F6:0x8966E8); setLine(losGhost,[A,B]); losGhost.visible=!L1.vis;
-  if(st.relay){ const Rr=W(st.relay.x,st.relay.y,H_RELAY); P3.relay=Rr; setLine(relLines[0],[A,Rr]); relLines[0].material.color.set(relOK?0xC9B8F5:0x8966E8);
-    if(!L1.vis&&relOK){ setLine(relLines[1],[Rr,B]); relLines[1].material.color.set(viaOK?0xC9B8F5:0x8966E8); relLines[1].material.opacity=viaOK?1:0.45; } else relLines[1].visible=false; }
-  else relLines.forEach(l=>l.visible=false);
-  if(!L1.vis){ P3.call=W(bx+(p.x-bx)*L1.worstT,by+(p.y-by)*L1.worstT); mk.call.hidden=false;
-    $('bubble').innerHTML=L2(`هذا التل يحجب الإشارة<small>يعلو الخط ${L1.worst.toFixed(1)} م</small>`,`This hill blocks the signal<small>${L1.worst.toFixed(1)} m above the line</small>`); } else mk.call.hidden=true;
-  $('status').className='status '+s;
-  $('stH2').textContent= s==='ok'?L2('الإشارة واصلة','Signal is getting through'): s==='rel'?L2('الإشارة تمر عبر محطتك','Signal is going through your relay'):L2('انقطعت الإشارة','Signal lost');
-  $('stP2').innerHTML= s==='ok'? L2(`المركبة على بعد <b>${km(L1.D)}</b> وترى القاعدة مباشرة.`,`The rover is <b>${km(L1.D)}</b> out and sees the base directly.`)
-    : s==='rel'? L2(`القاعدة لا ترى المركبة على بعد <b>${km(L1.D)}</b>، لكن المحطة تراهما معًا.`,`The base can’t see the rover <b>${km(L1.D)}</b> out, but the relay sees both.`)
-    : L2(`تلّ على بعد <b>${km(L1.worstT*L1.D)}</b> من القاعدة يرتفع <b>${L1.worst.toFixed(1)} م</b> فوق خط الرؤية.`,`A hill <b>${km(L1.worstT*L1.D)}</b> from the base rises <b>${L1.worst.toFixed(1)} m</b> above the line of sight.`);
-  $('mBlocked').textContent=pct(a.blocked); $('mStill').textContent=st.relay&&a.relayOK?pct(a.still):'—'; $('mGap').textContent=km(st.relay&&a.relayOK?a.gapR:a.gapD);
-  const mast=tr.mastNeeded(p.x,p.y,H_ROVER); $('mMast').textContent= mast===0?L2('يكفي الحالي','current is enough'):mast===Infinity?'> 400 m':mast.toFixed(1)+' m';
-  mk.rover.className='mk mk-rover'+(s==='bad'?' blocked':s==='rel'?' relayed':''); $('lblRover').textContent=L2(`المركبة · ${km(p.s)}`,`Rover · ${km(p.s)}`);
-  $('lblBase').textContent=L2(`القاعدة · هوائي ${st.hb} م`,`Base · ${st.hb} m antenna`);
-  mk.relay.hidden=!st.relay; mk.relay.className='mk mk-relay'+(st.relay&&!relOK?' dead':'');
-  $('lblRelay').textContent= relOK?(st.user?L2('محطتك','Your relay'):L2('محطة الترحيل','Relay')):L2('لا ترى القاعدة','Can’t see the base');
-  drawStrip(); drawProfile(L1);
-  if(lastState&&lastState!==s) log(s==='bad'?L2(`انقطعت الإشارة عند ${km(p.s)} من المسار`,`Lost the signal at ${km(p.s)}`):s==='rel'?L2(`المحطة التقطت المركبة عند ${km(p.s)}`,`The relay picked the rover up at ${km(p.s)}`):L2(`عادت الإشارة المباشرة عند ${km(p.s)}`,`Direct link back at ${km(p.s)}`), s==='bad'?'bad':s==='rel'?'rel':'');
-  lastState=s; dirty=true; }
-async function updateScore(){ const sc=$('score'); if(!st.relay){ sc.hidden=true; $('chP').innerHTML=T('chP'); return; }
-  const b=await getBest(), you=st.an.relayOK?st.an.recovered:0, pc=b.rec; sc.hidden=false;
-  $('scYou').textContent=pct(you); $('scPc').textContent=pct(pc); $('barYou').style.width=(you*100)+'%'; $('barPc').style.width=(pc*100)+'%';
-  $('chP').innerHTML=!st.an.relayOK?L2('محطتك لا ترى القاعدة، فلا تفيد. جرّب مكانًا أعلى.','Your relay can’t see the base, so it doesn’t help. Try higher ground.')
-    : you>=pc-0.005?L2('تعادلت مع الحاسوب أو تفوقت عليه. أحسنت!','You matched or beat the computer. Nice!')
-    : L2(`محطتك تعيد ${pct(you)} من الجزء المحجوب، والحاسوب وجد موقعًا يعيد ${pct(pc)}. اسحب محطتك لتحسّنها.`,`Your relay wins back ${pct(you)} of the blocked route; the computer found a spot that wins back ${pct(pc)}. Drag yours to improve it.`); }
+/* ================= rover simulation ================= */
+const RV={ g:null, route:null, base:null, pts:null, length:0, direct:null, cov:null, relay:null, best:null, idx:0, playing:false, placing:false, searching:false, prof:innerWidth>=820 };
+async function initRover(){ if(RV.g) return; const g=await getGrid('axis'), d=META.demo; RV.g=g; RV.route=d.route; RV.base=d.base;
+  const s=sampleRoute(d.route); RV.pts=s.points; RV.length=s.length; RV.direct=RV.pts.map(p=>lineOfSight(g,RV.base,p,BASE_H,ROVER_H).clear);
+  RV.cov=coverage(g,RV.base,RV.pts,RV.direct,null); RV.idx=Math.round(RV.pts.length*0.38); $('roverR').max=RV.pts.length-1; }
+function setRelay(p){ RV.relay=p; RV.cov=coverage(RV.g,RV.base,RV.pts,RV.direct,p); covDirty=true; updateRover(); }
+function drawRoute(){ const g=RV.g, f=RV.cov, cols=[], pts=[];
+  for(let i=0;i<RV.pts.length;i++){ pts.push(Wp(g,RV.pts[i],5)); cols.push(...(RV.direct[i]?[0.96,0.97,0.99]:f.via[i]?[0.79,0.72,0.96]:[0.54,0.40,0.91])); }
+  setLine(routeLine,pts,cols); }
+function roverStatus(i){ return RV.direct[i]?'ok':RV.cov.via[i]?'rel':'bad'; }
+function updateRover(){ if(!(mode==='rover'||mode==='results')||!RV.g||cur!==RV.g) return; const g=RV.g, i=RV.idx, p=RV.pts[i], st=roverStatus(i);
+  drawRoute(); MK.base.hidden=false; P3.base=Wp(g,RV.base,BASE_H+10); $('lblBase').textContent=L2('القاعدة','Base');
+  MK.rover.hidden=false; P3.rover=Wp(g,p,ROVER_H+10); MK.rover.className='mk mk-rover'+(st==='bad'?' blocked':st==='rel'?' relayed':''); $('lblRover').textContent=L2('المركبة','Rover');
+  const a=Wp(g,RV.base,BASE_H), b=Wp(g,p,ROVER_H), link=lineOfSight(g,RV.base,p,BASE_H,ROVER_H); losGhost.visible=false;
+  if(link.clear){ setLine(losMain,[a,b]); callout(null); }
+  else { const bp=lerpP(RV.base,p,link.at), bv=Wp(g,bp,1); setLine(losMain,[a,bv]); setLine(losGhost,[bv,b]);
+    callout(mode==='rover'?bv:null,L2(`التضاريس تقطع الخط<small>على بعد ${nf(dist(RV.base,bp)/1000,2)} كم من القاعدة</small>`,`Terrain cuts the line<small>${nf(dist(RV.base,bp)/1000,2)} km from the base</small>`)); }
+  relLines.forEach(l=>l.visible=false); MK.relay.hidden=!RV.relay;
+  if(RV.relay){ const r=RV.relay, rv=Wp(g,r,RELAY_H); P3.relay=Wp(g,r,RELAY_H+10); MK.relay.classList.toggle('dead',!RV.cov.back);
+    $('lblRelay').textContent=RV.cov.back?L2('المحطة','Relay'):L2('المحطة لا ترى القاعدة','Relay cannot see the base');
+    if(RV.cov.back){ setLine(relLines[0],[a,rv]); if(st==='rel') setLine(relLines[1],[rv,b]); } }
+  MK.best.hidden=!(RV.best&&RV.best.point&&(!RV.relay||dist(RV.relay,RV.best.point)>1)); if(!MK.best.hidden) P3.best=Wp(g,RV.best.point,RELAY_H+10); $('lblBest').textContent=L2('أفضل موقع','Best location');
+  const sh=$('status'); sh.className='status'+(st==='bad'?' bad':st==='rel'?' rel':'');
+  $('stH2').textContent= st==='ok'?L2('خط رؤية مباشر مع القاعدة','Direct line of sight to the base'): st==='rel'?L2('متصلة عبر المحطة','Connected through the relay'):L2('محجوبة: التضاريس تقطع الخط','Blocked: terrain cuts the line');
+  const pc=c=>nf(c/RV.pts.length*100)+'%'; $('covBefore').textContent=pc(RV.direct.filter(Boolean).length); $('covAfter').textContent=RV.relay?pc(RV.cov.connected):'—';
+  $('roverR').value=i; drawStrip(); if(RV.prof&&mode==='rover') drawProfile(g,RV.base,p,BASE_H,ROVER_H,L2('مقطع الارتفاع · القاعدة ← المركبة','Elevation profile · base → rover'));
+  if(covDirty&&$('covBtn').getAttribute('aria-pressed')==='true') computeCov(); }
 function drawStrip(){ const cv=$('strip'), dpr=Math.min(devicePixelRatio,2), w=cv.clientWidth, h=cv.clientHeight; if(!w) return; cv.width=w*dpr; cv.height=h*dpr;
-  const c=cv.getContext('2d'); c.scale(dpr,dpr); const a=st.an, rtl=lang==='ar';
-  c.save(); c.beginPath(); c.roundRect?c.roundRect(0,2,w,h-4,5):c.rect(0,2,w,h-4); c.clip();
-  for(let i=0;i<NROUTE;i++){ c.fillStyle=a.direct[i]?'#F5F7FC':a.via[i]?'#C9B8F5':'#8966E8'; const x=i/NROUTE*w; c.fillRect(rtl?w-x-w/NROUTE-0.6:x,2,w/NROUTE+0.6,h-4); } c.restore(); }
-function drawProfile(L1){ const cv=$('profile'), dpr=Math.min(devicePixelRatio,2), w=cv.clientWidth, h=cv.clientHeight; if(!w) return; cv.width=w*dpr; cv.height=h*dpr;
-  const c=cv.getContext('2d'); c.scale(dpr,dpr); const p=tr.route[st.idx], [bx,by]=tr.cfg.base, n=200, D=L1.D, zs=[];
-  for(let k=0;k<=n;k++){ const t=k/n; zs.push(tr.he(bx+(p.x-bx)*t,by+(p.y-by)*t)); }
-  const za=zs[0]+st.hb, zb=zs[n]+H_ROVER; let mn=Math.min(...zs,za,zb), mx=Math.max(...zs,za,zb); const pad=(mx-mn)*0.15+2; mn-=pad; mx+=pad;
-  const rtl=lang==='ar', X=k=>rtl?w-6-k/n*(w-12):6+k/n*(w-12), Y=z=>h-20-(z-mn)/(mx-mn)*(h-28);
-  c.beginPath(); c.moveTo(X(0),h-20); zs.forEach((z,k)=>c.lineTo(X(k),Y(z))); c.lineTo(X(n),h-20); c.closePath();
-  const g=c.createLinearGradient(0,0,0,h); g.addColorStop(0,tr.cfg.color); g.addColorStop(1,'rgba(18,26,45,.2)'); c.globalAlpha=.55; c.fillStyle=g; c.fill(); c.globalAlpha=1;
-  c.strokeStyle=tr.cfg.color; c.lineWidth=1.6; c.beginPath(); zs.forEach((z,k)=>k?c.lineTo(X(k),Y(z)):c.moveTo(X(k),Y(z))); c.stroke();
-  c.fillStyle='#8966E8'; for(let k=1;k<n;k++){ const lz=za+(zb-za)*k/n; if(zs[k]>lz) c.fillRect(Math.min(X(k),X(k+1))-0.5,Y(zs[k]),Math.abs(X(k+1)-X(k))+1,Y(lz)-Y(zs[k])); }
-  c.strokeStyle=L1.vis?'#F5F7FC':'#8966E8'; c.setLineDash(L1.vis?[]:[5,4]); c.lineWidth=1.6; c.beginPath(); c.moveTo(X(0),Y(za)); c.lineTo(X(n),Y(zb)); c.stroke(); c.setLineDash([]);
-  c.fillStyle='#F5F7FC'; c.fillRect(X(0)-1,Y(za),2,Y(zs[0])-Y(za)); c.fillRect(X(n)-1,Y(zb),2,Y(zs[n])-Y(zb));
-  c.font=`500 12px ${FONT}`; c.fillStyle='#8A9AB3'; c.direction=rtl?'rtl':'ltr'; c.textAlign=rtl?'right':'left'; c.fillText(L2('القاعدة','Base'),X(0),h-4);
-  c.textAlign=rtl?'left':'right'; c.fillText(L2(`المركبة · ${km(D)}`,`Rover · ${km(D)}`),X(n),h-4); c.direction='ltr'; }
-function setPlacing(v){ st.placing=v; $('placeBtn').setAttribute('aria-pressed',v); $('placeBtn').textContent=v?T('placing'):T('place'); canvas.classList.toggle('placing',v); }
-$('placeBtn').addEventListener('click',()=>setPlacing(!st.placing));
-$('clearBtn').addEventListener('click',()=>{ st.relay=null; st.user=false; mk.best.hidden=true; setPlacing(false); updateExplore(true); updateScore(); });
-$('bestBtn').addEventListener('click',async e=>{ const b=e.currentTarget; b.disabled=true; b.textContent=T('searching'); const r=await getBest(); b.disabled=false; b.textContent=T('best');
-  if(!r.pos){ log(L2('لا يوجد جزء محجوب لنعيده','Nothing blocked to win back')); return; }
-  bestPos=r.pos; P3.best=W(r.pos.x,r.pos.y,H_RELAY); mk.best.hidden=false; $('lblBest').textContent=L2('أفضل موقع','Best spot');
-  if(!st.relay){ st.relay={...r.pos}; st.user=false; } updateExplore(true); updateScore(); log(L2(`أفضل موقع يعيد ${pct(r.rec)} من الجزء المحجوب`,`The best spot wins back ${pct(r.rec)} of the blocked route`),'rel'); });
-$('roverR').addEventListener('input',e=>{ st.idx=+e.target.value; updateExplore(false); });
-$('hbR').addEventListener('input',e=>{ st.hb=+e.target.value; $('hbOut').textContent=st.hb.toFixed(1)+' m'; mk.best.hidden=true; updateExplore(true); updateScore(); });
-const playBtn=$('playBtn'); let lastT=0;
-playBtn.addEventListener('click',()=>{ st.playing=!st.playing; if(st.playing&&st.idx>=NROUTE-1) st.idx=0; playBtn.textContent=st.playing?T('pause'):T('drive'); });
-document.querySelectorAll('.wbtn').forEach(b=>b.addEventListener('click',async()=>{ exploreKey=b.dataset.site; document.querySelectorAll('.wbtn').forEach(x=>x.setAttribute('aria-selected',x===b)); if(mode==='story') setMode('explore'); else { await loadSite(exploreKey); enterExplore(); } }));
-
-/* ================= shared interactions ================= */
-const nearestRoute=pt=>{ let bi=0,bd=Infinity; tr.route.forEach((q,i)=>{ const d=(q.x-pt.x)**2+(q.y-pt.y)**2; if(d<bd){bd=d;bi=i;} }); return bi; };
+  const x=cv.getContext('2d'), n=RV.pts.length, rtl=document.documentElement.dir==='rtl'; x.scale(dpr,dpr);
+  for(let i=0;i<n;i++){ const st=roverStatus(i); x.fillStyle=st==='ok'?'#F5F7FC':st==='rel'?'#C9B8F5':'#8966E8'; const xx=w*i/n; x.fillRect(rtl?w-xx-w/n-0.5:xx,3,w/n+0.5,h-6); }
+  const xi=w*(RV.idx+0.5)/n; x.fillStyle='#0B1020'; x.fillRect((rtl?w-xi:xi)-1.5,0,3,h); }
+function drawProfile(g,a,b,hA,hB,cap,clearOnly){ const pr=$('prof'); pr.hidden=false; const cv=$('profile'), dpr=Math.min(devicePixelRatio,2), w=cv.clientWidth, h=cv.clientHeight; if(!w) return;
+  cv.width=w*dpr; cv.height=h*dpr; const x=cv.getContext('2d'); x.scale(dpr,dpr); const N=220, D=dist(a,b), zs=[];
+  for(let k=0;k<=N;k++){ const p=lerpP(a,b,k/N); zs.push(elevation(g,p)); }
+  const link=hA!=null?lineOfSight(g,a,b,hA,hB):null, zA=zs[0]+(hA||0), zB=zs[N]+(hB||0), curv=D*D/(2*g.R);
+  const line=t=>zA+(zB-zA)*t-curv*t*(1-t); let lo=Math.min(...zs), hi=Math.max(...zs,zA,zB); const pad=(hi-lo)*0.12+2; lo-=pad; hi+=pad;
+  const X=t=>8+t*(w-16), Y=z=>6+(1-(z-lo)/(hi-lo))*(h-22);
+  x.beginPath(); x.moveTo(X(0),h-16); zs.forEach((z,k)=>x.lineTo(X(k/N),Y(z))); x.lineTo(X(1),h-16); x.closePath(); x.fillStyle='#34425B'; x.fill();
+  x.beginPath(); zs.forEach((z,k)=>k?x.lineTo(X(k/N),Y(z)):x.moveTo(X(0),Y(z))); x.strokeStyle='#B5C1D4'; x.lineWidth=1.5; x.stroke();
+  if(link){ const at=link.clear?1:link.at; x.beginPath(); for(let k=0;k<=40;k++){ const t=at*k/40; k?x.lineTo(X(t),Y(line(t))):x.moveTo(X(t),Y(line(t))); } x.strokeStyle='#F5F7FC'; x.lineWidth=2; x.stroke();
+    if(!link.clear){ x.setLineDash([5,4]); x.beginPath(); for(let k=0;k<=40;k++){ const t=at+(1-at)*k/40; k?x.lineTo(X(t),Y(line(t))):x.moveTo(X(t),Y(line(t))); } x.strokeStyle='#8966E8'; x.stroke(); x.setLineDash([]);
+      x.beginPath(); x.arc(X(at),Y(elevation(g,lerpP(a,b,at))),5,0,7); x.fillStyle='#8966E8'; x.fill(); } }
+  x.fillStyle='#8A9AB3'; x.font='11px '+FONT; x.textAlign='left'; x.fillText(nf(Math.min(...zs),0)+' m',8,h-3); x.textAlign='right'; x.fillText(nf(Math.max(...zs),0)+' m',w-8,h-3);
+  $('profCap').textContent=cap; $('profLen').textContent=nf(D/1000,2)+' km'; }
+let covDirty=true, covTok=0;
+async function computeCov(){ if(!RV.g||cur!==RV.g) return; covDirty=false; const g=RV.g, tok=++covTok, rel=RV.relay&&RV.cov.back?RV.relay:null;
+  for(let i=0;i<C;i++){ const y=(i+0.5)*g.size/C, row=C-1-i; for(let j=0;j<C;j++){ const p={x:(j+0.5)*g.size/C,y}, o=(row*C+j)*4;
+      const v=lineOfSight(g,RV.base,p,BASE_H,ROVER_H).clear; covData[o]=v?255:0; covData[o+1]=(!v&&rel)?(lineOfSight(g,rel,p,RELAY_H,ROVER_H).clear?255:0):0; covData[o+3]=255; }
+    if(i%14===13){ await new Promise(r=>setTimeout(r,0)); if(tok!==covTok) return; } }
+  covTex.needsUpdate=true; matA.uniforms.covOn.value=1; }
+function setPlacing(v){ RV.placing=v; $('placeBtn').setAttribute('aria-pressed',v); $('placeBtn').textContent=v?T('placing'):T('place'); canvas.classList.toggle('placing',v); }
+$('placeBtn').onclick=()=>setPlacing(!RV.placing);
+$('clearBtn').onclick=()=>{ setPlacing(false); setRelay(null); };
+async function findBest(){ if(RV.best){ setRelay(RV.best.point); return RV.best; } if(RV.searching) return; RV.searching=true; const btn=$('bestBtn'); btn.disabled=true;
+  const best=await optimize(RV.g,RV.base,RV.pts,RV.direct,f=>{ btn.textContent=L2('نختبر 729 موقعًا… ','Testing 729 sites… ')+Math.round(f*100)+'%'; });
+  RV.best=best; RV.searching=false; btn.disabled=false; btn.textContent=T('best'); if(best.point) setRelay(best.point); return best; }
+$('bestBtn').onclick=()=>{ setPlacing(false); findBest(); };
+$('roverR').oninput=e=>{ RV.playing=false; $('playBtn').textContent=T('drive'); RV.idx=+e.target.value; updateRover(); };
+$('playBtn').onclick=()=>{ RV.playing=!RV.playing; $('playBtn').textContent=RV.playing?T('stop'):T('drive'); if(RV.playing&&RV.idx>=RV.pts.length-1) RV.idx=0; };
+$('profToggle').onclick=()=>{ RV.prof=!RV.prof; $('profToggle').setAttribute('aria-pressed',RV.prof); $('prof').hidden=!RV.prof; updateRover(); };
+// drag the relay or rover
 let drag=null;
-for(const [el,kind] of [[mk.rover,'rover'],[mk.relay,'relay']]){
-  el.addEventListener('pointerdown',e=>{ drag=kind; controls.enabled=false; el.setPointerCapture(e.pointerId); e.preventDefault(); stopStory(); });
-  el.addEventListener('pointermove',e=>{ if(drag!==kind) return; const pt=pick(e); if(!pt) return;
-    if(mode==='story'){ if(kind==='rover'){ const x=Math.min(ROVER0,Math.max(S.CREST,pt.x)); setT(Math.max(0.32,0.32+0.66*(ROVER0-x)/(ROVER0-S.CREST))); } else { S.relay=pt; updateStory(); } return; }
-    if(kind==='rover'){ const i=nearestRoute(pt); if(i!==st.idx){ st.idx=i; $('roverR').value=i; updateExplore(false); } } else { st.relay=pt; updateExplore(true); } });
-  el.addEventListener('pointerup',()=>{ if(drag==='relay'&&mode!=='story'){ st.user=true; updateScore(); } drag=null; controls.enabled=true; }); }
-let downAt=null; canvas.addEventListener('pointerdown',e=>{ downAt=[e.clientX,e.clientY]; });
-canvas.addEventListener('pointerup',e=>{ if(!downAt||Math.hypot(e.clientX-downAt[0],e.clientY-downAt[1])>6) return;
-  if(mode==='story'){ const pt=pick(e); if(pt){ S.relay=pt; updateStory(); } return; }
-  if(!st.placing) return; const pt=pick(e); if(!pt) return; st.relay=pt; st.user=true; setPlacing(false); updateExplore(true); updateScore();
-  log(st.an.relayOK?L2(`وضعت محطة تعيد ${pct(st.an.recovered)} من الجزء المحجوب`,`You placed a relay that wins back ${pct(st.an.recovered)} of the blocked route`):L2('وضعت محطة لا ترى القاعدة','You placed a relay that can’t see the base'),st.an.relayOK?'rel':'bad'); });
-$('covBtn').addEventListener('click',e=>{ st.cov=!st.cov; e.currentTarget.setAttribute('aria-pressed',st.cov); uniforms.covOn.value=st.cov&&(mode!=='story'||S.t>=0.3)?1:0; dirty=true; });
-$('exBtn').addEventListener('click',e=>{ ex=ex===1?3:1; e.currentTarget.setAttribute('aria-pressed',ex===3); buildMesh(); if(mode==='story'){ enterStoryLines(); updateStory(); } else updateExplore(true); });
-function enterStoryLines(){ const pts=[]; for(let k=0;k<=40;k++){ const x=ROVER0+(S.CREST-ROVER0)*k/40; pts.push(W(x,SY,0.5)); } setLine(pathLine,pts);
-  const fp=[]; for(let k=0;k<=40;k++){ const f=k/40, x=HELI0+(HELI1-HELI0)*f, a=f<0.15?12*f/0.15:f>0.85?12*(1-f)/0.15:12; fp.push(W(x,SY,HI+a)); } setLine(flightLine,fp); }
-$('grab').addEventListener('click',()=>{ document.body.classList.toggle('mini'); setTimeout(resize,350); });
+MK.relay.addEventListener('pointerdown',e=>{ drag='relay'; e.preventDefault(); MK.relay.setPointerCapture(e.pointerId); controls.enabled=false; });
+MK.rover.addEventListener('pointerdown',e=>{ drag='rover'; e.preventDefault(); MK.rover.setPointerCapture(e.pointerId); controls.enabled=false; });
+const nearest=pt=>{ let bi=0,bd=Infinity; RV.pts.forEach((q,i)=>{ const d=dist(q,pt); if(d<bd){bd=d;bi=i;} }); return bi; };
+let dragRAF=0;
+for(const el of [MK.relay,MK.rover]){ el.addEventListener('pointermove',e=>{ if(!drag) return; const p=pick(e); if(!p) return; if(dragRAF) return;
+    dragRAF=requestAnimationFrame(()=>{ dragRAF=0; if(drag==='relay'){ RV.relay=p; RV.cov=coverage(RV.g,RV.base,RV.pts,RV.direct,p); updateRover(); } else { RV.idx=nearest(p); updateRover(); } }); });
+  el.addEventListener('pointerup',()=>{ if(drag==='relay'){ covDirty=true; updateRover(); } drag=null; controls.enabled=true; }); }
+let downAt=null; canvas.addEventListener('pointerdown',e=>{ downAt=[e.clientX,e.clientY]; controls.autoRotate=false; });
+canvas.addEventListener('pointerup',e=>{ if(!downAt||Math.hypot(e.clientX-downAt[0],e.clientY-downAt[1])>6) return; const p=pick(e); if(!p) return;
+  if(mode==='rover'&&RV.placing){ setPlacing(false); setRelay(p); }
+  else if(mode==='lab'&&LAB.picking){ LAB.pts.push(p); if(LAB.pts.length>2) LAB.pts=[p]; drawLabProfile(); } });
+
+/* ================= terrain lab ================= */
+const LAB={ id:'axis', layer:0, picking:false, pts:[] }, split={on:false,b:'jezero'};
+const LAB_SITES=['axis','labah','anahi','nobile','jezero'];
+function siteMeta(id){ const m=META.sites[id]; return m; }
+function renderLabChips(){ const box=$('siteChips'); box.innerHTML='';
+  LAB_SITES.forEach(id=>{ const b=document.createElement('button'); b.className='chip glass'; b.type='button'; b.textContent=LL(NAMES[id]); b.setAttribute('aria-pressed',id===LAB.id); b.onclick=()=>labSite(id); box.appendChild(b); });
+  const sel=$('splitSel'); sel.innerHTML=''; LAB_SITES.filter(id=>id!==LAB.id).forEach(id=>{ const o=document.createElement('option'); o.value=id; o.textContent=LL(NAMES[id]); sel.appendChild(o); });
+  if(split.b===LAB.id) split.b=LAB.id==='jezero'?'axis':'jezero'; sel.value=split.b; }
+function renderLab(){ const m=siteMeta(LAB.id), k=m.metrics['70'];
+  $('labTitle').innerHTML=`${LL(NAMES[LAB.id])} <span class="meta">· ${LL(WORLD[m.source])}</span>`;
+  const sc=META.scores['70'][LAB.id];
+  $('labStats').innerHTML=L2(`التفاوت ${nf(k.relief,0)} م · الميل الوسيط ${nf(k.slope50)}° · الخشونة ${nf(k.roughness,2)} م`,`Relief ${nf(k.relief,0)} m · median slope ${nf(k.slope50)}° · roughness ${nf(k.roughness,2)} m`)+
+    (sc?L2(`<br>مؤشر الاختلاف عن نوبيل ${nf(sc.nobile,2)} · عن جيزيرو ${nf(sc.jezero,2)}`,`<br>Difference from Nobile ${nf(sc.nobile,2)} · from Jezero ${nf(sc.jezero,2)}`):'');
+  const shown=m.step!==m.srcStep?L2(`، معروضة على شبكة ${m.step} م`,`, shown on a ${m.step} m grid`):'';
+  $('labMeta').innerHTML=`<a href="${LINKS[m.source]}" target="_blank" rel="noopener">${LL(SRC[m.source])}</a> · `+L2(`تباعد الشبكة ${m.srcStep} م${shown} · المقاييس على شبكة المقارنة 70 م`,`grid spacing ${m.srcStep} m${shown} · metrics on the 70 m comparison grid`);
+  document.querySelectorAll('#layerChips .chip[data-layer]').forEach(c=>c.setAttribute('aria-pressed',+c.dataset.layer===LAB.layer));
+  $('splitBtn').setAttribute('aria-pressed',split.on); $('splitSel').hidden=!split.on; $('profBtn').setAttribute('aria-pressed',LAB.picking);
+  $('profBtn').textContent=LAB.picking?L2('اضغط نقطتين على التضاريس','Click two points on the terrain'):T('lProf');
+  const lg=$('legend'); lg.hidden=LAB.layer===0; if(cur&&LAB.layer){ const L=layerTex(cur); const r=[[nf(cur.min,0)+' m',nf(cur.max,0)+' m'],['0°',nf(L.sMax,0)+'°'],['0 m',nf(L.rMax,1)+' m']][LAB.layer-1]; $('legLo').textContent=r[0]; $('legHi').textContent=r[1]; }
+  $('splitA').textContent=LL(NAMES[LAB.id]); $('splitB').textContent=LL(NAMES[split.b]); }
+function applyLayer(){ const ch=[[0,0,0],[1,0,0],[0,1,0],[0,0,1]][LAB.layer]; for(const m of [matA,matB]){ m.uniforms.layOn.value=LAB.layer?1:0; m.uniforms.layCh.value.set(...ch); } }
+async function labSite(id){ LAB.id=id; LAB.pts=[]; $('prof').hidden=true; profLine.visible=false; MK.p1.hidden=MK.p2.hidden=true; renderLabChips();
+  await showSite(id); if(mode!=='lab') return; applyLayer(); renderLab(); if(split.on) await setSplitSite(split.b); frame(cur,[0.3,0.75,0.75],split.on?1.25:1); }
+async function setSplitSite(id,force){ split.b=id; const g=await getGrid(id), tex=await loadTex(g.tex); if(objB){ sceneB.remove(objB.grp); objB.grp.traverse(o=>o.geometry&&o.geometry.dispose()); }
+  objB=buildTerrain(g,tex,matB); matB.uniforms.lay.value=layerTex(g).tex; sceneB.add(objB.grp); renderLab(); }
+document.querySelectorAll('#layerChips .chip[data-layer]').forEach(c=>c.onclick=()=>{ LAB.layer=+c.dataset.layer; applyLayer(); renderLab(); });
+$('splitBtn').onclick=async()=>{ split.on=!split.on; LAB.picking=false; LAB.pts=[]; $('prof').hidden=true; profLine.visible=false; MK.p1.hidden=MK.p2.hidden=true; if(split.on) await setSplitSite(split.b); renderLab(); refreshSplit(); frame(cur,[0.3,0.75,0.75],split.on?1.25:1); };
+$('splitSel').onchange=e=>setSplitSite(e.target.value);
+$('profBtn').onclick=()=>{ LAB.picking=!LAB.picking; LAB.pts=[]; if(LAB.picking&&split.on){ split.on=false; refreshSplit(); } canvas.classList.toggle('picking',LAB.picking); renderLab(); drawLabProfile(); };
+function refreshSplit(){ const on=split.on&&mode==='lab'; $('splitLine').hidden=!on; $('splitA').hidden=!on; $('splitB').hidden=!on; resize(); }
+function drawLabProfile(){ MK.p1.hidden=!LAB.pts[0]; MK.p2.hidden=!LAB.pts[1]; if(LAB.pts[0]) P3.p1=Wp(cur,LAB.pts[0],6); if(LAB.pts[1]) P3.p2=Wp(cur,LAB.pts[1],6);
+  if(LAB.pts.length===2){ const pts=[]; for(let k=0;k<=80;k++) pts.push(Wp(cur,lerpP(LAB.pts[0],LAB.pts[1],k/80),4)); setLine(profLine,pts);
+    const D=dist(LAB.pts[0],LAB.pts[1]); drawProfile(cur,LAB.pts[0],LAB.pts[1],null,null,L2('مقطع الارتفاع · A ← B','Elevation profile · A → B')); }
+  else { profLine.visible=false; $('prof').hidden=true; } }
+
+/* ================= mission chapters ================= */
+const CH=[
+  { kick:['أطلس رهط · طويق سبيس · تحدّي ناسا لتطبيقات الفضاء 2026 · جدة','Rahat Atlas · Tuwaiq Space · NASA Space Apps Challenge 2026 · Jeddah'], title:['الأرض','Earth'],
+    text:['نقارن تضاريس حرّة رهط بموقعين على القمر والمريخ، ونختبر كيف تحجب التضاريس خط الرؤية بين الهوائيات.','We compare terrain in Harrat Rahat with sites on the Moon and Mars, then test how terrain blocks the line of sight between antennas.'],
+    meta:['حرّة رهط · 24.134° شمالًا، 39.897° شرقًا','Harrat Rahat · 24.134° N, 39.897° E'],
+    acts:[[['ابدأ الاستكشاف','Explore the Mission'],()=>goChap(1),'acc'],[['شغّل المحاكاة','Launch Simulation'],()=>setMode('rover')]] },
+  { site:'axis', kick:['1 · الأرض','1 · Earth'], title:['حرّة رهط','Harrat Rahat'],
+    text:['قارنّا ثلاثة قطاعات من الحقل البركاني جنوب المدينة المنورة. طول ضلع كل منطقة دراسة 8.4 كم.','We compared three sectors of the volcanic field south of Madinah. Each study area is 8.4 km across.'],
+    meta:['القطاع المختار: محور الفوّهات الجنوبي · NASA SRTM GL1 · نحو 30 م · صورة Sentinel-2، 8 نوفمبر 2025','Selected sector: southern vent axis · NASA SRTM GL1 · about 30 m · Sentinel-2 image, 8 Nov 2025'],
+    acts:[[['افتح مختبر التضاريس','Open Terrain Lab'],()=>{ LAB.id='axis'; setMode('lab'); }]] },
+  { site:'nobile', kick:['2 · القمر','2 · Moon'], title:['حافة نوبيل 1','Nobile Rim 1'], cam:[0.7,0.55,0.55],
+    text:['تُظهر قياسات الليزر قرب القطب الجنوبي للقمر حوافًا أشد انحدارًا من القطاعات التي درسناها في حرّة رهط.','Laser measurements near the lunar south pole show steeper terrain than the sectors we studied in Harrat Rahat.'],
+    meta:['NASA LRO / LOLA Site06 · شبكة 5 م معروضة على 20 م · 85.44° جنوبًا، 37.37° شرقًا · الإضاءة مظللة من نموذج الارتفاع','NASA LRO / LOLA Site06 · 5 m grid shown at 20 m · 85.44° S, 37.37° E · shaded from the elevation model'],
+    acts:[[['افتح في المختبر','Open in Terrain Lab'],()=>{ LAB.id='nobile'; setMode('lab'); }]] },
+  { site:'jezero', kick:['3 · المريخ','3 · Mars'], title:['فوهة جيزيرو','Jezero Crater'],
+    text:['كان الجزء المدروس من جيزيرو أقرب طبوغرافيًا إلى القطاع المختار في حرّة رهط من حافة نوبيل.','The Jezero study area was a closer topographic match to the selected Harrat Rahat sector than Nobile Rim 1.'],
+    meta:['USGS / NASA JPL، نموذج CTX · 20 م · 18.49° شمالًا، 77.39° شرقًا','USGS / NASA JPL CTX DEM · 20 m · 18.49° N, 77.39° E'],
+    acts:[[['قصة إنجينيويتي','Ingenuity story'],()=>goChap(4),'acc']] },
+  { site:'f52', kick:['4 · الرحلة 52','4 · Flight 52'], title:['إنجينيويتي: 63 يومًا بلا اتصال','Ingenuity: 63 Days Without Contact'],
+    text:['أثناء هبوط إنجينيويتي في الرحلة 52، حجب تلّ الاتصال بمركبة بيرسيفيرانس. عاد الاتصال في 28 يونيو 2023 بعدما صعدت المركبة إلى قمة التل.','As Ingenuity descended on Flight 52, a hill blocked its link to Perseverance. Contact returned on 28 June 2023 after the rover crested the hill.'],
+    meta:['تضاريس CTX لجيزيرو، الارتفاع ×3.25 والمركبتان مكبّرتان · المسار من خريطة NASA MMGIS · <a href="'+LINKS.jpl+'" target="_blank" rel="noopener">بيان NASA JPL</a>','Jezero CTX terrain, height ×3.25, vehicles enlarged · path from NASA MMGIS · <a href="'+LINKS.jpl+'" target="_blank" rel="noopener">NASA JPL release</a>'],
+    acts:[] } ];
+let chap=0;
+function renderChap(){ const c=CH[chap]; $('mcKick').textContent=LL(c.kick); $('mcTitle').textContent=LL(c.title); $('mcText').textContent=LL(c.text); $('mcMeta').innerHTML=LL(c.meta);
+  const a=$('mcActions'); a.innerHTML=''; c.acts.forEach(([lbl,fn,cls])=>{ const b=document.createElement('button'); b.type='button'; b.className='btn'+(cls?' '+cls:''); b.textContent=LL(lbl); b.onclick=fn; a.appendChild(b); });
+  $('mcNum').textContent=`${chap+1} / ${CH.length}`; const d=$('mcDots'); d.innerHTML=''; CH.forEach((_,i)=>{ const x=document.createElement('i'); if(i===chap) x.className='on'; d.appendChild(x); });
+  $('mcPrev').disabled=chap===0; $('mcNote').hidden=true; }
+async function goChap(i){ chap=Math.max(0,Math.min(CH.length-1,i)); if(mode!=='mission'){ await setMode('mission'); return; } await enterChap(); }
+async function enterChap(){ const c=CH[chap]; stopStory(); renderChap(); hideLines(); hideMarkers(); callout(null); $('prof').hidden=true; matA.uniforms.covOn.value=0; matA.uniforms.layOn.value=0;
+  if(F.heli){ F.heli.visible=F.pers.visible=false; } flightLine.visible=false;
+  $('bottom').hidden=chap!==4; $('bStory').hidden=chap!==4; $('bRover').hidden=true; $('bottom').classList.remove('wide'); $('verdict').hidden=true;
+  $('tools').hidden=chap===0; globeOn=chap===0; document.body.classList.toggle('ch4',chap===4);
+  if(chap===0){ $('loading').hidden=true; await ensureGlobe(); const d=llDir(...RAHAT_LL); controls.minDistance=GR*1.6; controls.maxDistance=GR*6;
+    const side=new THREE.Vector3(0,1,0).cross(d).normalize(); const pos=d.clone().multiplyScalar(GR*3.3).addScaledVector(side,innerWidth<820?0:-GR*0.9).add(new THREE.Vector3(0,GR*0.25,0));
+    const tgt=innerWidth<820?new THREE.Vector3(0,-GR*0.35,0):side.clone().multiplyScalar(-GR*0.75); flyTo(tgt,pos,fly?1200:1); P3.pin=d.clone().multiplyScalar(GR*1.01); MK.pin.hidden=false; $('lblPin').textContent=L2('حرّة رهط','Harrat Rahat'); controls.autoRotate=false; return; }
+  const g=await showSite(c.site); if(!g||mode!=='mission') return;
+  if(c.site==='f52'){ F.rec=g.rec; if(!F.path){ F.recovery=representativeRecovery(g,g.rec); F.path=[...g.rec.rover,F.recovery]; F.solAt=[...g.rec.rover.map(r=>r.sol),SOL1]; }
+    setLine(flightLine,g.rec.flight.filter((_,i)=>i%2===0).map(p=>Wp(g,p,g.rec.altitude*0.6)));
+    const mid={x:(g.rec.flight[g.rec.flight.length-1].x+F.path[0].x)/2,y:(g.rec.flight[g.rec.flight.length-1].y+F.path[0].y)/2};
+    const t=Wp(g,mid); controls.minDistance=120; controls.maxDistance=3000; const m=innerWidth<820?2.1:1; if(innerWidth<820){ const hl=g.rec.flight[g.rec.flight.length-1], r0=F.path[0], dv=new THREE.Vector3(r0.x-hl.x,0,r0.y-hl.y).normalize(); flyTo(t,t.clone().addScaledVector(dv,900).add(new THREE.Vector3(0,1150,0))); }
+    else flyTo(t,t.clone().add(new THREE.Vector3(140,560,520)));
+    loadModels().then(()=>updateStory()); if(S.t<=0.001||S.t>=0.999) S.t=0; updateStory(); controls.autoRotate=false; if(!present) playStory(); return; }
+  frame(g,c.cam||[0.3,0.62,0.78],0.95); controls.autoRotate=!matchMedia('(prefers-reduced-motion: reduce)').matches; }
+$('mcPrev').onclick=()=>goChap(chap-1); $('mcNext').onclick=()=>{ if(chap===CH.length-1) setMode('rover'); else goChap(chap+1); };
+let globeOn=true;
+
+/* ================= results ================= */
+function renderResults(){ const d=META.demo, b=d.before/d.total*100, a=d.after/d.total*100;
+  $('rBefore').textContent=nf(b)+'%'; $('rAfter').textContent=nf(a)+'%'; $('rBarA').style.width=b+'%'; $('rBarB').style.width=(a-b)+'%';
+  $('rText').innerHTML=L2(`ارتفع عدد عينات المسار ذات خط رؤية من <b class="num">${d.before}</b> إلى <b class="num">${d.after}</b> من أصل <b class="num">${d.total}</b> عينة، على مسار طوله ${nf(d.length/1000,2)} كم في محور الفوّهات الجنوبي، بأفضل محطة بين ${d.tested} موقعًا مرشحًا.`,
+    `The number of route samples with line of sight increased from <b class="num">${d.before}</b> to <b class="num">${d.after}</b> out of <b class="num">${d.total}</b>, on a ${nf(d.length/1000,2)} km route in the southern vent axis, with the best of ${d.tested} candidate locations.`);
+  $('dMethodIn').innerHTML=L2(`<p>استخدمنا بيانات SRTM لحرّة رهط، وLOLA لحافة نوبيل، وCTX لجيزيرو. أجرينا المقارنة الأساسية على شبكة 70 م، وأعدناها عند 50 و100 م. نوافذ المقارنة 8.4 × 8.4 كم.</p><p>تُحسب نقطة المسار متصلة إذا كان خط الرؤية مباشرًا أو كانت وصلتا الترحيل واضحتين. الهوائيات: القاعدة ${BASE_H} م، المركبة ${ROVER_H} م، المحطة ${RELAY_H} م، مع انحناء الكوكب.</p><p>تقيس تجربة الترحيل خط الرؤية الهندسي، ويحتاج تقييم أداء الراديو إلى اختبار مستقل.</p>`,
+    `<p>We used SRTM for Harrat Rahat, LOLA for Nobile Rim 1, and CTX for Jezero. The primary comparison uses a 70 m grid, rechecked at 50 and 100 m. Comparison windows are 8.4 × 8.4 km.</p><p>A route sample is covered when it has a direct line of sight or when both relay links are clear. Antennas: base ${BASE_H} m, rover ${ROVER_H} m, relay ${RELAY_H} m, with planetary curvature.</p><p>The relay experiment measures geometric line of sight. Radio performance requires separate testing.</p>`);
+  const row=(w,ds,src,link,use)=>`<tr><td>${w}</td><td>${ds}</td><td><a href="${link}" target="_blank" rel="noopener">${src}</a></td><td>${use}</td></tr>`;
+  $('dDataIn').innerHTML=`<table><tr><th>${L2('الموقع','Site')}</th><th>${L2('البيانات','Dataset')}</th><th>${L2('المصدر','Source')}</th><th>${L2('الاستخدام','Use')}</th></tr>`+
+    row(L2('حرّة رهط','Harrat Rahat'),'NASA SRTM GL1 v003',L2('مرجع SRTM','SRTM reference'),LINKS.srtm,L2('نحو 30 م. للقطاعات الثلاثة ولمحاكاة المركبة والترحيل.','About 30 m. Three sectors, rover and relay.'))+
+    row(L2('حافة نوبيل 1','Nobile Rim 1'),'NASA LRO / LOLA Site06',L2('صفحة NASA PGDA','NASA PGDA page'),LINKS.lola,L2('5 م. قياسات ليزرية وقيم مستوفاة بينها.','5 m. Laser shots and interpolated values.'))+
+    row(L2('فوهة جيزيرو','Jezero Crater'),'USGS / NASA JPL CTX DEM',L2('صفحة USGS','USGS page'),LINKS.ctx,L2('20 م. لمقارنة التضاريس ومحاكاة الرحلة 52.','20 m. Terrain comparison and Flight 52.'))+
+    row(L2('الرحلة 52','Flight 52'),'NASA MMGIS · JPL',L2('بيان NASA JPL','NASA JPL release'),LINKS.jpl,L2('المسار المنشور ونقاط بيرسيفيرانس ومجسّمات NASA.','Published path, Perseverance waypoints, NASA models.'))+`</table><p>${L2('تباعد الشبكة يصف حجم العينة الأفقية ولا يعبّر عن دقة الارتفاع.','Grid spacing describes the horizontal sample size, not elevation accuracy.')}</p><p><a href="${LINKS.geo}" target="_blank" rel="noopener">${L2('الخريطة الجيولوجية لحرّة رهط (USGS)','Geologic map of Harrat Rahat (USGS)')}</a></p>`;
+  $('dRulesIn').innerHTML=L2(`<p>قارنّا نوافذ بطول ضلع 8.4 كم على شبكة 70 م، وأعدنا الحساب عند 50 و100 م لفحص أثر التباعد.</p><p>نتيجة الترحيل المرجعية من ${d.total} عينة متساوية التباعد. في مشهد الرحلة 52 اختُصر توقيت الحركة، وكُبّرت المجسّمات للعرض، وموضع الاستعادة تقديري.</p>`,
+    `<p>We compared 8.4 km windows on a 70 m grid and rechecked at 50 and 100 m to test the effect of spacing.</p><p>The reference relay result uses ${d.total} equally spaced samples. In the Flight 52 scene the timing is shortened, the models are enlarged for display, and the recovery position is estimated.</p>`); }
 
 /* ================= modes ================= */
-async function setMode(m){ mode=m;
-  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode===m));
-  document.querySelectorAll('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==m);
-  document.body.classList.remove('mini');
-  $('bStory').hidden=m!=='story'; $('bExplore').hidden=m==='story'; $('worldsBar').hidden=m==='story';
-  if(m==='story'){ st.playing=false; await loadSite('mars'); mode==='story'&&enterStory(); }
-  else { const fresh=key!==exploreKey||!st.an||S.ready&&mk.base.hidden; await loadSite(exploreKey); if(fresh) enterExplore(); else updateExplore(false); }
-  if(m==='worlds') renderWorlds(); if(m==='how') drawBulges(); setTimeout(resize,30); }
-document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.mode==='deck') openDeck(); else { closeDeck(); setMode(b.dataset.mode); } }));
+let mode='mission', present=false;
+async function setMode(m){ mode=m; stopStory(); RV.playing=false; $('playBtn').textContent=T('drive'); setPlacing(false); LAB.picking=false; canvas.classList.remove('picking');
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode===m||(b.dataset.mode==='present'&&present)));
+  for(const id of ['missionCard','labCard','resCard','prof','hint','labBar','bottom','verdict']) $(id).hidden=true;
+  hideLines(); hideMarkers(); callout(null); globeOn=false; controls.autoRotate=false; matA.uniforms.covOn.value=0; matA.uniforms.layOn.value=0; refreshSplit();
+  if(F.heli){ F.heli.visible=F.pers.visible=false; } $('tools').hidden=false; $('covBtn').hidden=!(m==='rover'||m==='results');
+  document.body.classList.toggle('has-card',m!=='rover'); if(m!=='mission') document.body.classList.remove('ch4');
+  if(m==='mission'){ $('missionCard').hidden=false; await enterChap(); return; }
+  if(m==='lab'){ $('labCard').hidden=false; $('labBar').hidden=false; renderLabChips(); await labSite(LAB.id); refreshSplit(); return; }
+  await initRover(); await showSite('axis'); if(mode!==m) return; covDirty=true;
+  if(m==='rover'){ $('hint').hidden=false; $('hintT').textContent=L2('محاكاة المركبة','Rover Simulation');
+    $('hintP').textContent=L2('حرّك المركبة على مسار بطول 7.85 كم في حرّة رهط. يتغيّر خط الرؤية بين المركبة والقاعدة مع تغيّر موقعها. اختر موقعًا للمحطة أو ابحث عن أفضل موقع بين 729 موقعًا مرشحًا.','Move the rover along a 7.85 km route in Harrat Rahat. The line of sight to the base changes as the rover moves. Place the relay or search for the best of 729 candidate locations.');
+    $('bottom').hidden=false; $('bottom').classList.add('wide'); $('bRover').hidden=false; $('bStory').hidden=true; $('prof').hidden=!RV.prof; $('profToggle').setAttribute('aria-pressed',RV.prof); }
+  if(m==='results'){ $('resCard').hidden=false; renderResults(); if(!RV.best) RV.best={point:META.demo.relay}; setRelay(RV.best.point); }
+  updateRover(); const c=routeCenter(); frame(cur,m==='results'?[-0.35,0.7,0.6]:[0.2,0.75,0.7],0.95,c); }
+function routeCenter(){ const xs=RV.route.map(p=>p.x).concat([META.demo.relay.x]), ys=RV.route.map(p=>p.y).concat([META.demo.relay.y]); return {x:(Math.min(...xs)+Math.max(...xs))/2,y:(Math.min(...ys)+Math.max(...ys))/2}; }
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{ const m=b.dataset.mode; if(m==='present'){ togglePresent(); return; } if(present) togglePresent(false); setMode(m); });
+$('covBtn').onclick=()=>{ const on=$('covBtn').getAttribute('aria-pressed')!=='true'; $('covBtn').setAttribute('aria-pressed',on); if(on){ covDirty=true; computeCov(); } else matA.uniforms.covOn.value=0; };
+$('exBtn').onclick=async()=>{ ex=ex===1?3:1; $('exBtn').setAttribute('aria-pressed',ex!==1); await rebuild(); };
+function refreshScene(){ if(mode==='mission') updateStory(); if(mode==='rover'||mode==='results') updateRover(); if(mode==='lab') drawLabProfile(); }
 
-/* ================= presentation ================= */
+/* ================= presentation mode ================= */
+const PS=[ ['mission',0],['mission',1],['mission',2],['mission',3],['mission',4],['rover'],['rover','best'],['results'] ]; let pI=0;
+async function pGo(i){ pI=Math.max(0,Math.min(PS.length-1,i)); $('pNum').textContent=`${pI+1} / ${PS.length}`; const [m,a]=PS[pI];
+  if(m==='mission'){ chap=a; await setMode('mission'); } else { await setMode(m); if(a==='best') await findBest(); else if(m==='rover'&&pI===5){ setRelay(null); } } }
+function togglePresent(v){ present=v??!present; document.body.classList.toggle('present',present); $('pbar').hidden=!present; if(!present) closeDeck();
+  document.querySelectorAll('.mode').forEach(b=>{ if(b.dataset.mode==='present') b.setAttribute('aria-selected',present); });
+  if(present) pGo(0); }
+$('pPrev').onclick=()=>deckOpen()?showSlide(deckI-1):pGo(pI-1); $('pNext').onclick=()=>deckOpen()?showSlide(deckI+1):pGo(pI+1);
+$('pReset').onclick=()=>{ closeDeck(); RV.relay=null; RV.best=null; RV.idx=Math.round((RV.pts?.length||262)*0.38); S.t=0; LAB.layer=0; split.on=false; pGo(0); };
 const DECK=Array.from({length:11},(_,i)=>`deck/s-${String(i+1).padStart(2,'0')}.jpg`); let deckI=0;
-function showSlide(i){ deckI=Math.max(0,Math.min(DECK.length-1,i)); $('deckImg').src=DECK[deckI]; $('deckImg').alt=`Slide ${deckI+1}`; $('deckN').textContent=`${deckI+1} / ${DECK.length}`;
-  $('deckPrev').disabled=deckI===0; $('deckNext').disabled=deckI===DECK.length-1; if(deckI+1<DECK.length) new Image().src=DECK[deckI+1]; }
-function openDeck(){ stopStory(); st.playing=false; $('deck').hidden=false; document.body.classList.add('deck-open'); showSlide(deckI);
-  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode==='deck')); }
-function closeDeck(){ if($('deck').hidden) return; $('deck').hidden=true; document.body.classList.remove('deck-open');
-  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode===mode)); }
-$('deckPrev').addEventListener('click',()=>showSlide(deckI-1)); $('deckNext').addEventListener('click',()=>showSlide(deckI+1)); $('deckClose').addEventListener('click',closeDeck);
-$('deckImg').addEventListener('click',e=>{ const r=e.currentTarget.getBoundingClientRect(), left=e.clientX<r.left+r.width/2, rtl=document.documentElement.dir==='rtl'; showSlide(deckI+((left!==rtl)?-1:1)); });
-addEventListener('keydown',e=>{ if($('deck').hidden) return; const rtl=document.documentElement.dir==='rtl';
-  if(e.key==='Escape') closeDeck(); else if(e.key==='ArrowRight') showSlide(deckI+(rtl?-1:1)); else if(e.key==='ArrowLeft') showSlide(deckI+(rtl?1:-1)); else if(e.key===' '||e.key==='PageDown') { e.preventDefault(); showSlide(deckI+1); } else if(e.key==='PageUp') showSlide(deckI-1); });
+const deckOpen=()=>!$('deck').hidden;
+function showSlide(i){ deckI=Math.max(0,Math.min(DECK.length-1,i)); $('deckImg').src=DECK[deckI]; $('deckImg').alt=`Slide ${deckI+1}`; $('pNum').textContent=`${deckI+1} / ${DECK.length}`; }
+function openDeck(){ stopStory(); RV.playing=false; $('deck').hidden=false; $('pSlides').setAttribute('aria-pressed',true); showSlide(deckI); }
+function closeDeck(){ $('deck').hidden=true; $('pSlides').setAttribute('aria-pressed',false); $('pNum').textContent=`${pI+1} / ${PS.length}`; }
+$('pSlides').onclick=()=>deckOpen()?closeDeck():openDeck();
 let swX=null; $('deckStage').addEventListener('pointerdown',e=>{ swX=e.clientX; }); $('deckStage').addEventListener('pointerup',e=>{ if(swX==null) return; const d=e.clientX-swX; swX=null; if(Math.abs(d)>50){ const rtl=document.documentElement.dir==='rtl'; showSlide(deckI+((d<0)!==rtl?1:-1)); } });
-
-/* ================= worlds pane ================= */
-const worldRes={}; let sensH=3; const SC={rahat:'#F5F7FC',moon:'#8966E8',mars:'#8A9AB3'};
-function renderWorlds(){ const box=$('wcards'); box.innerHTML='';
-  for(const k of ['rahat','moon','mars']){ const cfg=SITES[k], r=worldRes[k]; const el=document.createElement('button'); el.type='button'; el.className='wcard';
-    el.innerHTML=`<div class="ph" style="background-image:url(${cfg.tex})"></div><div><div class="sm">${cfg.world[lang]}</div><h3>${cfg.name[lang]}</h3>
-      <div class="big">${r?pct(r.direct):'…'}</div><div class="sm">${r?L2(`محجوب. محطة واحدة تعيد <b>${pct(r.recovered)}</b> منه.`,`blocked. One relay wins back <b>${pct(r.recovered)}</b> of it.`):L2('نحسب…','Computing…')}</div></div>`;
-    el.addEventListener('click',()=>{ exploreKey=k; document.querySelectorAll('.wbtn').forEach(x=>x.setAttribute('aria-selected',x.dataset.site===k)); setMode('explore'); }); box.appendChild(el); }
-  renderSens(); }
-function sensAt(r,h){ const a=r.sens; for(let i=0;i<a.length-1;i++) if(h<=a[i+1][0]){ const f=(h-a[i][0])/(a[i+1][0]-a[i][0]); return a[i][1]+(a[i+1][1]-a[i][1])*f; } return a[a.length-1][1]; }
-function renderSens(){ const Wd=340,Ht=200,l=36,r=12,t=14,b=26, X=h=>l+(h-2)/8*(Wd-l-r), Y=v=>t+(1-v/0.7)*(Ht-t-b);
-  let s=`<g font-family='${FONT}' font-size="11" fill="#8A9AB3">`;
-  for(const v of [0,0.2,0.4,0.6]) s+=`<line x1="${l}" x2="${Wd-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(255,255,255,.08)"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end">${v*100}%</text>`;
-  for(const h of [2,4,6,8,10]) s+=`<text x="${X(h)}" y="${Ht-8}" text-anchor="middle">${h} m</text>`; s+='</g>';
-  s+=`<line x1="${X(sensH)}" x2="${X(sensH)}" y1="${t-4}" y2="${Ht-b}" stroke="#C9B8F5" stroke-width="2"/>`;
-  for(const k of ['rahat','moon','mars']){ const rr=worldRes[k]; if(!rr) continue;
-    s+=`<path d="${rr.sens.map(([h,v],i)=>`${i?'L':'M'}${X(h).toFixed(1)},${Y(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${SC[k]}" stroke-width="2.6" stroke-linecap="round"/><circle cx="${X(sensH)}" cy="${Y(sensAt(rr,sensH))}" r="5" fill="${SC[k]}" stroke="#121A2D" stroke-width="2.5"/>`; }
-  $('sens').innerHTML=s;
-  $('sensRead').innerHTML=['rahat','moon','mars'].map(k=>`<div><b style="color:${SC[k]}">${worldRes[k]?pct(sensAt(worldRes[k],sensH)):'…'}</b><span>${SITES[k].name[lang]}</span></div>`).join(''); }
-(()=>{ const svg=$('sens'); let down=false; const set=e=>{ const r=svg.getBoundingClientRect(), x=(e.clientX-r.left)/r.width*340; sensH=Math.min(10,Math.max(2,2+(x-36)/(340-48)*8)); renderSens(); };
-  svg.addEventListener('pointerdown',e=>{ down=true; svg.setPointerCapture(e.pointerId); set(e); }); svg.addEventListener('pointermove',e=>{ if(down) set(e); }); svg.addEventListener('pointerup',()=>down=false); })();
-async function computeWorlds(){ for(const k of ['rahat','moon','mars']){ const t=await loadTerrain(k), a=analyse(t,3,null), rel=await bestRelay(t,3), a2=analyse(t,3,rel);
-  const sens=[]; for(let h=2;h<=10.001;h+=0.5) sens.push([h,analyse(t,h,null).blocked]); worldRes[k]={direct:a.blocked,recovered:a2.recovered,sens}; if(mode==='worlds') renderWorlds(); await new Promise(r=>setTimeout(r,0)); } }
-/* ================= how pane ================= */
-function drawBulges(){ const D=+$('dR').value*1000; $('dOut').textContent=(D/1000).toFixed(1)+' km';
-  const ws=[['rahat',6371000,'الأرض','Earth'],['moon',1737400,'القمر','Moon'],['mars',3396190,'المريخ','Mars']];
-  $('bulges').innerHTML=ws.map(([k,R,a,e])=>{ const bm=D*D/(8*R); return `<div class="bulge"><span>${L2(a,e)}</span><div class="b"><i style="width:${Math.min(100,bm/8*100)}%;background:${SC[k]}"></i></div><output class="num">${bm<1?(bm*100).toFixed(0)+' cm':bm.toFixed(2)+' m'}</output></div>`; }).join('')
-   + `<p>${L2('هذا ارتفاع الأرض في منتصف المسار فوق الخط المستقيم. بهوائيين 3 م و1.5 م يقطع الأفق وحده الإشارة بعد','This is how far the ground rises above a straight line at mid-path. With 3 m and 1.5 m antennas the horizon alone cuts the link beyond')} <b class="num">${ws.map(([k,R])=>((Math.sqrt(2*R*3)+Math.sqrt(2*R*1.5))/1000).toFixed(1)+' km').join(' · ')}</b> ${L2('على الأرض والقمر والمريخ.','on Earth, the Moon and Mars.')}</p>`; }
-$('dR').addEventListener('input',drawBulges);
+addEventListener('keydown',e=>{ if(e.target.closest&&e.target.closest('input,select,textarea')) return; const rtl=document.documentElement.dir==='rtl';
+  if(e.key==='Escape'){ if(deckOpen()) closeDeck(); else if(present) togglePresent(false); return; }
+  const fw=e.key===(rtl?'ArrowLeft':'ArrowRight')||e.key===' '||e.key==='PageDown', bw=e.key===(rtl?'ArrowRight':'ArrowLeft')||e.key==='PageUp';
+  if(!fw&&!bw) return; if(deckOpen()){ e.preventDefault(); showSlide(deckI+(fw?1:-1)); } else if(present){ e.preventDefault(); pGo(pI+(fw?1:-1)); }
+  else if(mode==='mission'){ e.preventDefault(); goChap(chap+(fw?1:-1)); } });
 
 /* ================= loop ================= */
-function resize(){ const w=host.clientWidth,h=host.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h;
-  const bb=$('bottom').getBoundingClientRect(); const ox=0, oy=Math.round(Math.max(0,h-bb.top-60)*0.45);
-  camera.setViewOffset(w,h,ox,oy,w,h); camera.updateProjectionMatrix(); ALL_LINES.forEach(l=>l.material.resolution.set(w,h)); dirty=true; if(tr&&mode!=='story'&&st.an) updateExplore(false); }
-new ResizeObserver(resize).observe(host);
-controls.addEventListener('change',()=>dirty=true);
-renderer.setAnimationLoop(t=>{ if(!tr) return;
-  if(fly){ const f=Math.min(1,(t-fly.t0)/fly.ms), e=f<.5?4*f*f*f:1-Math.pow(-2*f+2,3)/2; controls.target.lerpVectors(fly.a.t,fly.b.t,e); camera.position.lerpVectors(fly.a.p,fly.b.p,e); if(f>=1) fly=null; dirty=true; }
+function resize(){ const w=host.clientWidth,h=host.clientHeight; renderer.setSize(w,h,false); camera.aspect=(split.on&&mode==='lab'?w/2:w)/h; camera.updateProjectionMatrix();
+  ALL_LINES.forEach(l=>l.material.resolution.set(split.on&&mode==='lab'?w/2:w,h)); if(mode==='rover') { drawStrip(); updateRover(); } }
+addEventListener('resize',resize);
+function dirty(){}
+let last=performance.now(), acc=0;
+function loop(now){ requestAnimationFrame(loop); const dt=Math.min(0.05,(now-last)/1000); last=now;
+  if(fly){ const k=Math.min(1,(now-fly.t0)/fly.ms), e=ease(k); controls.target.lerpVectors(fly.a.t,fly.b.t,e); camera.position.lerpVectors(fly.a.p,fly.b.p,e); if(k>=1) fly=null; }
   controls.update();
-  if(st.playing&&mode!=='story'&&t-lastT>45){ lastT=t; if(st.idx<NROUTE-1){ st.idx++; $('roverR').value=st.idx; updateExplore(false); } else { st.playing=false; playBtn.textContent=T('drive'); } }
-  if(dirty){ renderer.render(scene,camera); updateMarkers(); dirty=false; } });
-hooks.push(()=>{ setTimeout(resize,30); playBtn.textContent=st.playing?T('pause'):T('drive'); setPlacing(st.placing); $('bestBtn').textContent=T('best'); $('tPlay').textContent=S.playing?T('tPause'):T('tPlay');
-  if(mode==='story') updateStory(); else if(st.an){ updateExplore(false); updateScore(); } if(mode==='worlds') renderWorlds(); if(mode==='how') drawBulges(); });
-applyLang();
-setMode('story').then(()=>{ setTimeout(()=>{ if(mode==='story'&&$('deck').hidden&&!S.playing){ setT(0); playStory(); } },900); computeWorlds(); }).catch(e=>{ $('loading').textContent='Data failed to load: '+e.message; console.error(e); });
+  if(S.playing&&mode==='mission'&&chap===4){ S.t+=dt/16; if(S.t>=1){ S.t=1; stopStory(); } updateStory(); }
+  if(RV.playing&&mode==='rover'){ acc+=dt*14; if(acc>=1){ RV.idx+=Math.floor(acc); acc%=1; if(RV.idx>=RV.pts.length-1){ RV.idx=RV.pts.length-1; RV.playing=false; $('playBtn').textContent=T('drive'); } updateRover(); } }
+  if(F.rot.length&&mode==='mission'&&chap===4&&sLast&&sLast.alt>0.2) F.rot.forEach((r,i)=>r.rotateOnWorldAxis(new THREE.Vector3(1,0,0),dt*17*(i?-1:1)));
+  if(globeOn&&globe){ globe.rotation.y+=dt*0.02; P3.pin=llDir(...RAHAT_LL).applyAxisAngle(new THREE.Vector3(0,1,0),globe.rotation.y).multiplyScalar(GR*1.01);
+    tmp.copy(P3.pin).sub(camera.position); MK.pin.style.opacity=tmp.dot(P3.pin)<0?1:0; }
+  const az=Math.atan2(camera.position.x-controls.target.x,camera.position.z-controls.target.z); $('northI').style.transform=`rotate(${az}rad)`;
+  updateMarkers();
+  const w=host.clientWidth,h=host.clientHeight;
+  if(globeOn){ renderer.setScissorTest(false); renderer.setViewport(0,0,w,h); renderer.render(gScene,camera); return; }
+  if(split.on&&mode==='lab'&&objB){ renderer.setScissorTest(true); renderer.setScissor(0,0,w/2,h); renderer.setViewport(0,0,w/2,h); renderer.render(scene,camera);
+    renderer.setScissor(w/2,0,w/2,h); renderer.setViewport(w/2,0,w/2,h); renderer.render(sceneB,camera); renderer.setScissorTest(false); }
+  else { renderer.setViewport(0,0,w,h); renderer.render(scene,camera); } }
+
+/* ================= start ================= */
+hooks.push(()=>{ if(mode==='mission') renderChap(); if(mode==='lab'){ renderLabChips(); renderLab(); } if(mode==='results') renderResults(); refreshScene();
+  if(mode==='rover'){ $('hintT').textContent=L2('محاكاة المركبة','Rover Simulation'); $('hintP').textContent=L2('حرّك المركبة على مسار بطول 7.85 كم في حرّة رهط. يتغيّر خط الرؤية بين المركبة والقاعدة مع تغيّر موقعها. اختر موقعًا للمحطة أو ابحث عن أفضل موقع بين 729 موقعًا مرشحًا.','Move the rover along a 7.85 km route in Harrat Rahat. The line of sight to the base changes as the rover moves. Place the relay or search for the best of 729 candidate locations.'); }
+  $('playBtn').textContent=RV.playing?T('stop'):T('drive'); $('tPlay').textContent=S.playing?T('tPause'):T('tPlay'); setPlacing(RV.placing); if(deckOpen()) showSlide(deckI); else if(present) $('pNum').textContent=`${pI+1} / ${PS.length}`; });
+applyLang(); resize(); camera.position.set(0,0,GR*4); requestAnimationFrame(loop);
+await setMode('mission');
+getGrid('axis'); getGrid('f52'); initRover();
+window.__atlas={RV,META,S,F,LAB,split,get mode(){return mode},setMode,goChap,findBest,pGo,togglePresent,get cur(){return cur}};
 </script>
 
-</body>
-</html>
+</body></html>
