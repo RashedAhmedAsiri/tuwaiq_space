@@ -409,9 +409,9 @@ body.deck-open .bottom,body.deck-open .tools,body.deck-open .worlds-bar,body.dec
     <div class="deck-stage" id="deckStage"><img id="deckImg" alt=""></div>
     <div class="deck-bar glass">
       <button class="btn" type="button" id="deckPrev" aria-label="Previous slide"><span class="chev">‹</span></button>
-      <span class="num" id="deckN">1 / 11</span>
+      <span class="num" id="deckN">1 / 7</span>
       <button class="btn" type="button" id="deckNext" aria-label="Next slide"><span class="chev">›</span></button>
-      <a class="btn" id="deckPdf" href="deck/Rahat_Atlas.pdf" download data-i18n="deckPdf">تحميل PDF</a>
+      <a class="btn" id="deckPdf" href="submission/Rahat_Atlas_Demo.pdf" download data-i18n="deckPdf">تحميل PDF</a>
       <button class="btn" type="button" id="deckFs" data-i18n="deckFs">⛶ ملء الشاشة</button>
       <button class="btn" type="button" id="deckClose" data-i18n="deckClose">العودة إلى الخريطة</button>
     </div>
@@ -860,7 +860,7 @@ document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{ i
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeSrc(); });
 
 /* ================= presentation ================= */
-const DECK=Array.from({length:11},(_,i)=>`deck/s-${String(i+1).padStart(2,'0')}.jpg`); let deckI=0;
+const DECK=Array.from({length:7},(_,i)=>`deck/s-${String(i+1).padStart(2,'0')}.jpg`); let deckI=0;
 function showSlide(i){ deckI=Math.max(0,Math.min(DECK.length-1,i)); $('deckImg').src=DECK[deckI]; $('deckImg').alt=`Slide ${deckI+1}`; $('deckN').textContent=`${deckI+1} / ${DECK.length}`;
   $('deckPrev').disabled=deckI===0; $('deckNext').disabled=deckI===DECK.length-1; if(deckI+1<DECK.length) new Image().src=DECK[deckI+1]; }
 function openDeck(){ stopStory(); st.playing=false; $('deck').hidden=false; document.body.classList.add('deck-open'); showSlide(deckI);

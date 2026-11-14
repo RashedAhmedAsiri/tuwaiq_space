@@ -15,7 +15,7 @@ Rahat Relay is a full-screen 3D map that shows where terrain cuts a rover's radi
 
 - **Ingenuity story**: replay the 63 days in 2023 when a hill blocked the link between Ingenuity and Perseverance. The positions are illustrative; the dates and numbers come from JPL.
 - **Map**: drive the rover along the route, raise the base antenna, place a relay, then compare your spot with the best of 729 candidates. On Harrat Rahat the 7.85 km route has 262 samples: 22.1% see the base directly (58), and 93.1% are connected with the best relay (244).
-- **Presentation**: the team's slides, with full screen (button or F key), arrow keys, swipe and a PDF download.
+- **Presentation**: the team's 7-slide competition deck, with full screen (button or F key), arrow keys, swipe and a PDF download.
 - **Sources**: every dataset with its link, plus the method.
 
 The page is in Arabic by default, with an English toggle.
@@ -42,7 +42,8 @@ python3 -m http.server 8000
 - `data/atlas.json`: site metadata and the relay experiment
 - `data/mars_h.txt`: the HiRISE grid for the Ingenuity story
 - `data/*_tex.jpg`: surface textures
-- `deck/`: the presentation slides and PDF
+- `deck/`: the presentation slides as images
+- `submission/`: the competition deck as PDF and PPTX
 
 ## Sources
 
