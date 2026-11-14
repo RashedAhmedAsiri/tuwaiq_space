@@ -45,6 +45,25 @@ python3 -m http.server 8000
 - `deck/`: the presentation slides as images
 - `submission/`: the competition deck as PDF and PPTX
 
+## Licenses
+
+This project's code is released under the [Apache License 2.0](LICENSE). The data and libraries it uses keep their own licenses:
+
+| Item | Use | License |
+|---|---|---|
+| NASA SRTM GL1 v003 | Harrat Rahat elevation | Public domain (NASA), no reuse restrictions |
+| Sentinel-2 L2A | Harrat Rahat image | Free and open Copernicus data. Contains modified Copernicus Sentinel data 2025 |
+| NASA LRO / LOLA Site06 | Nobile Rim 1 elevation | Public domain (NASA GSFC) |
+| USGS / NASA JPL Mars 2020 CTX DEM | Jezero elevation | Public domain (USGS / NASA) |
+| HiRISE DTM and ortho image | Ingenuity story terrain | Free to use with credit: NASA/JPL/University of Arizona |
+| NASA JPL Flight 52 release | Story dates and numbers | NASA/JPL image use policy, free with credit |
+| USGS geologic map of Harrat Rahat (SIM 3428) | Geologic context | Public domain (USGS) |
+| three.js r160 (in `vendor.js`) | 3D engine | MIT |
+| IBM Plex Sans Arabic | The site's font, from Google Fonts | SIL Open Font License 1.1 |
+| Tuwaiq SPACE logo | Team identity | Owned by the team |
+
+No item has an unclear license. The Moon and Mars surfaces on the map are shaded from the elevation models themselves.
+
 ## Sources
 
 - SRTM GL1: https://portal.opentopography.org/raster?opentopoID=OTSRTM.082016.4326.1
