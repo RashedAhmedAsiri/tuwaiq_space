@@ -65,7 +65,7 @@ npm test   # Node.js 20+: engine tests and exact regeneration of the results
 - `data/*_tex.jpg`: surface textures
 - `deck/`: the presentation slides as images (`s-*` full slides, `b-*` backgrounds that the Presentation tab builds each slide on)
 - `submission/`: the competition deck as PDF and PPTX, in Arabic and English (`_EN`)
-- `brand/`: the NASA Space Apps Challenge and Arab Open University logos, used on the title slide of the Arabic deck to note participation. They belong to NASA and the Arab Open University.
+- `brand/`: the NASA Space Apps Challenge and Arab Open University logos, used on the title slide of both decks to note participation. They belong to NASA and the Arab Open University.
 
 ## Licenses
 
