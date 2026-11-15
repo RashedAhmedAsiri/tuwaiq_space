@@ -2,7 +2,7 @@ import { cp, mkdir, writeFile } from 'node:fs/promises';
 
 const project = new URL('../', import.meta.url);
 const output = new URL('dist/', project);
-const assets = ['.nojekyll','LICENSE','vendor.js','logo_full.png','mission/','data/atlas.json','data/axis.txt',
+const assets = ['.nojekyll','LICENSE','THIRD-PARTY-THREE-LICENSE.txt','vendor.js','logo_full.png','mission/','data/atlas.json','data/axis.txt',
   'data/jezero.txt','data/mission/'];
 await mkdir(new URL('data/',output),{recursive:true});
 for (const name of assets) {
