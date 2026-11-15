@@ -28,7 +28,7 @@ On the Al Anahi primary route (30 m grid, antennas 6 / 2 / 8 m), one relay cuts 
 - **Ingenuity story**: replay the 63 days in 2023 when a hill blocked the link between Ingenuity and Perseverance. The positions are illustrative; the dates and numbers come from JPL.
 - **Map**: a free exploration of the Rahat axis sector. Drive the rover, raise the base antenna, place a relay, then compare your spot with the best of 729 candidates. Its numbers change with your choices.
 - **Results**: the before-relay comparison, the relay result in Al Anahi and the 11-direction stress test.
-- **Presentation**: the team's 7-slide competition deck. Slides animate in, full screen fills the display, and presentation clickers work (PageDown/PageUp, arrows, Space, Enter, B or period to blank, F5 to start). PDF download included.
+- **Presentation**: the team's 7-slide competition deck. Slides animate in, full screen fills the display, and presentation clickers work (PageDown/PageUp, arrows, Space, Enter, B or period to blank, F5 to start). PDF and PPTX downloads included, in Arabic or English to match the site language.
 - **Sources**: every dataset with its link, plus the method.
 
 The page is in Arabic by default, with an English toggle.
@@ -64,7 +64,7 @@ npm test   # Node.js 20+: engine tests and exact regeneration of the results
 - `data/mars_h.txt`: the HiRISE grid for the Ingenuity story
 - `data/*_tex.jpg`: surface textures
 - `deck/`: the presentation slides as images (`s-*` full slides, `b-*` backgrounds that the Presentation tab builds each slide on)
-- `submission/`: the competition deck as PDF and PPTX
+- `submission/`: the competition deck as PDF and PPTX, in Arabic and English (`_EN`)
 
 ## Licenses
 
