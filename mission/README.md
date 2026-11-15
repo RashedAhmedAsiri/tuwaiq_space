@@ -13,7 +13,7 @@ npm test
 node mission/recalculate.mjs
 ```
 
-Open the site and choose the Interactive mission tab (or go to `/#mission`). The server prints the active IPv4 addresses. On the same Wi-Fi, use the address of the active Wi-Fi adapter with port 4173. If Windows shows a firewall prompt, grant private-network access for the local server only. Some guest networks isolate devices.
+Open the site and choose the Results tab. The server prints the active IPv4 addresses. On the same Wi-Fi, use the address of the active Wi-Fi adapter with port 4173. If Windows shows a firewall prompt, grant private-network access for the local server only. Some guest networks isolate devices.
 
 `npm test` checks flat terrain and curvature, a known ridge, missing elevation, failure of either relay hop, and exact regeneration of [all results](../data/mission/results.json). The browser recomputes route states and nominal results using the same engine as the generator. The [protocol](../data/mission/protocol.json) records both routes, input hashes and all numerical settings. The recorded protocol precedes scoring in branch commit `58b9248`.
 

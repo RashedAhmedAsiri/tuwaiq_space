@@ -17,9 +17,9 @@ Can a particular Saudi rover test reproduce the geometry of a Moon or Mars commu
 
 Across 11 fixed-base route directions, Al Anahi matches Nobile on five directions at both grid resolutions; the Rahat axis matches Jezero on one. In Al Anahi, the training-selected relay cuts the worst longest blocked segment on six held-out directions from **7.49 km to 4.70 km**. Al Labah's own relay reduces that sector's worst gap further, but Al Labah did not match either space site under the fixed limits. In the axis sector, the multi-route optimizer improves its training result and loses to the primary-route relay in validation. See the [protocol, per-sector decisions and limitations](mission/ROUTE-ROBUSTNESS.md).
 
-## Judging mission
+## Mission analysis
 
-The bilingual mission (the **Interactive mission** tab, https://rashedahmedasiri.github.io/tuwaiq_space/#mission) uses the same local terrain archive and adds route-matched comparison of Nobile Rim and Jezero, a verification route, a relay sensitivity comparison, and inspectable line-of-sight profiles. See [the mission method](mission/README.md) to reproduce the results.
+The mission analysis uses the same local terrain archive and adds route-matched comparison of Nobile Rim and Jezero, a verification route and a relay sensitivity comparison. Its results are in the **Results** tab and in [results.json](data/mission/results.json). See [the mission method](mission/README.md) to reproduce them.
 
 On the Al Anahi primary route (30 m grid, antennas 6 / 2 / 8 m), one relay cuts the longest blocked span from **6,918.8 m to 2,246.4 m** and raises the clear share of the route from **8.4% to 53.8%**. Across six height and grid assumptions the longest gap stays between 2,036.7 and 2,366.2 m.
 
@@ -27,7 +27,6 @@ On the Al Anahi primary route (30 m grid, antennas 6 / 2 / 8 m), one relay cuts 
 
 - **Ingenuity story**: replay the 63 days in 2023 when a hill blocked the link between Ingenuity and Perseverance. The positions are illustrative; the dates and numbers come from JPL.
 - **Map**: a free exploration of the Rahat axis sector. Drive the rover, raise the base antenna, place a relay, then compare your spot with the best of 729 candidates. Its numbers change with your choices.
-- **Interactive mission**: the judging mission with the matched-route results, inside the site (code in [mission/](mission/)).
 - **Results**: the before-relay comparison, the relay result in Al Anahi and the 11-direction stress test.
 - **Presentation**: the team's 7-slide competition deck. Slides animate in, full screen fills the display, and presentation clickers work (PageDown/PageUp, arrows, Space, Enter, B or period to blank, F5 to start). PDF download included.
 - **Sources**: every dataset with its link, plus the method.
@@ -61,7 +60,7 @@ npm test   # Node.js 20+: engine tests and exact regeneration of the results
 - `data/axis.txt`, `nobile.txt`, `jezero.txt`: elevation grids, gzip-compressed Uint16 at 0.1 m above each grid's base, stored as base64
 - `data/atlas.json`: site metadata and the relay experiment
 - `data/mission/`: the mission protocol, compact grids for Al Labah, Al Anahi and Nobile (5 m), and all computed results
-- `mission/`: the mission page and the line-of-sight engine; `npm test` checks it and reproduces every result
+- `mission/`: the line-of-sight engine; `npm test` checks it and reproduces every result
 - `data/mars_h.txt`: the HiRISE grid for the Ingenuity story
 - `data/*_tex.jpg`: surface textures
 - `deck/`: the presentation slides as images (`s-*` full slides, `b-*` backgrounds that the Presentation tab builds each slide on)
