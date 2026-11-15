@@ -19,7 +19,7 @@ Across 11 fixed-base route directions, Al Anahi matches Nobile on five direction
 
 ## Judging mission
 
-The bilingual mission at [mission/](mission/) (live: https://rashedahmedasiri.github.io/tuwaiq_space/mission/) uses the same local terrain archive and adds route-matched comparison of Nobile Rim and Jezero, a verification route, a relay sensitivity comparison, and inspectable line-of-sight profiles. See [the mission method](mission/README.md) to reproduce the results.
+The bilingual mission (the **Interactive mission** tab, https://rashedahmedasiri.github.io/tuwaiq_space/#mission) uses the same local terrain archive and adds route-matched comparison of Nobile Rim and Jezero, a verification route, a relay sensitivity comparison, and inspectable line-of-sight profiles. See [the mission method](mission/README.md) to reproduce the results.
 
 On the Al Anahi primary route (30 m grid, antennas 6 / 2 / 8 m), one relay cuts the longest blocked span from **6,918.8 m to 2,246.4 m** and raises the clear share of the route from **8.4% to 53.8%**. Across six height and grid assumptions the longest gap stays between 2,036.7 and 2,366.2 m.
 
@@ -27,7 +27,7 @@ On the Al Anahi primary route (30 m grid, antennas 6 / 2 / 8 m), one relay cuts 
 
 - **Ingenuity story**: replay the 63 days in 2023 when a hill blocked the link between Ingenuity and Perseverance. The positions are illustrative; the dates and numbers come from JPL.
 - **Map**: a free exploration of the Rahat axis sector. Drive the rover, raise the base antenna, place a relay, then compare your spot with the best of 729 candidates. Its numbers change with your choices.
-- **Interactive mission**: opens [mission/](mission/), the judging mission with the matched-route results.
+- **Interactive mission**: the judging mission with the matched-route results, inside the site (code in [mission/](mission/)).
 - **Results**: the before-relay comparison, the relay result in Al Anahi and the 11-direction stress test.
 - **Presentation**: the team's 7-slide competition deck, with full screen (button or F key), arrow keys, swipe and a PDF download.
 - **Sources**: every dataset with its link, plus the method.
@@ -45,7 +45,7 @@ The page is in Arabic by default, with an English toggle.
 
 ```sh
 python3 -m http.server 8000
-# then open http://localhost:8000 and http://localhost:8000/mission/
+# then open http://localhost:8000
 npm test   # Node.js 20+: engine tests and exact regeneration of the results
 ```
 
@@ -78,7 +78,6 @@ This project's code is released under the [Apache License 2.0](LICENSE). The dat
 | USGS geologic map of Harrat Rahat (SIM 3428) | Geologic context | Public domain (USGS) |
 | three.js r160 (in `vendor.js`) | 3D engine | MIT |
 | IBM Plex Sans Arabic | The site's font, from Google Fonts | SIL Open Font License 1.1 |
-| Thmanyah Sans (optional) | Mission page font, only if installed on the presenting computer; not distributed | [Thmanyah license](https://font.thmanyah.com/) |
 | Tuwaiq SPACE logo | Team identity | Owned by the team |
 
 No item has an unclear license. The Moon and Mars surfaces on the map are shaded from the elevation models themselves.

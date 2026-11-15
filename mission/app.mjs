@@ -18,7 +18,7 @@ let protocol, report, setup;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const loadGrid = new Map();
 const calculations = new Map();
-const palette = { [CLEAR]:'#72e5b3', [BLOCKED]:'#ff9d87', [UNKNOWN]:'#a8acbf' };
+const palette = { [CLEAR]:'#F5F7FC', [BLOCKED]:'#8966E8', [UNKNOWN]:'#5B6780' };
 const states = () => ({[CLEAR]:t().clear,[BLOCKED]:t().blocked,[UNKNOWN]:t().unknown});
 const t = () => copy[lang];
 const $ = name => document.querySelector('#' + name);
@@ -103,9 +103,9 @@ function template() {
     <details class="section" id="sensitivity"><summary>${l.relayTable}</summary><p class="muted">${l.mappedDate} ${l.search}</p>
       <div id="relay-table" class="scroll"></div><p id="objectives"></p></details>
     <details class="section"><summary>${l.story}</summary><p>${l.storyText}</p>
-      <a href="https://www.jpl.nasa.gov/news/nasas-ingenuity-mars-helicopter-phones-home/">${l.jpl}</a></details>
-    <section class="section sources"><h2>${l.assets}</h2><p><a href="https://github.com/RashedAhmedAsiri/tuwaiq_space/blob/main/mission/README.md">${l.method}</a> · <a href="https://github.com/RashedAhmedAsiri/tuwaiq_space/blob/main/mission/ROUTE-ROBUSTNESS.md">${l.sweep}</a> · <a href="../#sources">${l.licenses}</a> ·
-      <a href="../data/mission/results.json">${l.raw}</a></p></section></main>`;
+      <a target="_blank" rel="noopener" href="https://www.jpl.nasa.gov/news/nasas-ingenuity-mars-helicopter-phones-home/">${l.jpl}</a></details>
+    <section class="section sources"><h2>${l.assets}</h2><p><a target="_blank" rel="noopener" href="https://github.com/RashedAhmedAsiri/tuwaiq_space/blob/main/mission/README.md">${l.method}</a> · <a target="_blank" rel="noopener" href="https://github.com/RashedAhmedAsiri/tuwaiq_space/blob/main/mission/ROUTE-ROBUSTNESS.md">${l.sweep}</a> · <a target="_top" href="../#sources">${l.licenses}</a> ·
+      <a target="_blank" href="../data/mission/results.json">${l.raw}</a></p></section></main>`;
   if(webgl)webgl.dispose();
   try { webgl=createMap($('terrain-map')); } catch { webgl=null; $('terrain-map').hidden=true; }
   $('explanation').hidden=!detailsOpen;
@@ -166,13 +166,13 @@ function profileHtml(name, profile) {
     ? [d+(valid?'L':'M')+sx(p.t).toFixed(2)+','+sy(p[key]).toFixed(2),true]:[d,false],['',false])[0];
   const worst=points.find(p=>p.t===ray.at);
   const point=worst&&Number.isFinite(worst.z+worst.sight)
-    ? `<line x1="${sx(ray.at)}" x2="${sx(ray.at)}" y1="${sy(worst.z)}" y2="${sy(worst.sight)}" stroke="#ffddab" stroke-width="3"/><circle cx="${sx(ray.at)}" cy="${sy(worst.z)}" r="4" fill="#ffddab"/>`:'';
+    ? `<line x1="${sx(ray.at)}" x2="${sx(ray.at)}" y1="${sy(worst.z)}" y2="${sy(worst.sight)}" stroke="#C9B8F5" stroke-width="3"/><circle cx="${sx(ray.at)}" cy="${sy(worst.z)}" r="4" fill="#C9B8F5"/>`:'';
   return `<div class="profile-row"><p><strong>${name}</strong> · ${states()[ray.state]}${ray.state===UNKNOWN?'':' · '+l.clearance+' '+meters(ray.clearance,1)}</p>
     <svg dir="ltr" viewBox="0 0 550 122" role="img" aria-label="${name} · ${l.elevation} · ${l.along}">
-      <path d="M50 10V96H510" stroke="#777896" fill="none"/>
+      <path d="M50 10V96H510" stroke="#34425B" fill="none"/>
       ${valid.length ? `<text x="46" y="23" text-anchor="end">${num(max)}</text><text x="46" y="96" text-anchor="end">${num(min)}</text>` : ''}
       <text x="50" y="112">0</text><text x="510" y="112" text-anchor="end">${num(length)} m</text>
-      <path d="${line('z')}" fill="none" stroke="#d1b694" stroke-width="2.5"/>
+      <path d="${line('z')}" fill="none" stroke="#8A9AB3" stroke-width="2.5"/>
       <path d="${line('sight')}" fill="none" stroke="${palette[ray.state]}" stroke-width="2"/>${point}</svg></div>`;
 }
 
@@ -182,7 +182,7 @@ function fallbackMap(g,m,p,witness) {
   const pin=(q,color)=>q?`<circle cx="${q.x/g.size*320}" cy="${q.y/g.size*310}" r="4" fill="${color}"/>`:'';
   return `<svg class="fallback-map" viewBox="0 0 320 310" role="img" aria-label="${t().noMap}">
     ${m.states.map((s,i)=>`<polyline points="${segment(i)}" stroke="${palette[s]}" stroke-width="3" fill="none"/>`).join('')}
-    ${pin(setup.base,'#f5efff')}${pin(p,'#cdb6fe')}${pin(witness,'#ffd7a0')}</svg>`;
+    ${pin(setup.base,'#F5F7FC')}${pin(p,'#C9B8F5')}${pin(witness,'#B5C1D4')}</svg>`;
 }
 
 async function refresh() {

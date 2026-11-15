@@ -1,7 +1,12 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101320"><title>Rahat Relay · Tuwaiq Space</title>
+<meta name="theme-color" content="#0B1020"><title>Rahat Relay · Tuwaiq Space</title>
+<script>
+// The mission lives inside the main site's "Interactive mission" tab. Opened on its own, go there.
+if(!/[?&]embed=1/.test(location.search)) location.replace('../#mission');
+else document.documentElement.classList.add('embed');
+</script>
 <link rel="icon" href="../logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">

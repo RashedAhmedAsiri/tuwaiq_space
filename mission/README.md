@@ -13,13 +13,13 @@ npm test
 node mission/recalculate.mjs
 ```
 
-Open [the mission](http://localhost:4173/mission/). English is also available at `/mission/?lang=en`. The server prints the active IPv4 addresses. On the same Wi-Fi, use the address of the active Wi-Fi adapter with port 4173. If Windows shows a firewall prompt, grant private-network access for the local server only. Some guest networks isolate devices.
+Open the site and choose the Interactive mission tab (or go to `/#mission`). The server prints the active IPv4 addresses. On the same Wi-Fi, use the address of the active Wi-Fi adapter with port 4173. If Windows shows a firewall prompt, grant private-network access for the local server only. Some guest networks isolate devices.
 
 `npm test` checks flat terrain and curvature, a known ridge, missing elevation, failure of either relay hop, and exact regeneration of [all results](../data/mission/results.json). The browser recomputes route states and nominal results using the same engine as the generator. The [protocol](../data/mission/protocol.json) records both routes, input hashes and all numerical settings. The recorded protocol precedes scoring in branch commit `58b9248`.
 
 ## Type and assets
 
-The mission uses original system-installed Thmanyah Sans Regular, Medium and Bold, and Thmanyah Serif Display Medium where available. Install the original fonts from the team’s archive on the presentation PC and restart the browser. The static bundle ships no copies of the font files. [Thmanyah licensing](https://font.thmanyah.com/). Team lockup by Tuwaiq Space. three.js r160 and OrbitControls are distributed under the [three.js MIT license](https://github.com/mrdoob/three.js/blob/r160/LICENSE).
+The mission uses IBM Plex Sans Arabic from Google Fonts (SIL Open Font License 1.1), like the rest of the site. Team lockup by Tuwaiq Space. three.js r160 and OrbitControls are distributed under the [three.js MIT license](https://github.com/mrdoob/three.js/blob/r160/LICENSE).
 
 ## Elevation data
 

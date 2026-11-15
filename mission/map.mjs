@@ -4,7 +4,7 @@ export function createMap(host) {
   const { THREE, OrbitControls } = window.__T;
   const renderer = new THREE.WebGLRenderer({antialias:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
-  renderer.setClearColor(0x17192a);
+  renderer.setClearColor(0x121A2D);
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   host.replaceChildren(renderer.domElement);
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(43,1,4,40000);
@@ -78,7 +78,7 @@ export function createMap(host) {
   function show(g, site, setup, result, relay, witness, rays, label) {
     if(active!==g) terrain(g,site);
     clear(overlays);
-    const palette={1:0x72e5b3,0:0xff9d87,'-1':0xa8acbf};
+    const palette={1:0xF5F7FC,0:0x8966E8,'-1':0x5B6780};
     const grouped=new Map();
     for(let i=0;i<setup.points.length;i++) {
       const state=result.states[i], a=setup.points[i];
@@ -94,7 +94,7 @@ export function createMap(host) {
       const obj=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color:palette[state],depthTest:false}));
       obj.renderOrder=4; overlays.add(obj);
     }
-    pin(g,setup.base,0xf5efff,72); pin(g,relay,0xcdb6fe,82); pin(g,witness,0xffd7a0,64);
+    pin(g,setup.base,0xF5F7FC,72); pin(g,relay,0xC9B8F5,82); pin(g,witness,0xB5C1D4,64);
     for(const ray of rays) {
       const a=point(g,ray.a,ray.hA),b=point(g,ray.b,ray.hB);
       if([a.y,b.y].every(Number.isFinite))line([a,b],palette[ray.state]);
