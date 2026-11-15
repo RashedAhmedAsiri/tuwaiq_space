@@ -944,6 +944,10 @@ $('deckFs').addEventListener('click',()=>setDeckMax(!isMax()));
 const fsChange=()=>{ if(!(document.fullscreenElement||document.webkitFullscreenElement)&&isMax()) setDeckMax(false); };
 document.addEventListener('fullscreenchange',fsChange); document.addEventListener('webkitfullscreenchange',fsChange);
 $('slideBox').addEventListener('click',e=>{ if(swMoved) return; const r=e.currentTarget.getBoundingClientRect(), left=e.clientX<r.left+r.width/2, rtl=document.documentElement.dir==='rtl'; showSlide(deckI+((left!==rtl)?-1:1)); });
+/* Shortcuts: Ctrl+B (Cmd+B on Mac) opens the Ingenuity story, Ctrl+M (Cmd+M) opens the presentation in full screen. Matched by key position, so they also work on an Arabic keyboard layout. */
+addEventListener('keydown',e=>{ if(!(e.ctrlKey||e.metaKey)||e.altKey||e.shiftKey) return;
+  if(e.code==='KeyB'){ e.preventDefault(); e.stopImmediatePropagation(); if(isMax()) setDeckMax(false); closeDeck(); closeSrc(); if(mode!=='story') setMode('story'); }
+  else if(e.code==='KeyM'){ e.preventDefault(); e.stopImmediatePropagation(); closeSrc(); if($('deck').hidden) openDeck(); if(!isMax()) setDeckMax(true); } },true);
 /* Keyboard and presentation clickers: most send PageDown/PageUp, arrows, Space/Enter, B or period (blank), F5 or Esc. */
 const NEXT=new Set(['PageDown','ArrowDown',' ','Spacebar','Enter','n','N','MediaTrackNext']), PREV=new Set(['PageUp','ArrowUp','Backspace','p','P','MediaTrackPrevious']);
 addEventListener('keydown',e=>{ if($('deck').hidden||e.altKey||e.ctrlKey||e.metaKey) return; const k=e.key, rtl=document.documentElement.dir==='rtl', max=isMax();

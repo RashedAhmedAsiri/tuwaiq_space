@@ -34,6 +34,8 @@ On the Al Anahi primary route (30 m grid, antennas 6 / 2 / 8 m), one relay cuts 
 
 The page is in Arabic by default, with an English toggle.
 
+Shortcuts: **Ctrl+B** (Cmd+B) opens the Ingenuity story, **Ctrl+M** (Cmd+M) opens the presentation in full screen.
+
 ## Method
 
 - Antennas: base 6 m (adjustable), rover 2 m, relay 8 m. Planetary curvature is included.
