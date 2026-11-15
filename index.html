@@ -181,6 +181,10 @@ canvas.chart{width:100%;display:block}
 .intro .row{gap:10px;margin-top:6px}
 #boot{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:var(--bg);transition:opacity .5s ease}
 #boot.out{opacity:0;pointer-events:none}
+#tabfx{position:fixed;inset:0;z-index:55;display:grid;place-items:center;background:rgba(11,16,32,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s ease,visibility 0s linear .16s}
+#tabfx.on{opacity:1;visibility:visible;transition:opacity .16s ease}
+#tabfx svg{width:min(150px,34vw);height:auto;transform:scale(.92);transition:transform .5s cubic-bezier(.2,.75,.25,1)}
+#tabfx.on svg{transform:none}
 #boot img{width:min(220px,46vw);height:auto;display:block}
 .loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--soft);z-index:1;pointer-events:none}
 
@@ -273,6 +277,7 @@ body.deck-open .bottom,body.deck-open .tools,body.deck-open .worlds-bar,body.dec
 </style>
 </head>
 <body>
+<div id="tabfx" aria-hidden="true"></div>
 <div id="boot" role="status" aria-label="Rahat Relay"><img id="bootLogo" src="logo_loader.svg?v=2" alt="Tuwaiq Space" onload="window.__bootT=performance.now()"></div>
 
 
@@ -889,7 +894,18 @@ function loadMission(){ const f=$('misFrame'); if(!f.getAttribute('src')||!f.get
 $('misFrame').addEventListener('load',()=>{ const f=$('misFrame'); try{ const d=f.contentDocument; let raf=0; const fit=()=>{ cancelAnimationFrame(raf); raf=requestAnimationFrame(()=>{ f.style.height=Math.max(400,d.documentElement.scrollHeight)+'px'; }); }; new ResizeObserver(fit).observe(d.body); fit(); }catch(e){} });
 function openSrc(which='sources'){ closeDeck(); closeSrc(); stopStory(); st.playing=false; if(which==='mission') loadMission(); $(OVL[which]||'srcs').hidden=false; document.body.classList.add('srcs-open'); document.querySelectorAll('.mode').forEach(b=>b.dataset.mode&&b.setAttribute('aria-selected',b.dataset.mode===which)); }
 function closeSrc(){ if($('srcs').hidden&&$('res').hidden&&$('mis').hidden) return; $('srcs').hidden=true; $('res').hidden=true; $('mis').hidden=true; document.body.classList.remove('srcs-open'); document.querySelectorAll('.mode').forEach(b=>b.dataset.mode&&b.setAttribute('aria-selected',b.dataset.mode===mode)); }
-document.querySelectorAll('button.mode').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.mode==='deck'){ closeSrc(); openDeck(); } else if(OVL[b.dataset.mode]) openSrc(b.dataset.mode); else { closeSrc(); closeDeck(); setMode(b.dataset.mode); } }));
+/* Tab switch: a quick TS logo flash (about 0.65 s) hides the change. It never blocks clicks and always clears itself. */
+let tabSvg=null, tabT=[];
+fetch('logo_tab.svg').then(r=>r.ok?r.text():'').then(t=>{ if(!t) return; $('tabfx').innerHTML=t; tabSvg=$('tabfx').querySelector('svg'); if(tabSvg) tabSvg.pauseAnimations(); }).catch(()=>{});
+function tabFlash(run){ const fx=$('tabfx'); if(!tabSvg||matchMedia('(prefers-reduced-motion: reduce)').matches){ run(); return; }
+  tabT.forEach(clearTimeout); tabT=[]; try{ tabSvg.setCurrentTime(0); tabSvg.unpauseAnimations(); }catch(e){}
+  fx.classList.add('on');
+  tabT.push(setTimeout(()=>{ try{ run(); }catch(e){ console.error(e); } },170));
+  tabT.push(setTimeout(()=>fx.classList.remove('on'),650));
+  tabT.push(setTimeout(()=>{ fx.classList.remove('on'); try{ tabSvg.pauseAnimations(); }catch(e){} },1200)); }
+function currentTab(){ const b=document.querySelector('button.mode[aria-selected="true"]'); return b&&b.dataset.mode; }
+document.querySelectorAll('button.mode').forEach(b=>b.addEventListener('click',()=>{ const go=()=>{ if(b.dataset.mode==='deck'){ closeSrc(); openDeck(); } else if(OVL[b.dataset.mode]) openSrc(b.dataset.mode); else { closeSrc(); closeDeck(); setMode(b.dataset.mode); } };
+  if(currentTab()===b.dataset.mode||$('boot')) go(); else tabFlash(go); }));
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeSrc(); });
 addEventListener('hashchange',()=>{ const h=location.hash.slice(1); if(OVL[h]) openSrc(h); });
 hooks.push(()=>{ if(!$('mis').hidden||$('misFrame').getAttribute('src')) loadMission(); });
