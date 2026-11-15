@@ -12,3 +12,4 @@ table{font-variant-numeric:tabular-nums}
 html.embed{background:transparent}html.embed body{overflow:hidden}
 html.embed header{display:none}html.embed main{width:100%}
 html.embed h1{font-size:clamp(1.4rem,3.4vw,2rem);margin-top:0}
+.loading.failed{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;color:#B5C1D4}

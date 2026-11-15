@@ -274,6 +274,7 @@ try {
   template(); await refresh();
 } catch (error) {
   console.error(error);
-  view.className='loading';
-  view.textContent=copy[initialLanguage].error;
+  view.className='loading failed';
+  view.innerHTML='<img src="../logo_loader.svg?r='+Date.now()+'" alt="Tuwaiq Space" width="180"><p></p>';
+  view.querySelector('p').textContent=copy[initialLanguage].error;
 }
