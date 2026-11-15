@@ -29,7 +29,7 @@ On the Al Anahi primary route (30 m grid, antennas 6 / 2 / 8 m), one relay cuts 
 - **Map**: a free exploration of the Rahat axis sector. Drive the rover, raise the base antenna, place a relay, then compare your spot with the best of 729 candidates. Its numbers change with your choices.
 - **Interactive mission**: the judging mission with the matched-route results, inside the site (code in [mission/](mission/)).
 - **Results**: the before-relay comparison, the relay result in Al Anahi and the 11-direction stress test.
-- **Presentation**: the team's 7-slide competition deck, with full screen (button or F key), arrow keys, swipe and a PDF download.
+- **Presentation**: the team's 7-slide competition deck. Slides animate in, full screen fills the display, and presentation clickers work (PageDown/PageUp, arrows, Space, Enter, B or period to blank, F5 to start). PDF download included.
 - **Sources**: every dataset with its link, plus the method.
 
 The page is in Arabic by default, with an English toggle.
@@ -60,7 +60,7 @@ npm test   # Node.js 20+: engine tests and exact regeneration of the results
 - `mission/`: the mission page and the line-of-sight engine; `npm test` checks it and reproduces every result
 - `data/mars_h.txt`: the HiRISE grid for the Ingenuity story
 - `data/*_tex.jpg`: surface textures
-- `deck/`: the presentation slides as images
+- `deck/`: the presentation slides as images (`s-*` full slides, `b-*` backgrounds that the Presentation tab builds each slide on)
 - `submission/`: the competition deck as PDF and PPTX
 
 ## Licenses
