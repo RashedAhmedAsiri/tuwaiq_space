@@ -19,6 +19,8 @@ Open [the mission](http://localhost:4173/mission/). English is also available at
 
 ## Type and assets
 
+See the [sources and asset credits](SOURCES.md) for the judging build.
+
 The mission uses original system-installed Thmanyah Sans Regular, Medium and Bold, and Thmanyah Serif Display Medium where available. Install the original fonts from the team’s archive on the presentation PC and restart the browser. The static bundle ships no copies of the font files. [Thmanyah licensing](https://font.thmanyah.com/). Team lockup by Tuwaiq Space. three.js r160 and OrbitControls are distributed under the [three.js MIT license](https://github.com/mrdoob/three.js/blob/r160/LICENSE).
 
 ## Elevation data
