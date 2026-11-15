@@ -182,9 +182,6 @@ canvas.chart{width:100%;display:block}
 #boot{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:var(--bg);transition:opacity .5s ease}
 #boot.out{opacity:0;pointer-events:none}
 #boot img{width:min(220px,46vw);height:auto;display:block}
-#boot .boot-in{display:flex;flex-direction:column;align-items:center;gap:18px;padding:24px;text-align:center}
-#boot .boot-msg{max-width:30em;color:var(--soft);font-size:15px}
-#boot .boot-msg:empty,#boot .btn[hidden]{display:none}
 .loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--soft);z-index:1;pointer-events:none}
 
 @media (max-width:820px){
@@ -276,7 +273,7 @@ body.deck-open .bottom,body.deck-open .tools,body.deck-open .worlds-bar,body.dec
 </style>
 </head>
 <body>
-<div id="boot" role="status" aria-label="Rahat Relay"><div class="boot-in"><img id="bootLogo" src="logo_loader.svg?v=2" alt="Tuwaiq Space" onload="window.__bootT=performance.now()"><p class="boot-msg" id="bootMsg"></p><button class="btn sand" type="button" id="bootRetry" hidden onclick="location.reload()">Reload</button></div></div>
+<div id="boot" role="status" aria-label="Rahat Relay"><img id="bootLogo" src="logo_loader.svg?v=2" alt="Tuwaiq Space" onload="window.__bootT=performance.now()"></div>
 
 
 <div class="app" id="app">
@@ -449,18 +446,11 @@ body.deck-open .bottom,body.deck-open .tools,body.deck-open .worlds-bar,body.dec
 </div>
 
 <script>
-window.__fail=function(m){ var ar=document.documentElement.lang!=='en'; try{ var sl=localStorage.getItem('rr-lang'); if(sl) ar=sl!=='en'; }catch(e){}
-  var b=document.getElementById('boot'), l=document.getElementById('loading');
-  if(l) l.hidden=true;
-  if(!b){ /* the loader already left: bring it back with the logo, replaying its animation */
-    b=document.createElement('div'); b.id='boot'; b.setAttribute('role','alert');
-    b.innerHTML='<div class="boot-in"><img id="bootLogo" alt="Tuwaiq Space"><p class="boot-msg" id="bootMsg"></p><button class="btn sand" type="button" id="bootRetry" onclick="location.reload()"></button></div>';
-    document.body.appendChild(b); document.getElementById('bootLogo').src='logo_loader.svg?r='+Date.now(); }
-  window.__bootErr=true; b.classList.remove('out'); b.setAttribute('role','alert');
-  document.getElementById('bootMsg').textContent=(ar?'تعذّر تشغيل الموقع. ':'The site could not start. ')+m;
-  var r=document.getElementById('bootRetry'); r.hidden=false; r.textContent=ar?'أعد التحميل':'Reload'; };
-window.addEventListener('error',function(e){ if(window.__booted||/ResizeObserver loop/.test(e.message||'')) return; __fail('3D failed to start: '+(e.message||'script error')); });
-window.addEventListener('unhandledrejection',function(e){ if(window.__booted) return; __fail('3D failed to start: '+((e.reason&&e.reason.message)||e.reason)); });
+window.__fail=function(m){ var b=document.getElementById('boot'); if(b) b.remove(); var l=document.getElementById('loading'); if(l){ l.hidden=false; l.classList.add('err'); l.textContent=m; } };
+/* Only errors from this site's own files can stop the 3D view. Browser extensions and third-party scripts raise "Script error." with no file of ours; those, and anything after the first scene is up, are only logged. */
+window.__ownError=function(file){ return !!file && file.indexOf(location.origin)===0; };
+window.addEventListener('error',function(e){ if(e.target&&e.target!==window) return; if(window.__booted||/ResizeObserver loop/.test(e.message||'')||!__ownError(e.filename)){ console.warn('Ignored error:',e.message,e.filename); return; } __fail('3D failed to start: '+(e.message||'script error')); });
+window.addEventListener('unhandledrejection',function(e){ if(window.__booted){ console.warn('Ignored rejection:',e.reason); return; } __fail('3D failed to start: '+((e.reason&&e.reason.message)||e.reason)); });
 </script>
 <script src="vendor.js" onerror="__fail('Could not load the 3D engine (vendor.js). Please reload the page.')"></script>
 <script type="module">
@@ -998,11 +988,11 @@ applyLang();
 /* loader: let the logo reveal finish (about 3.6 s, none with reduced motion), then fade out once the first scene is ready */
 /* The reveal is timed from when the logo image itself loads, so it always plays in full, even on a fast or cached load. */
 function logoReady(){ const img=$('bootLogo'); return img&&!img.complete ? new Promise(r=>{ img.addEventListener('load',r,{once:true}); img.addEventListener('error',r,{once:true}); setTimeout(r,4000); }) : Promise.resolve(); }
-async function bootDone(){ const b=$('boot'); if(!b||window.__bootErr) return; await logoReady(); const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+async function bootDone(){ const b=$('boot'); if(!b) return; await logoReady(); const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const start=window.__bootT ?? performance.now(), wait=Math.max(0,(still?0:3700)-(performance.now()-start));
-  return new Promise(r=>setTimeout(()=>{ if(window.__bootErr) return r(); b.classList.add('out'); setTimeout(()=>{ b.remove(); r(); },500); },wait)); }
-setTimeout(()=>{ const b=$('boot'); if(b&&!window.__bootErr){ b.classList.add('out'); setTimeout(()=>b.remove(),500); } },20000);
-setMode('story').then(bootDone).then(()=>{ window.__booted=true; if(OVL[location.hash.slice(1)]) openSrc(location.hash.slice(1)); setTimeout(()=>{ if(mode==='story'&&$('deck').hidden&&$('srcs').hidden&&$('res').hidden&&$('mis').hidden&&!S.playing){ setT(0); playStory(); } },600); }).catch(e=>{ console.error(e); __fail((lang==='en'?'Data failed to load: ':'تعذّر تحميل البيانات: ')+e.message); });
+  return new Promise(r=>setTimeout(()=>{ b.classList.add('out'); setTimeout(()=>{ b.remove(); r(); },500); },wait)); }
+setTimeout(()=>{ const b=$('boot'); if(b){ b.classList.add('out'); setTimeout(()=>b.remove(),500); } },20000);
+setMode('story').then(bootDone).then(()=>{ window.__booted=true; if(OVL[location.hash.slice(1)]) openSrc(location.hash.slice(1)); setTimeout(()=>{ if(mode==='story'&&$('deck').hidden&&$('srcs').hidden&&$('res').hidden&&$('mis').hidden&&!S.playing){ setT(0); playStory(); } },600); }).catch(e=>{ bootDone(); $('loading').textContent='Data failed to load: '+e.message; console.error(e); });
 </script>
 
 </body>

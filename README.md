@@ -52,7 +52,7 @@ npm test   # Node.js 20+: engine tests and exact regeneration of the results
 ## Files
 
 - `index.html`: the whole app
-- `logo_loader.svg`: the animated TS logo shown while the site loads, on error screens and on the 404 page (a still logo with reduced motion)
+- `logo_loader.svg`: the animated TS logo shown while the site loads and on the 404 page (a still logo with reduced motion)
 - `404.html`: the not-found page
 - `vendor.js`: three.js r160 with OrbitControls and Line2 (MIT License)
 - `data/axis.txt`, `nobile.txt`, `jezero.txt`: elevation grids, gzip-compressed Uint16 at 0.1 m above each grid's base, stored as base64
